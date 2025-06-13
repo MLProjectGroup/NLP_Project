@@ -1,10 +1,12 @@
 langchain
 langchain-google-genai
 chromadb
-streamlit
 pypdf
 python-docx
 sentence-transformers
 faiss-cpu
 python-dotenv
 tiktoken
+dash
+pandas
+gunicorn
