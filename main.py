@@ -1,13 +1,15 @@
-# main.py
+# main.py - Smart Recruiter Assistant with Gemini-Powered Job Recommendations
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
 from RAG.job_matcher import EnhancedJobMatcher
 from RAG.cv_summarizer import CVSummarizer
+from RAG.job_recommender import JobRecommender
 import os
 from pathlib import Path
 import logging
 import re
+import time
 
 # Configure logging
 logging.basicConfig(
@@ -69,6 +71,7 @@ def main():
     rag_engine = EnhancedRAGEngine(vector_store, max_candidates_per_query=15)
     job_matcher = EnhancedJobMatcher(vector_store, rag_engine)
     summarizer = CVSummarizer()
+    job_recommender = JobRecommender()  # Gemini-powered job recommender
     
     # Setup output directory
     output_dir = "results"
@@ -167,16 +170,37 @@ def main():
     master_summary_file = os.path.join(output_dir, "all_candidate_summaries.txt")
     save_to_txt(master_summary_content, master_summary_file)
     
-    # 2. Query-based candidate search
+    # 2. AI Job recommendations with Gemini explanations
+    logger.info("Starting AI job recommendations with Gemini explanations...")
+    try:
+        job_recommendations = job_recommender.get_top_candidates_for_jobs(candidate_cv_map, top_k=5)
+        job_recommender.save_recommendations_to_file(
+            job_recommendations,
+            os.path.join(output_dir, "ai_job_recommendations.txt")
+        )
+    except Exception as e:
+        logger.error(f"Job recommendation failed: {e}")
+        # Create error file
+        with open(os.path.join(output_dir, "ai_job_recommendations.txt"), 'w', encoding='utf-8') as f:
+            f.write(f"Job recommendation failed: {str(e)}")
+    
+    # 3. Query-based candidate search
+    logger.info("Processing query-based candidate search...")
     query = "Who has work experience?"
-    top_candidates = rag_engine.find_top_candidates(query, top_k=5)
-    all_relevant = rag_engine.get_all_candidates_for_skill("work experience")
+    try:
+        top_candidates = rag_engine.find_top_candidates(query, top_k=5)
+        all_relevant = rag_engine.get_all_candidates_for_skill("work experience")
+        
+        # Format and save query results
+        query_results = format_query_results(top_candidates, all_relevant)
+        save_to_txt(query_results, os.path.join(output_dir, "query_results.txt"))
+    except Exception as e:
+        logger.error(f"Query processing failed: {e}")
+        with open(os.path.join(output_dir, "query_results.txt"), 'w', encoding='utf-8') as f:
+            f.write(f"Query processing failed: {str(e)}")
     
-    # Format and save query results
-    query_results = format_query_results(top_candidates, all_relevant)
-    save_to_txt(query_results, os.path.join(output_dir, "query_results.txt"))
-    
-    # 3. Job description matching
+    # 4. Job description matching
+    logger.info("Processing job matching...")
     job_title = "Full Stack Developer"
     job_description = """
         Full Stack Developer needed for web application development.
@@ -206,13 +230,18 @@ def main():
         - Portfolio of deployed web applications
     """
     
-    # Perform job matching with enhanced description
-    job_match_result = job_matcher.match_job_to_cvs(enhanced_job_description, top_k=5, explain=True)
-    formatted_job_results = job_matcher.format_results(job_match_result, show_snippets=False)
-    
-    # Format and save job matching results
-    job_match_results = format_job_match_results(job_title, job_description, formatted_job_results)
-    save_to_txt(job_match_results, os.path.join(output_dir, "job_match_results.txt"))
+    try:
+        # Perform job matching with enhanced description
+        job_match_result = job_matcher.match_job_to_cvs(enhanced_job_description, top_k=5, explain=True)
+        formatted_job_results = job_matcher.format_results(job_match_result, show_snippets=False)
+        
+        # Format and save job matching results
+        job_match_results = format_job_match_results(job_title, job_description, formatted_job_results)
+        save_to_txt(job_match_results, os.path.join(output_dir, "job_match_results.txt"))
+    except Exception as e:
+        logger.error(f"Job matching failed: {e}")
+        with open(os.path.join(output_dir, "job_match_results.txt"), 'w', encoding='utf-8') as f:
+            f.write(f"Job matching failed: {str(e)}")
     
     print("✅ Processing complete. All results saved to 'results' directory")
 
