@@ -1,0 +1,8 @@
+CV Summary for Sara Gamil
+============================================================
+
+Here is a professional CV summary for Sara Gamil:.
+Highly motivated AI Engineer with  experience in deep learning, computer vision, and data analysis, seeking to leverage expertise in developing innovative solutions for autonomous systems.
+With a strong educational background in Artificial Intelligence and Machine Learning from Kafr El-Sheikh University and ITI, Sara possesses a solid foundation in technical skills, including Python, TensorFlow, and Power BI.
+Sara has a proven track record of delivering projects, including a skin condition detection mobile application, hate speech detection web application, and sales dashboard, showcasing her capabilities in machine learning, data analysis, and visualization.
+With excellent communication and teamwork skills, Sara is well-equipped to contribute to cutting-edge research and real-world applications in AI engineering.

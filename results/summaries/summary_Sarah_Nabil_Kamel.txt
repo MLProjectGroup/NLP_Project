@@ -1,0 +1,8 @@
+CV Summary for Sarah Nabil Kamel
+============================================================
+
+Here is a professional CV summary for Sarah Nabil Kamel:.
+Highly motivated AI Engineer with 1+ year of experience in developing and deploying machine learning models for real-world applications, proficient in Python, C, and C, with expertise in TensorFlow, PyTorch, and data processing tools.
+Skilled in computer vision, natural language processing, and predictive analytics, with a strong foundation in Linux systems and full-stack web development using PHP.
+Currently pursuing a 9-month Professional Diploma in Artificial Intelligence and Machine Learning from ITI, with a background in Computer Science from Luxor University (2020-2024).
+Proven ability to work effectively in teams, with excellent communication, leadership, and problem-solving skills, and a passion for technology, innovation, and continuous learning.

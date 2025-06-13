@@ -1,0 +1,8 @@
+CV Summary for Ali Adel Hassan Ai Engineer
+============================================================
+
+Here is a professional CV summary for Ali Adel Hassan AI Engineer:.
+Highly motivated AI Engineer with 1+ year of hands-on experience in building machine learning and deep learning models using TensorFlow and scikit-learn, with a strong foundation in computer science.
+Proficient in Python, data visualization tools, and machine learning packages, with a strong understanding of mathematics, including Linear Algebra, Probability, and Statistics.
+Recent projects include developing an interactive web application for handwritten digit recognition and contributing to a machine learning pipeline for predicting obesity levels.
+Holding a 9-month diploma in Artificial Intelligence and Machine Learning from ITI and a Bachelor's degree in Computer Science from Misr Higher Institute, with excellent honors and a cumulative score of 87.1%.

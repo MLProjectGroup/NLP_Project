@@ -1,0 +1,8 @@
+CV Summary for Mariam Osama
+============================================================
+
+Here is a professional CV summary for Mariam Osama:.
+Highly motivated AI Developer with a strong focus on Generative AI and LLMs, skilled in developing and deploying end-to-end AI solutions using Python, TensorFlow, and OpenCV.
+With  experience in AI development, Mariam has worked on various projects, including Job search assistant using AI agent, Drowsiness Detection, and Documents classification.
+She holds a 9-month diploma in Artificial Intelligence and Machine Learning from ITI and a Bachelor's degree in Computer Science from Zagazig University, where she ranked 4th with a GPA of 3.7.
+Mariam possesses excellent technical skills, including Transformers, LLMs, Deep Learning, Computer Vision, and Natural Language Processing, along with strong soft skills in teamwork, presentation, problem-solving, and communication.

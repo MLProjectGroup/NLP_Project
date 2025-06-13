@@ -1,0 +1,7 @@
+CV Summary for Nagwa Mohamed Ai & Ml Engineer
+============================================================
+
+Results-driven AI & Machine Learning Engineer with experience in applied machine learning, data analytics, and generative AI, proficient in TensorFlow, Scikit-learn, and NLP with Hugging Face Transformers.
+Highly skilled in designing scalable AI solutions with a strong focus on automation and cloud-first strategies, with a strong educational background in Computer Science and Information Technology.
+Proficient in a range of technical skills, including programming languages such as Python, C, and C++, as well as data analysis and visualization tools like Power BI, Tableau, and Excel.
+With a strong portfolio of projects, including Obesity Risk Prediction, Image Analysis Classification, and Weather Image Classification, Nagwa has demonstrated her ability to drive measurable business impact through data-driven solutions.

@@ -1,0 +1,8 @@
+CV Summary for Mohamed Salama Ai Engineer
+============================================================
+
+Here is a professional CV summary for Mohamed Salama:.
+Highly motivated AI Engineer with 1+ year of experience in developing and optimizing AI-driven solutions, proficient in AI frameworks, and skilled in programming languages such as Python, C, and SQL.
+Proven expertise in machine learning, deep learning, computer vision, and natural language processing, with a strong educational background in AI and ML from reputable institutions, including ITI and Kafr-El-Sheikh University.
+Successfully led and contributed to various projects, including Intelligent Security System, Smart Recruiter Assistant, and Hate Speech Classification, utilizing technologies like CrewAI, LangChain, and Hugging Face.
+Results-driven professional with a passion for problem-solving, data science, and LLMs, seeking opportunities to leverage cutting-edge technologies and drive success in innovative projects.

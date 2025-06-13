@@ -1,0 +1,8 @@
+CV Summary for Rehab Abdelghaffar
+============================================================
+
+Here is a professional CV summary for Rehab Abdelghaffar:.
+Rehab Abdelghaffar is an Artificial Intelligence Engineer with a strong foundation in AI, machine learning, and deep learning, and a passion for leveraging data-driven solutions to tackle complex challenges.
+With hands-on experience in computer vision, NLP, and cloud computing, she has developed diverse projects, including a predictive model to estimate obesity risk and a smart unit for guiding the visually impaired.
+She possesses excellent technical skills in programming languages such as Python, C, and C++, as well as data manipulation and analysis tools like Pandas and NumPy.
+With  skills in team collaboration, communication, and adaptability, she is committed to continuous learning and applying AI techniques in innovative and real-world applications.
