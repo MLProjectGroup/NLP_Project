@@ -1,0 +1,8 @@
+CV Summary for Amr Cv 1.2
+============================================================
+
+Here is a professional CV summary for Amr Cv1.2:.
+Highly motivated AI Engineer with 2+ years of experience in developing intelligent systems, solving complex problems through data-driven solutions, and instructing students in robotics and programming.
+Proficient in a range of technical skills, including Machine Learning, Deep Learning, Computer Vision, NLP, and Data Analysis, with expertise in Python, TensorFlow, PyTorch, and SQL.
+Recently served as a Programming and Robotics Instructor at Tekatech, where I mentored students in hands-on programming, mechanical design, and automation systems, and participated in international competitions.
+Holding a Bachelor's degree in Mechatronics Engineering from Mansoura University and a 9-month diploma in AI from the Information Technology Institute (ITI), with a strong foundation in mathematics and data analysis.

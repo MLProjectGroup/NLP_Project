@@ -1,0 +1,8 @@
+CV Summary for Ai&Ml Engineer Omar Ayman Elgemaey
+============================================================
+
+Here is a professional summary for Omar Ayman Elgemaey:.
+Highly motivated AI and ML engineer with  experience in building and deploying machine learning models using Python, TensorFlow, PyTorch, and other data handling tools.
+Proficient in computer vision, NLP, and predictive analytics, with a strong background in training, testing, and deploying models for real-world applications.
+Skilled in data analysis, problem-solving, and teamwork, with experience in leading and collaborating on projects involving object detection, image segmentation, and career assistance.
+Holding a 9-month Professional Diploma in Artificial Intelligence and Machine Learning from ITI, and a Bachelor's degree in Electronics and Communication from Mansoura University.

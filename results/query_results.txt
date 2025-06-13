@@ -1,0 +1,48 @@
+Query: Who has work experience?
+============================================================
+
+TOP 5 CANDIDATES RANKING:
+----------------------------------------
+RANKING RESULTS:
+1. MOHAMED SALAMA AI ENGINEER- Score: 9/10
+   Relevance: Has experience as a Software Engineer at G2I, supporting AI model training and improvement. Also lists internship experience at Mentorness.
+2. ALAA SEIF- Score: 8/10
+   Relevance: Lists experience as a Software Engineer (Freelance) at G2I, supporting the training and improvement of AI models.
+3. ALI SALAMA RESUME- Score: 7/10
+   Relevance: Has freelancing experience as a Graphic Designer at Highway Digital Marketing Agency.
+4. HAJAR ELBEHAIRY AL&ML- Score: 6/10
+   Relevance: Lists internships, including a Generative AI Intern role at Digital Egypt Pioneers Initiative (DEPI).
+5. ALAA-HUSSIEN-CV - Score: 5/10
+
+========================================
+ALL RELEVANT CANDIDATES:
+----------------------------------------
+Here's a breakdown of the candidates with work experience, based on the provided CV snippets:
+
+*   **Abdallah Mahmoud:**
+    *   Translator at Lexicon Certified Translation Foundation (Remotely, Saudi Arabia) (2021 – 2022)
+        *   Translation from English to Arabic
+        *   Translation from Arabic to English
+        *   Working with the team
+
+*   **Ali Salama:**
+    *   Graphic Designer at Highway Digital Marketing Agency, Cairo, Egypt (Jan 2021 - Feb 2022, Dec 2023 - Mar 2024)
+        *   Designing and creating creative designs for social media.
+        *   Building and designing the visual identity for different brands (logo design, business cardsetc.)
+        *   Creating normal & motion ads videos and campaigns.
+
+*   **Ali Ayman:**
+    *   Teaching Assistant (Full Time) at Faculty Of Artificial Intelligence (Egyptian Russian University), Cairo, Egypt (Oct. 2024 – Present)
+        *   Assisted in delivering Machine Learning and Deep Learning courses, including lectures, labs, and assessments.
+        *   Guided students through practical projects and hands-on assignments to reinforce theoretical concepts.
+        *   Supported students in understanding core AI topics, Improving their problem-solving skills.
+    *   Instructor (Part Time) at YAT (Digital Egypt CUBS), Cairo, Egypt (June. 2024 – Oct. 2024)
+        *   Instructed courses on AI, mobile app development, and web development.
+        *   Guided students through various topics and practical projects, enhancing their understanding in these fields.
+
+*   **Mennatullah Tarek:**
+    *   Data Analyst Intern at Neutrinotix (08/2024 – 10/2024)
+
+*   **Mohamed Salama:**
+    *   Software Engineer at G2I (Sep 2024 – Mar 2025) Remotely
+        *   Supported the training and improvement of AI models by refining responses, rewriting Python code, and optimizing prompt structure.
