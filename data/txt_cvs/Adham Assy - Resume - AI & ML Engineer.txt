@@ -1,0 +1,88 @@
+ADHAM ASSY 
+AI & ML ENGINEER 
+ 201119377022 adhamabdelsalam@outlook Cairo , Egypt GITHUB LINKEDIN 
+ 
+ 
+PROFILE 
+ 
+Passionate AI, ML & Data Science Engineer with a strong software engineering 
+background. Experienced in analyzing complex data , developing intelligent solutions, 
+optimizing machine learning models, and building scalable software applications. 
+ 
+EDUCATION 
+ 
+9-Month Diploma (ITI) Information Technology Institute ,(MCIT) Ministry of 
+Communications and Information Technology , AI & ML track October June 2025 
+Coursework: C, C, My
+SQL , NOSQL ,Data Structure & Algorithms , Python , Linear Algebra , Probability 
+& Statistics , Numerical Optimization , EDA , Data Preparation , Machine & Deep Learning , Cloud 
+Infrastructure , Recommender Systems , NLP , Computer Vision , Gen AI , 
+Big Data , pyspark , spark , MLOps . 
+ 
+COMPUTER SCIENCE MANSOURA UNIVERSITY 2018 2022 
+Bachelors degree in computer science - Software Engineering department. 
+ GPA: 2.9 (Very Good) 
+ 
+PROJECT S 
+ 
+Graduation Project Golden Ager (Grade: A) 
+ Developed a mobile app and smart bracelet to monitor elderly health via real-time vitals tracking and alerts. 
+Enabled doctor/family monitoring and included medication reminders for proactive care. 
+Interview Questions Multi Agent Generator 
+ A multi-agent AI system that generates customized technical interview questions based on a candidate's 
+uploaded CV (PDF) and the target job title powered by LLMs from Hugging Face, a Streamlit frontend, 
+and Crew AI-based agents. 
+Arabic POS Classification Dashboard 
+ An interactive POS tagging dashboard for Arabic text using Dash and a fine-tuned BERT model. Integrated 
+NLP with Transformers and visualized linguistic features with Plotly in a RTL UI. 
+ 
+Hate speech text classification on twitter dataset 
+ Text classification pipeline to detect hate speech, offensive, and neutral content on Twitter. Implemented 
+traditional ML and deep learning models using TF-IDF, Word2Vec, Glove, and FastText.
+Text Clustering on People Wikipedia Dataset 
+ Streamlit app for clustering Wikipedia biographies using TF-IDF, K-Means, and hierarchical clustering. 
+Visualized insights using PCA and dendrograms to reveal profession-based groupings. 
+Obesity Prediction A Machine Learning Approach 
+ Machine learning pipelines to classify obesity levels with preprocessing and model tuning. Applied Random 
+Forest, Gradient Boosting, and Light
+GBM for optimal performance 
+Deep Learning Projects 
+ Datasets: Cifar-10, Mnist, Credit Score, Potato Leaf Disease, Pets , Chest CT Scans. 
+ Models: ANNs , CNNs(ResNet, VGG, U-Net , InceptionV3) , RNNs(LSTM, CONVLSTM , GRU) 
+Machine Learning Projects 
+ Datasets: House Pricing , Credit Card Market Segmentation , Banking Credit Score. 
+ Models: Linear Regression ,Logistic Regression ,SVM ,Decision Tree , KMeans , DBScan , GMM. 
+ 
+INTERNSHIPS 
+ 
+ Python for Machine Learning and Data Science 
+Consulting of Computers and Information Center (CCIC) 
+ Front End HTML - CSS - Javascript - Bootstrap - Vue.js 
+Consulting of Computers and Information Center (CCIC) 
+ Digital Marketing Planning and Management and Consumer behavior 
+Consulting of Computers and Information Center (CCIC) 
+ 
+TECHNICAL SKILLS 
+ 
+Programming Languages: Machine Learning Techniques: 
+C/C, Python, SQL , No
+SQL. Supervised & Unsupervised Algorithms. 
+Data Management: Mathematics and Statistics: 
+My
+SQL, MongoDB. Knowledge of linear algebra, probability theory, 
+ Numerical Optimization and Statistics. 
+Data Analysis and Visualization: Cloud & Linux : 
+Data Exploration, Data Processing, NumPy, Google Cloud Platform, AWS, Linux, Git. 
+Pandas, Matplotlib, Seaborn, Plotly. 
+ 
+PERSONAL SKILLS 
+ 
+Leadership Communication Skills Fast Learner 
+Work under pressure Problem Solving Adaptability 
+Team collaboration Negotiation Skills Marketing skills 
+ 
+ADDITIONAL INFORMATION 
+ 
+LANGAUGES NATIONALITY MILITARY SERVICE 
+ -ARABIC NATIVE -EGYPTIAN -COMPLETED May 2023 - May 2024 
+ -ENGLISH FLUENT

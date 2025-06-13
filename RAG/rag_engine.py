@@ -65,7 +65,7 @@ class EnhancedRAGEngine:
     def __init__(self, vector_store, max_candidates_per_query=10):
         # Initialize Gemini model
         self.llm = ChatGoogleGenerativeAI(
-            model=os.getenv("GEMINI_MODEL", "gemini-pro"),
+            model=os.getenv("GEMINI_MODEL"),
             google_api_key=os.getenv("GOOGLE_API_KEY"),
             temperature=0.1,
             convert_system_message_to_human=True

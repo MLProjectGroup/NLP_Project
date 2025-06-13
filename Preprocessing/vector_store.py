@@ -1,6 +1,6 @@
 # vector_store.py
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.embeddings.base import Embeddings
 import chromadb
 import os
