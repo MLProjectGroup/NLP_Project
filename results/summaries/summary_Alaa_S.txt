@@ -1,7 +1,0 @@
-CV Summary for Alaa'S
-============================================================
-
-Highly motivated AI Engineer with 1 year of experience in developing and training AI models, proficient in Python, C, and C, with a strong background in front-end development.
-Proven ability to work under pressure, with excellent problem-solving skills, and a passion for continuous learning, having completed various certifications and courses in AI, Machine Learning, and related technologies.
-Currently advancing skills through the ITI (Intake 45) Artificial Intelligence and Machine Learning program, with hands-on experience in ML/DL frameworks, NLP libraries, and data handling tools.
-Detail-oriented and ambitious Computer Science graduate with a specialization in AI/Machine Learning, having developed a digital stethoscope connected to an Android app that classifies heart sounds, and achieved a distinction for the project.

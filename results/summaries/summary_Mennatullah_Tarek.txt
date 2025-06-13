@@ -1,8 +1,0 @@
-CV Summary for Mennatullah Tarek
-============================================================
-
-Here is a professional CV summary for Mennatullah Tarek:.
-Highly motivated AI/ML Engineer with 1 year of experience in developing and deploying impactful AI solutions, leveraging skills in Python, TensorFlow, and end-to-end ML development.
-Proficient in data science and analysis, with expertise in data wrangling, feature engineering, and data visualization using tools like Pandas, NumPy, and Power BI.
-Recent graduate with a 9-month diploma in AI and ML from ITI and a B.Sc. in Computer Science from Mansoura University, with a strong academic foundation and excellent skills in machine learning, NLP, and deep learning.
-Possesses excellent analytical, problem-solving, and communication skills, with experience in team leadership, public speaking, and business development.

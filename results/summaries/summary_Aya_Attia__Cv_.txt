@@ -1,8 +1,0 @@
-CV Summary for Aya Attia (Cv)
-============================================================
-
-Here is a professional CV summary for Aya Attia:.
-Highly motivated AI Engineer with  experience in Data Analysis, Machine Learning, Deep Learning, and Computer Vision, skilled in using TensorFlow, Keras, PyCaret, and Scikit-learn to build and deploy AI solutions.
-Proficient in web scraping, NLP, and data visualization with Python and Streamlit, with a strong background in performing data analysis and optimizing models for better performance.
-With a Bachelor's degree in Computer and Information from Zagazig University and a 9-month diploma in AI from the Information Technology Institute, Aya possesses a solid educational foundation in computer science and AI.
-Possessing excellent personal skills, including problem-solving, continuous learning, communication, and teamwork, Aya is well-equipped to contribute to dynamic teams and drive innovative projects forward.

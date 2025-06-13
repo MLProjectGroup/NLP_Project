@@ -1,7 +1,0 @@
-CV Summary for Israaabdelghany Ai&Ml Engineer
-============================================================
-
-Highly motivated AI and Machine Learning engineer with  experience in developing AI and machine learning models, working with cloud platforms, and handling data pipelines.
-Proficient in Python, TensorFlow, Keras, and scikit-learn, with a strong background in robotics, NLP, and software engineering, and experience with SQL and NoSQL databases.
-Currently pursuing a 9-month AI & ML scholarship at the Information Technology Institute (ITI) and previously worked as a Teaching Assistant in the Mechatronics Department at MUST University.
-Holding a Bachelor of Science in Mechatronics Engineering from Misr University for Science and Technology with a GPA of 3.84, and possessing strong technical and soft skills, including teamwork, leadership, problem-solving, and adaptability.

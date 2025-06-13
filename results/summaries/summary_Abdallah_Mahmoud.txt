@@ -1,8 +1,0 @@
-CV Summary for Abdallah Mahmoud
-============================================================
-
-Here is a professional CV summary for Abdallah Mahmoud:.
-Highly motivated AI & ML Engineer and Data Scientist with a growth mindset, having  experience in Natural Language Processing (NLP) and Computer Vision (CV).
-Proficient in machine learning, deep learning, and artificial intelligence, with expertise in programming languages such as Python, C, and C++, and experience with various frameworks and tools.
-With a background in computer science and a 9-month professional diploma in AI & ML from the Information Technology Institute (ITI), Abdallah has worked on various projects, including hate speech classification, document clustering, and obesity classification.
-Possessing excellent technical, problem-solving, and communication skills, Abdallah is a team player with adaptability, leadership, and business acumen, fluent in Arabic and English.

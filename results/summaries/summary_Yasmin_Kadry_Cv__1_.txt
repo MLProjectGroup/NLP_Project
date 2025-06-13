@@ -1,8 +1,0 @@
-CV Summary for Yasmin Kadry Cv (1)
-============================================================
-
-Here is a professional CV summary for Yasmin Kadry:.
-Highly motivated AI Engineer with  experience in computer vision and NLP, specializing in CNN, U-Net, and data preprocessing, and a strong foundation in Python and TensorFlow.
-Proficient in developing scalable ML solutions with expertise in Machine Learning, Deep Learning, and data analysis, with a solid understanding of statistics, linear algebra, and optimization.
-Skilled in collaborative problem-solving with good communication and teamwork skills, and a quick learner with a positive attitude and adaptability to feedback.
-Holding a 9-month diploma in AI from ITI and a Bachelor's degree in Biomedical Engineering from Mansoura University, with a range of projects and courses in AI, ML, and data science.

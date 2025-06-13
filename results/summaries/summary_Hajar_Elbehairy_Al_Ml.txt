@@ -1,8 +1,0 @@
-CV Summary for Hajar Elbehairy Al&Ml
-============================================================
-
-Here is a professional CV summary for Hajar Elbehairy:.
-Highly motivated AI/ML Engineer with a strong background in deep learning, computer vision, and data analysis, currently completing a 9-month AI program at the Information Technology Institute (ITI).
-Proficient in developing intelligent systems, with experience in MLOps tools, large language models, and NLP techniques, having worked on various projects, including sentiment-based music and poem generation, hate speech classification, and obesity risk prediction.
-Skilled in programming languages, including Python, C, and HTML/CSS, with expertise in TensorFlow, Keras, OpenCV, and data manipulation libraries, such as Pandas and NumPy.
-Possesses excellent soft skills, including team leadership, project management, problem-solving, and cross-cultural communication, with 4+ years of experience in AI and related fields.

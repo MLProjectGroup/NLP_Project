@@ -1,8 +1,0 @@
-CV Summary for Salma Ibrahim Zaher
-============================================================
-
-Here is a professional CV summary for Salma Ibrahim Zaher:.
-Highly motivated AI Engineer with a strong focus on Deep Learning and Natural Language Processing (NLP), skilled in building, training, and deploying intelligent models that learn from data and understand human language.
-Proficient in frameworks such as TensorFlow, PyTorch, and scikit-learn, with experience in computer vision, machine learning, and data analysis, and a strong educational background in Computer Science from Mansoura University.
-With  experience in AI-driven solution development and a passion for innovation, I deliver effective and scalable AI solutions applying the latest research and best practices.
-Possessing excellent soft skills, including communication, time management, and team collaboration, with a strong command of Arabic and English languages.

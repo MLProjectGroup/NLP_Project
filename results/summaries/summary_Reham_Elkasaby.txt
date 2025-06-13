@@ -1,8 +1,0 @@
-CV Summary for Reham Elkasaby
-============================================================
-
-Here is a professional CV summary for Reham Elkasaby:.
-Highly motivated AI/ML Engineer with  solid academic training and  practical experience in machine learning, NLP, and deep learning, holding a 9-month AI/ML diploma from ITI and a B.Sc. in Computer and Control Systems Engineering from Mansoura University.
-Skilled in Python, TensorFlow, Pytorch, and scikit-learn, with experience building and deploying end-to-end ML pipelines, and a strong foundation in transformer architectures, LLMs, and Generative AI.
-Proven ability to work on various projects, including document clustering, hate speech detection, predictive modeling, and computer vision applications using OpenCV and Python.
-Possesses excellent soft skills, including teamwork, communication, analytical thinking, and problem-solving, with a strong passion for contributing to cutting-edge AI solutions and growing within a visionary tech environment.

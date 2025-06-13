@@ -1,8 +1,0 @@
-CV Summary for Adham Assy Resume Ai & Ml Engineer
-============================================================
-
-Here is a professional CV summary for Adham Assy:.
-Highly motivated AI and ML engineer with a strong software engineering background, experienced in analyzing complex data and developing intelligent solutions.
-Proficient in machine learning techniques, including supervised and unsupervised algorithms, with expertise in Python, SQL, and NoSQL, and  experience with cloud infrastructure and MLOps.
-With a Bachelor's degree in Computer Science and  experience in various projects, including natural language processing, computer vision, and recommender systems, Adham delivers scalable software applications and optimized machine learning models.
-Equipped with excellent leadership, communication, and problem-solving skills, Adham is a fast learner who excels in team collaboration and works effectively under pressure.

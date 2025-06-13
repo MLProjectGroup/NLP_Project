@@ -1,7 +1,0 @@
-CV Summary for Alaa Hussien
-============================================================
-
-Highly motivated Artificial Intelligence Engineer with a strong foundation in AI, machine learning, and deep learning, and  experience in computer vision, NLP, and cloud computing.
-Proficient in programming languages such as Python and C, with expertise in libraries and frameworks including TensorFlow, PyTorch, and OpenCV, and data science tools like Power BI and Tableau.
-Having completed various projects, including research paper summarization, image inpainting, and sentiment analysis, Alaa has demonstrated hands-on experience in diverse AI applications.
-With a Bachelor's degree in Artificial Intelligence from Kafrelsheikh University and relevant certifications from Coursera and Udemy, Alaa is well-equipped to drive innovative AI solutions.

@@ -1,8 +1,0 @@
-CV Summary for Mohamed Kamal Elsharkawy
-============================================================
-
-Here is a professional summary for Mohamed Kamal Elsharkawy:.
-Highly motivated Machine Learning Engineer with 1-2 years of experience in building, evaluating, and deploying machine learning and deep learning models, proficient in Python, TensorFlow, Scikit-learn, and computer vision.
-Proven ability to lead projects, collaborate with teams, and deliver impactful AI solutions, with a strong educational background in Artificial Intelligence and Machine Learning from the Information Technology Institute (ITI) and Mansoura University.
-Skilled in a range of technical tools, including NumPy, Pandas, Matplotlib, Seaborn, OpenCV, and Keras, with experience in model deployment using Flask, REST APIs, and Streamlit.
-Possesses excellent communication, teamwork, and problem-solving skills, with a strong passion for innovative AI projects and a native Arabic and B2 English language proficiency.
