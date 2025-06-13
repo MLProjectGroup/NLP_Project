@@ -1,0 +1,94 @@
+Query: Who has work experience?
+============================================================
+
+TOP 5 CANDIDATES RANKING:
+----------------------------------------
+RANKING RESULTS:
+1. ALAA-HUSSIEN-CV - Score: 9/10
+   Relevance: Has multiple internships listed, including roles as a Data Analyst Intern and Business Intelligence Trainee, demonstrating practical work experience.
+2. HAJAR ELBEHAIRY AL&ML- Score: 8/10
+   Relevance: Lists a Generative AI Internship at Digital Egypt Pioneers Initiative (DEPI), showcasing relevant experience in the field.
+3. SARA GAMIL- Score: 8/10
+   Relevance: Includes a Data Scientist internship at Digital Egypt Pioneers Initiative (DPEI) and a Power BI training internship, indicating practical experience.
+4. MOHAMED SALAMA AI ENGINEER- Score: 7/10
+   Relevance: Has experience as a Software Engineer at G2I and AI&ML intern at Mentorness, providing relevant work experience.
+5. ALI SALAMA RESUME- Score: 6/10
+
+========================================
+ALL RELEVANT CANDIDATES:
+----------------------------------------
+Here's a breakdown of the candidates who have listed work experience in their CVs, along with the details provided:
+
+*   **Abdallah Mahmoud:**
+    *   Translator at Lexicon Certified Translation Foundation (Remotely, Saudi Arabia) (2021 – 2022)
+        *   Translation from English to Arabic
+        *   Translation from Arabic to English
+        *   Working with the team
+
+*   **Mariam Osama:**
+    *   Summer internship in Embedded Systems, (ITI) Information Technology Institute, (MCIT) Ministry of communications and Information Technology (2022)
+        *   Embedd System Concepts
+        *   Microcontroller Interfacing
+        *   Real Time Operating Systems
+        *   Embedded Systems Tooling
+
+*   **Mohamed Kamal Elsharkawy:**
+    *   Web Development using Python Framework, Information Technology Institute [ITI] (07/2022 – 09/2022)
+        *   Built a Blog Project with a 5-member team, handling authentication, CRUD, and email notifications.
+    *   Python for Machine Learning and Data Science, Consulting of Computers and Information Center [CCIC] (08/2021 – 10/2021)
+        *   Built a Chronic Kidney Disease Classification Project with a 2-member team, handling model selection, training, and evaluation — achieved 96% accuracy
+
+*   **Ali Salama:**
+    *   Highway Digital Marketing Agency, Cairo, Egypt (Jan 2021 - Feb 2022, Dec 2023 - Mar 2024)
+        *   Graphic Designer
+            *   Designing and creating creative designs for social media.
+            *   Building and designing the visual identity for different brands (logo design, business cardsetc.)
+            *   Creating normal & motion ads videos and campaigns.
+
+*   **Hajar Elbehairy:**
+    *   Generative AI Intern at Digital Egypt Pioneers Initiative (DEPI) (July 2024 – Oct 2024)
+        *   Built and deployed AI and Generative AI models using MLOps tools like MLflow and Hugging Face, including developing GANs for content generation and NLP models with attention mechanisms.
+        *   Designed and optimized prompt engineering strategies for large language models (LLMs) to enhance text generation and processing.
+    *   Artificial Intelligence Training at Samsung Innovation Campus (August 2023 – October 2023)
+        *   Studied AI fundamentals, machine learning concepts, probability, statistics, and essential mathematics for data science with hands -on Python exercises.
+        *   Applied data processing techniques using NumPy and Pandas, and developed supervised machine learning models for both structured and unstructured data.
+
+*   **Ali Ayman:**
+    *   Teaching Assistant (Full Time) at Faculty Of Artificial Intelligence (Egyptian Russian University), Cairo, Egypt (Oct. 2024 – Present)
+        *   Assisted in delivering Machine Learning and Deep Learning courses, including lectures, labs, and assessments.
+        *   Guided students through practical projects and hands-on assignments to reinforce theoretical concepts.
+        *   Supported students in understanding core AI topics, Improving their problem-solving skills.
+    *   Instructor (Part Time) at YAT (Digital Egypt CUBS), Cairo, Egypt (June. 2024 – Oct. 2024)
+        *   Instructed courses on AI, mobile app development, and web development.
+        *   Guided students through various topics and practical projects, enhancing their understanding in these fields.
+
+*   **Sara Gamil:**
+    *   BMI Data Scientist Specialist intern at Digital Egypt Pioneers Initiative (DPEI) @ AMIT (July - September 2024)
+    *   Power BI summer Training in (ITI) Information Technology Institute ,(MCIT) Ministry Of Communications And Information Technology (July - September 2023)
+
+*   **Mennatullah Tarek:**
+    *   Data Analyst Intern at Neutrinotix (08/2024 – 10/2024)
+    *   Summer internship in Computer Vision at (ITI) Information Technology Institute , (MCIT) Ministry of communications and Information Technology (07/2023 – 09/2023)
+
+*   **Salma Ibrahim Zaher:**
+    *   Artificial Intelligence Internship at National Telecommunication Institute (NTI) & ITIDA, National Telecommunication Institute (NTI) & ITIDA (07/2023)
+
+*   **Reham Elkasaby:**
+    *   Computer Vision Intern at Information Technology Institute (ITI) (Oct 2023)
+        *   Developed computer vision applications using Python and OpenCV.
+
+*   **Mohamed Salama:**
+    *   Software Engineer at G2I (Sep 2024 – Mar 2025)
+        *   Supported the training and improvement of AI models by refining responses, rewriting Python code, and optimizing prompt structure.
+    *   AI&ML intern at Mentorness (January 2024 – March 2024)
+    *   Computer Vision Intern - ITI scholarship (July 2023 – August 2023 )
+        *   Learning the basics of computer vision.
+        *   Learn the core of computer vision.
+        *   Learn how to make advanced projects from A to Z using computer vision.
+        *   Learn how I can use computer vision in real life.
+
+*   **Yasmin Kadry:**
+    *   Intern Front-End Developer, DEPI(6 Months) (10/2024)
+
+*   **Alaa Hussein:**
+    *   No work experience listed.
