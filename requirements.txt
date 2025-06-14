@@ -3,16 +3,15 @@ streamlit
 python-dotenv==1.0.1
 pandas
 
-# Core LLM / LangChain
-langchain
-langchain-core
-langchain-community
-langchain-chroma
-langchain_google_genai
+# LangChain Core + Extensions
+langchain==0.1.20
+langchain-core==0.1.43
+langchain-community==0.0.32
+langchain-chroma==0.1.7
 
 # Vector Store
 chromadb==0.4.14
-pysqlite3-binary 
+pysqlite3-binary
 
 # Embeddings
 sentence-transformers
@@ -26,18 +25,8 @@ python-docx
 docx2txt
 pymupdf
 
-
 # Gemini + Tokenization
-google-generativeai
+google-generativeai==0.6.18
+google-ai-generativelanguage==0.6.18
+langchain-google-genai==0.0.9
 tiktoken
-
-
-
-
-
-
-
-
-
-
-
