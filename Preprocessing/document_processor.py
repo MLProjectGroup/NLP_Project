@@ -13,7 +13,6 @@ def clean_text(text):
     Clean up invisible characters, remove bullets, symbols, and extra spacing.
     Keeps original newlines intact.
     """
-    import re
 
     # Remove invisible/control characters
     text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F\x7F\u200B-\u200D\uFEFF]', '', text)
