@@ -1,20 +1,20 @@
-#vector_store.py
+import os
+import shutil
+import time
+import json
+import logging
+import hashlib
+import numpy as np
+from typing import List
+
+import chromadb
+from dotenv import load_dotenv
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.base import Embeddings
-import chromadb
-import os
-from dotenv import load_dotenv
-import logging
-import time
-import hashlib
-import shutil
-from typing import List
-import numpy as np
 
 load_dotenv()
 logger = logging.getLogger(__name__)
-
 
 class SafeGoogleGenerativeAIEmbeddings(Embeddings):
     def __init__(self, base_embeddings, max_retries=3, initial_timeout=30):
@@ -25,122 +25,88 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
         embeddings = []
         for i, text in enumerate(texts):
-            compressed = self._compress_text_for_embedding(text) if len(text) > 10000 else text
             for attempt in range(self.max_retries):
                 try:
-                    embedding = self.base_embeddings.embed_documents([compressed])[0]
+                    embedding = self.base_embeddings.embed_documents([text])[0]
                     embeddings.append(embedding)
                     break
                 except Exception as e:
                     if attempt == self.max_retries - 1:
-                        logger.error(f"Embedding failed after {self.max_retries} attempts: {e}")
+                        logger.error(f"Failed to embed after {self.max_retries} attempts. Using fallback.")
                         embeddings.append(self._create_fallback_embedding(text))
                     else:
-                        logger.warning(f"Retrying embed {i+1}/{len(texts)}: {e}")
-                        time.sleep((attempt + 1) * 2)
-            time.sleep(0.3)
+                        logger.warning(f"Retrying embed... attempt {attempt+1}")
+                        time.sleep(3)
         return embeddings
 
     def embed_query(self, text: str) -> List[float]:
-        for attempt in range(self.max_retries):
-            try:
-                return self.base_embeddings.embed_query(text)
-            except Exception as e:
-                if attempt == self.max_retries - 1:
-                    logger.error(f"Query embedding failed: {e}")
-                    return self._create_fallback_embedding(text)
-                time.sleep((attempt + 1) * 2)
-
-    def _compress_text_for_embedding(self, text: str, aggressive=False) -> str:
-        text = " ".join(text.split())
-        if len(text) > 8000:
-            return text[:3000] + "\n...\n" + text[len(text) // 2:len(text) // 2 + 2000] + "\n...\n" + text[-3000:]
-        return text
+        try:
+            return self.base_embeddings.embed_query(text)
+        except Exception:
+            return self._create_fallback_embedding(text)
 
     def _create_fallback_embedding(self, text: str) -> List[float]:
-        hash_ = hashlib.md5(text.encode()).hexdigest()
-        vector = [(int(hash_[i:i+2], 16) / 127.5 - 1.0) for i in range(0, len(hash_), 2)]
-        return (vector * (768 // len(vector) + 1))[:768]
+        hash_digest = hashlib.md5(text.encode()).hexdigest()
+        return [(int(hash_digest[i:i+2], 16) / 127.5 - 1.0) for i in range(0, len(hash_digest), 2)][:768]
 
 
 class CVVectorStore:
     def __init__(self):
+        # Load from env or fallback
         persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./chroma_store")
         collection_name = os.getenv("VECTOR_DB_COLLECTION", "cv_collection")
 
+        # 🧹 Clean corrupted store before anything else
+        if os.path.exists(persist_directory):
+            logger.warning(f"Removing corrupted Chroma store at: {persist_directory}")
+            shutil.rmtree(persist_directory)
+
+        # 🔐 Create fresh client and embeddings
         base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
             google_api_key=os.getenv("GOOGLE_API_KEY")
         )
         self.embeddings = SafeGoogleGenerativeAIEmbeddings(base_embeddings)
 
+        # 💾 Start Chroma DB
         self.client = chromadb.PersistentClient(path=persist_directory)
 
-        try:
-            # Try loading existing collection
-            self.collection = self.client.get_collection(collection_name)
-            self.vectorstore = Chroma(
-                client=self.client,
-                collection_name=collection_name,
-                embedding_function=self.embeddings
-            )
-            logger.info(f"✅ Loaded existing Chroma collection: {collection_name}")
-        except Exception as e:
-            logger.warning(f"⚠️ Failed to load collection due to: {e}. Resetting DB...")
-            shutil.rmtree(persist_directory, ignore_errors=True)
-            self.client = chromadb.PersistentClient(path=persist_directory)
-            self.vectorstore = Chroma(
-                client=self.client,
-                collection_name=collection_name,
-                embedding_function=self.embeddings
-            )
-            logger.info(f"🆕 Created new Chroma collection: {collection_name}")
+        # ✅ Create a new collection
+        self.vectorstore = Chroma(
+            client=self.client,
+            collection_name=collection_name,
+            embedding_function=self.embeddings
+        )
+        logger.info(f"✅ Chroma vector store initialized with collection: {collection_name}")
 
-    def add_cvs(self, documents, metadata=None):
-        logger.info(f"🔄 Adding {len(documents)} CVs to vectorstore")
-        successful = 0
-        failed = []
+    def add_cvs(self, documents):
+        logger.info(f"Adding {len(documents)} documents to Chroma vector store")
+        successes, failures = 0, []
 
         for i, doc in enumerate(documents):
             try:
                 self.vectorstore.add_documents([doc])
-                successful += 1
+                successes += 1
             except Exception as e:
-                logger.error(f"❌ Failed to add doc {i+1}: {e}")
-                failed.append({
-                    "doc": doc,
-                    "error": str(e),
-                    "candidate": doc.metadata.get("candidate_name", "Unknown")
-                })
+                logger.error(f"Failed to add doc {i}: {e}")
+                failures.append((doc.metadata.get("candidate_name", "Unknown"), str(e)))
 
-        if failed:
-            self._save_failed_documents(failed)
-        logger.info(f"✅ Successfully added {successful}/{len(documents)} documents.")
-        return successful, failed
+        logger.info(f"✅ Successfully added {successes} documents. ❌ Failed: {len(failures)}")
+        return successes, failures
 
-    def _save_failed_documents(self, failed):
-        import json
-        error_log = [{
-            "candidate": f["candidate"],
-            "error": f["error"],
-            "preview": f["doc"].page_content[:300]
-        } for f in failed]
-        with open("failed_documents.json", "w", encoding="utf-8") as f:
-            json.dump(error_log, f, indent=2, ensure_ascii=False)
-        logger.info("📝 Saved failed document logs to failed_documents.json")
-
-    def similarity_search(self, query, k=5, filter=None):
+    def similarity_search(self, query, k=5):
         try:
-            return self.vectorstore.similarity_search(query=query, k=k, filter=filter)
+            return self.vectorstore.similarity_search(query, k=k)
         except Exception as e:
-            logger.error(f"❌ Similarity search failed: {e}")
+            logger.error(f"Similarity search error: {e}")
             return []
 
     def get_all_candidates(self):
         try:
-            all_docs = self.vectorstore.get()
-            return list({md.get("candidate_name") for md in all_docs["metadatas"] if md and "candidate_name" in md})
-        except Exception as e:
-            logger.error(f"❌ Failed to fetch candidates: {e}")
+            results = self.vectorstore.get()
+            if "metadatas" in results:
+                return list({meta.get("candidate_name", "Unknown") for meta in results["metadatas"]})
             return []
-
+        except Exception as e:
+            logger.error(f"Failed to get candidates: {e}")
+            return []
