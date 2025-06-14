@@ -1,11 +1,11 @@
 import sys
+import os
 
 __import__('pysqlite3')
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import streamlit as st
-import os
 from pathlib import Path
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
