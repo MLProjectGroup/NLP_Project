@@ -14,12 +14,6 @@ import shutil
 
 load_dotenv()
 logger = logging.getLogger(__name__)
-persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./data/cv_database")
-
-# Clean corrupted old DB
-if os.path.exists(persist_directory):
-    shutil.rmtree(persist_directory)
-
 
 class SafeGoogleGenerativeAIEmbeddings(Embeddings):
     """Wrapper around Google embeddings with timeout handling and text compression"""
@@ -165,6 +159,14 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
 class CVVectorStore:
     def __init__(self):
         # Initialize Google Gemini embeddings with safety wrapper
+
+        # Path from .env or fallback
+        persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./chroma_store")
+
+        #  Clean up corrupted or outdated Chroma DB
+        if os.path.exists(persist_directory):
+            shutil.rmtree(persist_directory)
+            
         base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
             google_api_key=os.getenv("GOOGLE_API_KEY")
