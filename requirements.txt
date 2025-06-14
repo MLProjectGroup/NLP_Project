@@ -1,37 +1,31 @@
-# ⚙️ Core LangChain & LLMs
+# Core LLM / LangChain
 langchain==0.3.25
 langchain-core
 langchain-community==0.3.25
 langchain-chroma
 langchain-google-genai==2.1.5
 
-# 🔍 Embedding & Vector Search
+# Vector Store
 chromadb==0.4.14
-sentence-transformers==4.1.0
-faiss-cpu==1.11.0  
-pysqlite3-binary  
+pysqlite3-binary 
 
-# 📄 Document Processing
+# Embeddings
+sentence-transformers==2.2.2
+numpy
+scikit-learn
+tqdm
+
+# Document Loaders
 pypdf==5.6.0
 python-docx==1.1.2
 docx2txt
 pymupdf
 
-# 📦 Utilities
-python-dotenv==1.1.0
-numpy
-scikit-learn
-tqdm
+# Streamlit Interface
+streamlit
+python-dotenv==1.0.1
 pandas==2.3.0
 
-# 🌐 Frontend
-streamlit
-dash==3.0.4
-gunicorn==23.0.0  
-
-# 🔮 LLMs
+# Gemini + Tokenization
 google-generativeai
-tiktoken==0.9.0  
-
-# 🧪 Rich logs and colorized output
-rich
+tiktoken==0.9.0
