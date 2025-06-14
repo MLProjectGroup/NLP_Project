@@ -4,10 +4,10 @@ python-dotenv==1.0.1
 pandas
 
 # LangChain Core + Extensions
-langchain==0.1.20
-langchain-core==0.1.43
-langchain-community==0.0.32
-langchain-chroma==0.1.7
+langchain
+langchain-core
+langchain-community
+langchain-chroma
 
 # Vector Store
 chromadb==0.4.14
