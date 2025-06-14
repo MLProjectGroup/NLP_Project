@@ -10,9 +10,16 @@ import time
 import hashlib
 from typing import List
 import numpy as np
+import shutil
 
 load_dotenv()
 logger = logging.getLogger(__name__)
+persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./data/cv_database")
+
+# Clean corrupted old DB
+if os.path.exists(persist_directory):
+    shutil.rmtree(persist_directory)
+
 
 class SafeGoogleGenerativeAIEmbeddings(Embeddings):
     """Wrapper around Google embeddings with timeout handling and text compression"""
