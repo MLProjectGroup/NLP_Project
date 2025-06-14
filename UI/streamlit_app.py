@@ -1,7 +1,6 @@
-__import__('pysqlite3')
 import sys
-import os
 
+__import__('pysqlite3')
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
