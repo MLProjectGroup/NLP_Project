@@ -1,5 +1,5 @@
 # job_recommender.py
-"""Match each candidate to top AI jobs using Google Gemini for explanations and embeddings"""
+"""Match each candidate to their top 2 best AI jobs using Google Gemini for explanations and embeddings"""
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_groq import ChatGroq
 from langchain.schema import HumanMessage, SystemMessage
@@ -72,7 +72,7 @@ def cosine_similarity(vec1, vec2) -> float:
     return np.dot(vec1, vec2) / (np.linalg.norm(vec1) * np.linalg.norm(vec2))
 
 class JobRecommender:
-    """Recommend top candidates for AI roles using Gemini for explanations and embeddings"""
+    """Recommend top 2 jobs for each candidate using Gemini for explanations and embeddings"""
     
     def __init__(self):
         # Initialize Google Gemini embeddings
@@ -120,53 +120,56 @@ Provide your analysis in 2-3 concise sentences.
             logger.error(f"Gemini error: {e}")
             return f"⚠️ Explanation unavailable: {str(e)}"
     
-    def get_top_candidates_for_jobs(self, candidate_cv_map: Dict[str, str], top_k: int = 5) -> Dict[str, List[Tuple[str, float, str]]]:
+    def get_best_jobs_for_candidates(self, candidate_cv_map: Dict[str, str], top_k: int = 2) -> Dict[str, List[Tuple[str, float, str]]]:
         """
-        Get top candidates for each job role with Gemini explanations
+        Get top 2 jobs for each candidate with Gemini explanations
         
         Args:
             candidate_cv_map: Dictionary mapping candidate names to their CV text
-            top_k: Number of top candidates to return per job
+            top_k: Number of top jobs to return per candidate (default 2)
             
         Returns:
-            Dictionary mapping job titles to lists of (candidate_name, similarity_score, explanation)
+            Dictionary mapping candidate names to lists of (job_title, similarity_score, explanation)
         """
         # Precompute job embeddings
         job_embeddings = {}
         for job in self.job_list:
             job_text = f"{job['title']}: {job['description']}"
             job_embeddings[job['title']] = self.embedding_model.embed_query(job_text)
+            time.sleep(0.5)  # Rate limiting
         
         # Calculate similarity for each candidate against each job
-        job_candidates = {job['title']: [] for job in self.job_list}
+        candidate_recommendations = {}
         
         for candidate_name, cv_text in candidate_cv_map.items():
-            cv_embedding = self.embedding_model.embed_query(cv_text)
+            logger.info(f"Processing recommendations for {candidate_name}")
             
+            # Get CV embedding
+            cv_embedding = self.embedding_model.embed_query(cv_text)
+            time.sleep(0.5)  # Rate limiting
+            
+            # Calculate similarity with all jobs
+            job_scores = []
             for job in self.job_list:
                 job_title = job['title']
                 job_embedding = job_embeddings[job_title]
                 similarity = cosine_similarity(cv_embedding, job_embedding)
-                job_candidates[job_title].append((candidate_name, similarity, cv_text))
-        
-        # Get top candidates with explanations
-        final_recommendations = {}
-        
-        for job_title, candidates in job_candidates.items():
-            # Sort candidates by similarity
-            candidates.sort(key=lambda x: x[1], reverse=True)
-            top_candidates = candidates[:top_k]
+                job_scores.append((job_title, similarity, job['description']))
             
-            # Get Gemini explanations for top candidates
-            candidates_with_explanations = []
-            for candidate_name, score, cv_text in top_candidates:
-                explanation = self.explain_match(cv_text, job_title, self.get_job_description(job_title))
-                candidates_with_explanations.append((candidate_name, score, explanation))
+            # Sort jobs by similarity and get top k
+            job_scores.sort(key=lambda x: x[1], reverse=True)
+            top_jobs = job_scores[:top_k]
+            
+            # Get explanations for top jobs
+            jobs_with_explanations = []
+            for job_title, score, job_description in top_jobs:
+                explanation = self.explain_match(cv_text, job_title, job_description)
+                jobs_with_explanations.append((job_title, score, explanation))
                 time.sleep(1)  # Avoid rate limiting
             
-            final_recommendations[job_title] = candidates_with_explanations
+            candidate_recommendations[candidate_name] = jobs_with_explanations
         
-        return final_recommendations
+        return candidate_recommendations
     
     def get_job_description(self, job_title: str) -> str:
         """Get job description by title"""
@@ -175,28 +178,62 @@ Provide your analysis in 2-3 concise sentences.
                 return job['description']
         return ""
     
-    def save_recommendations_to_file(self, recommendations: Dict[str, List[Tuple[str, float, str]]], filename: str) -> None:
+    def save_candidate_recommendations_to_file(self, recommendations: Dict[str, List[Tuple[str, float, str]]], filename: str) -> None:
         """
-        Save job recommendations to a text file with explanations
+        Save candidate job recommendations to a text file with explanations
         
         Args:
-            recommendations: Dictionary of job recommendations with explanations
+            recommendations: Dictionary of candidate recommendations with explanations
             filename: Output file path
         """
-        content = "TOP CANDIDATES FOR AI ROLES (EGYPTIAN MARKET FOCUS)\n"
+        content = "BEST JOB RECOMMENDATIONS FOR EACH CANDIDATE\n"
         content += "=" * 80 + "\n\n"
+        content += f"Total Candidates: {len(recommendations)}\n\n"
         
-        for job_title, candidates in recommendations.items():
-            content += f"Job Title: {job_title}\n"
+        for i, (candidate_name, jobs) in enumerate(recommendations.items(), 1):
+            content += f"{i}. {candidate_name}\n"
             content += "-" * 60 + "\n"
-            content += f"Top 5 Candidates:\n"
+            content += "Best Job Positions:\n"
             
-            for i, (candidate, score, explanation) in enumerate(candidates, 1):
-                content += f"  {i}. {candidate} (Score: {score:.2f})\n"
+            for j, (job_title, score, explanation) in enumerate(jobs, 1):
+                percentage = int(score * 100)
+                content += f"  {j}. {job_title} - {percentage}%\n"
                 content += f"     Explanation: {explanation}\n\n"
             
             content += "\n"
         
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(content)
-        logger.info(f"Saved job recommendations to {filename}")
+        logger.info(f"Saved candidate job recommendations to {filename}")
+    
+    def print_candidate_recommendations(self, recommendations: Dict[str, List[Tuple[str, float, str]]]) -> None:
+        """
+        Print candidate recommendations in the requested format
+        """
+        print("\n" + "="*60)
+        print("BEST JOB RECOMMENDATIONS FOR EACH CANDIDATE")
+        print("="*60)
+        
+        for candidate_name, jobs in recommendations.items():
+            print(f"\n{candidate_name}")
+            print("Best two positions:")
+            
+            for job_title, score, explanation in jobs:
+                percentage = int(score * 100)
+                print(f"  {job_title} {percentage}%")
+            
+            print("-" * 40)
+
+# Additional utility function for integration with main.py
+def get_candidate_job_recommendations(candidate_cv_map: Dict[str, str]) -> Dict[str, List[Tuple[str, float, str]]]:
+    """
+    Utility function to get job recommendations for candidates
+    
+    Args:
+        candidate_cv_map: Dictionary mapping candidate names to their CV text
+        
+    Returns:
+        Dictionary mapping candidate names to their top 2 job recommendations
+    """
+    recommender = JobRecommender()
+    return recommender.get_best_jobs_for_candidates(candidate_cv_map, top_k=2)
