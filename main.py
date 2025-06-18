@@ -93,6 +93,8 @@ def main():
         logger.error("No CV files found in the directory")
         return
     
+    print(f"📄 Found {len(cv_files)} CV files to process")
+    
     # Process all CVs and store candidate content
     candidate_cv_map = {}
     all_documents = []
@@ -115,13 +117,21 @@ def main():
                     chunk.metadata["source_file"] = cv_file
                 
                 all_documents.extend(chunks)
+                print(f"✅ Processed: {normalized_name}")
         except Exception as e:
             logger.error(f"Error processing {cv_file}: {e}")
     
+    print(f"📊 Successfully processed {len(all_candidates)} candidates")
+    
     # Add documents to vector store
-    vector_store.add_cvs(all_documents)
+    print("🔄 Adding documents to vector store...")
+    successful, failed = vector_store.add_cvs(all_documents)
+    print(f"✅ Added {successful} documents to vector store")
+    if failed:
+        print(f"⚠️ Failed to add {len(failed)} documents")
     
     # 1. Generate summaries for ALL candidates
+    print("📝 Generating CV summaries...")
     summary_dir = os.path.join(output_dir, "summaries")
     os.makedirs(summary_dir, exist_ok=True)
     
@@ -153,6 +163,8 @@ def main():
                 master_summary_content += "-" * 40 + "\n"
                 master_summary_content += cv_summary + "\n\n"
                 
+                print(f"✅ Generated summary for: {candidate_name}")
+                
             except Exception as e:
                 error_msg = f"⚠️ Error generating summary for {candidate_name}: {str(e)}"
                 logger.error(error_msg)
@@ -169,23 +181,28 @@ def main():
     # Save master summary file
     master_summary_file = os.path.join(output_dir, "all_candidate_summaries.txt")
     save_to_txt(master_summary_content, master_summary_file)
+    print("📋 Master summary file created")
     
-    # 2. AI Job recommendations with Gemini explanations
-    logger.info("Starting AI job recommendations with Gemini explanations...")
+    # 2. AI Job recommendations with Gemini explanations (Best jobs for each candidate)
+    print("🎯 Starting AI job recommendations for each candidate...")
     try:
-        job_recommendations = job_recommender.get_top_candidates_for_jobs(candidate_cv_map, top_k=5)
-        job_recommender.save_recommendations_to_file(
-            job_recommendations,
-            os.path.join(output_dir, "ai_job_recommendations.txt")
+        candidate_job_recommendations = job_recommender.get_best_jobs_for_candidates(candidate_cv_map, top_k=2)
+        job_recommender.save_candidate_recommendations_to_file(
+            candidate_job_recommendations,
+            os.path.join(output_dir, "candidate_job_recommendations.txt")
         )
+        # Also print to console in the requested format
+        job_recommender.print_candidate_recommendations(candidate_job_recommendations)
+        print("✅ Candidate job recommendations completed")
     except Exception as e:
-        logger.error(f"Job recommendation failed: {e}")
+        logger.error(f"Candidate job recommendation failed: {e}")
         # Create error file
-        with open(os.path.join(output_dir, "ai_job_recommendations.txt"), 'w', encoding='utf-8') as f:
-            f.write(f"Job recommendation failed: {str(e)}")
+        with open(os.path.join(output_dir, "candidate_job_recommendations.txt"), 'w', encoding='utf-8') as f:
+            f.write(f"Candidate job recommendation failed: {str(e)}")
+        print("❌ Candidate job recommendations failed")
     
     # 3. Query-based candidate search
-    logger.info("Processing query-based candidate search...")
+    print("🔍 Processing query-based candidate search...")
     query = "Who has work experience?"
     try:
         top_candidates = rag_engine.find_top_candidates(query, top_k=5)
@@ -194,13 +211,15 @@ def main():
         # Format and save query results
         query_results = format_query_results(top_candidates, all_relevant)
         save_to_txt(query_results, os.path.join(output_dir, "query_results.txt"))
+        print("✅ Query-based search completed")
     except Exception as e:
         logger.error(f"Query processing failed: {e}")
         with open(os.path.join(output_dir, "query_results.txt"), 'w', encoding='utf-8') as f:
             f.write(f"Query processing failed: {str(e)}")
+        print("❌ Query-based search failed")
     
     # 4. Job description matching
-    logger.info("Processing job matching...")
+    print("🎯 Processing job matching...")
     job_title = "Full Stack Developer"
     job_description = """
         Full Stack Developer needed for web application development.
@@ -209,7 +228,7 @@ def main():
         3+ years of full-stack development experience required.
     """
     
-    # Enhanced job matching with skill weighting and detailed responsibilities
+    # Enhanced job description with skill weighting and detailed responsibilities
     enhanced_job_description = """
         Job Title: Full Stack Developer
         Key Responsibilities:
@@ -238,12 +257,29 @@ def main():
         # Format and save job matching results
         job_match_results = format_job_match_results(job_title, job_description, formatted_job_results)
         save_to_txt(job_match_results, os.path.join(output_dir, "job_match_results.txt"))
+        print("✅ Job matching completed")
     except Exception as e:
         logger.error(f"Job matching failed: {e}")
         with open(os.path.join(output_dir, "job_match_results.txt"), 'w', encoding='utf-8') as f:
             f.write(f"Job matching failed: {str(e)}")
+        print("❌ Job matching failed")
     
-    print("✅ Processing complete. All results saved to 'results' directory")
+    # Summary of results
+    print("\n" + "="*60)
+    print("📊 PROCESSING COMPLETE - SUMMARY")
+    print("="*60)
+    print(f"✅ Total candidates processed: {len(all_candidates)}")
+    print(f"✅ Documents added to vector store: {successful}")
+    print(f"✅ Summary files created: {len(all_candidates)} individual + 1 master")
+    print(f"✅ Job recommendations generated for: {len(candidate_cv_map)} candidates")
+    print(f"📁 All results saved to: {output_dir}/")
+    print("\n📋 Generated files:")
+    print(f"   - all_candidate_summaries.txt")
+    print(f"   - candidate_job_recommendations.txt")
+    print(f"   - query_results.txt")
+    print(f"   - job_match_results.txt")
+    print(f"   - summaries/ (individual summary files)")
+    print("="*60)
 
 if __name__ == "__main__":
     main()
