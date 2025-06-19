@@ -10,12 +10,13 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#490b4a",    
-    "secondary": "#b926a1",  
-    "accent": "#fefefe",     
-    "background": "#490b4a", 
-    "text": "#FFFFFF"       
+    "primary": "#490b4a",         
+    "secondary": "#FF6EC7",        # Pink Candy (يضيف life و playful tone)
+    "accent": "#fefefe",          
+    "background": "#F8EAF9",       # Soft very light pink - light elegant
+    "text": "#2B002C"              # Very dark purple (for readability)
 }
+
 
 # --- Daily Roz Tips ---
 daily_tips = [
