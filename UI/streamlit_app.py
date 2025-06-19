@@ -10,12 +10,13 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#017691",          # Teal Blue — ممتاز
-    "secondary": "#FFB703",        # Warm Gold/Yellow — contrast قوي مع teal
-    "accent": "#fefefe",           # White accent — ممتاز
-    "background": "#F9FAFB",       # Light neutral grey — very clean modern
-    "text": "#222222"              # Almost black — readability ممتازة
+    "primary": "#017691",          # Teal Blue — Professional & trustworthy
+    "secondary": "#FF9F1C",        # Warm Orange/Amber — friendly, balances teal
+    "accent": "#F4F4F4",           # Light grey for subtle accents / separators
+    "background": "#FFFFFF",       # Pure white — clean, modern, B2B SaaS standard
+    "text": "#222222"              # Very dark grey — perfect readability
 }
+
 
 
 
