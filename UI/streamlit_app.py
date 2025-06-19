@@ -10,7 +10,7 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#490b4a",         
+    "primary": "#5f273e",         
     "secondary": "#FF6EC7",        
     "accent": "#fefefe",          
     "background": "#F8EAF9",      
