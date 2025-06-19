@@ -1,15 +1,17 @@
-# main.py - Smart Recruiter Assistant with Gemini-Powered Job Recommendations
+# main.py
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
 from RAG.job_matcher import EnhancedJobMatcher
 from RAG.cv_summarizer import CVSummarizer
 from RAG.job_recommender import JobRecommender
+from RAG.hr_question_generator import HRQuestionGenerator
 import os
 from pathlib import Path
 import logging
 import re
 import time
+from typing import List
 
 # Configure logging
 logging.basicConfig(
@@ -18,15 +20,63 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+def extract_skill_from_query(query: str) -> str:
+    """Extract the main skill or requirement from a query"""
+    # Remove question marks and convert to lowercase
+    query_clean = query.lower().replace('?', '').strip()
+    
+    # Common patterns to identify skills/requirements
+    patterns = [
+        r'who has (.+?)(?:\?|$)',
+        r'who knows (.+?)(?:\?|$)',
+        r'candidates with (.+?)(?:\?|$)',
+        r'experience in (.+?)(?:\?|$)',
+        r'experienced in (.+?)(?:\?|$)',
+        r'skills in (.+?)(?:\?|$)',
+        r'knowledge of (.+?)(?:\?|$)',
+        r'proficient in (.+?)(?:\?|$)',
+        r'expertise in (.+?)(?:\?|$)',
+        r'background in (.+?)(?:\?|$)',
+        r'qualified in (.+?)(?:\?|$)',
+        r'certified in (.+?)(?:\?|$)',
+        r'degree in (.+?)(?:\?|$)',
+        r'studied (.+?)(?:\?|$)',
+        r'worked with (.+?)(?:\?|$)',
+        r'familiar with (.+?)(?:\?|$)'
+    ]
+    
+    # Try each pattern
+    for pattern in patterns:
+        match = re.search(pattern, query_clean)
+        if match:
+            skill = match.group(1).strip()
+            # Clean up common words
+            skill = skill.replace(' experience', '').replace(' skills', '')
+            return skill
+    
+    # If no pattern matches, try to extract key terms
+    # Remove common question words
+    stop_words = ['who', 'what', 'which', 'where', 'when', 'how', 'has', 'have', 'is', 'are', 
+                  'the', 'a', 'an', 'candidates', 'candidate', 'people', 'person']
+    
+    words = query_clean.split()
+    key_words = [w for w in words if w not in stop_words and len(w) > 2]
+    
+    if key_words:
+        return ' '.join(key_words)
+    
+    # Default fallback
+    return "relevant experience"
+
 def save_to_txt(content: str, filename: str):
     """Save content to a text file"""
     with open(filename, 'w', encoding='utf-8') as f:
         f.write(content)
     logger.info(f"Saved results to {filename}")
 
-def format_query_results(top_candidates: str, all_relevant: str) -> str:
+def format_query_results(query: str, top_candidates: str, all_relevant: str) -> str:
     """Format query results in the requested style"""
-    output = "Query: Who has work experience?\n"
+    output = f"Query: {query}\n"
     output += "=" * 60 + "\n\n"
     output += "TOP 5 CANDIDATES RANKING:\n"
     output += "-" * 40 + "\n"
@@ -62,6 +112,22 @@ def normalize_candidate_name(name: str) -> str:
     
     return name
 
+def process_custom_query(rag_engine: EnhancedRAGEngine, query: str):
+    """Process any custom query and return formatted results with candidate names"""
+    logger.info(f"Processing custom query: {query}")
+    
+    # Extract skill/requirement from query
+    skill_or_requirement = extract_skill_from_query(query)
+    logger.info(f"Extracted skill/requirement: {skill_or_requirement}")
+    
+    # Get top candidates - now returns both text and names
+    top_candidates_text, top_candidate_names = rag_engine.find_top_candidates(query, top_k=5)
+    
+    # Get all relevant candidates for the extracted skill
+    all_relevant = rag_engine.get_all_candidates_for_skill(skill_or_requirement)
+    
+    return top_candidates_text, all_relevant, top_candidate_names
+
 def main():
     print("🚀 Starting Smart Recruiter Assistant")
     
@@ -71,7 +137,8 @@ def main():
     rag_engine = EnhancedRAGEngine(vector_store, max_candidates_per_query=15)
     job_matcher = EnhancedJobMatcher(vector_store, rag_engine)
     summarizer = CVSummarizer()
-    job_recommender = JobRecommender()  # Gemini-powered job recommender
+    job_recommender = JobRecommender()
+    hr_question_generator = HRQuestionGenerator()
     
     # Setup output directory
     output_dir = "results"
@@ -92,8 +159,6 @@ def main():
     if not cv_files:
         logger.error("No CV files found in the directory")
         return
-    
-    print(f"📄 Found {len(cv_files)} CV files to process")
     
     # Process all CVs and store candidate content
     candidate_cv_map = {}
@@ -117,21 +182,13 @@ def main():
                     chunk.metadata["source_file"] = cv_file
                 
                 all_documents.extend(chunks)
-                print(f"✅ Processed: {normalized_name}")
         except Exception as e:
             logger.error(f"Error processing {cv_file}: {e}")
     
-    print(f"📊 Successfully processed {len(all_candidates)} candidates")
-    
     # Add documents to vector store
-    print("🔄 Adding documents to vector store...")
-    successful, failed = vector_store.add_cvs(all_documents)
-    print(f"✅ Added {successful} documents to vector store")
-    if failed:
-        print(f"⚠️ Failed to add {len(failed)} documents")
+    vector_store.add_cvs(all_documents)
     
     # 1. Generate summaries for ALL candidates
-    print("📝 Generating CV summaries...")
     summary_dir = os.path.join(output_dir, "summaries")
     os.makedirs(summary_dir, exist_ok=True)
     
@@ -163,8 +220,6 @@ def main():
                 master_summary_content += "-" * 40 + "\n"
                 master_summary_content += cv_summary + "\n\n"
                 
-                print(f"✅ Generated summary for: {candidate_name}")
-                
             except Exception as e:
                 error_msg = f"⚠️ Error generating summary for {candidate_name}: {str(e)}"
                 logger.error(error_msg)
@@ -181,45 +236,122 @@ def main():
     # Save master summary file
     master_summary_file = os.path.join(output_dir, "all_candidate_summaries.txt")
     save_to_txt(master_summary_content, master_summary_file)
-    print("📋 Master summary file created")
     
-    # 2. AI Job recommendations with Gemini explanations (Best jobs for each candidate)
-    print("🎯 Starting AI job recommendations for each candidate...")
+    # 2. AI Job recommendations
+    logger.info("Starting AI job recommendations...")
     try:
-        candidate_job_recommendations = job_recommender.get_best_jobs_for_candidates(candidate_cv_map, top_k=2)
-        job_recommender.save_candidate_recommendations_to_file(
-            candidate_job_recommendations,
-            os.path.join(output_dir, "candidate_job_recommendations.txt")
+        job_recommendations = job_recommender.get_top_candidates_for_jobs(candidate_cv_map, top_k=5)
+        job_recommender.save_recommendations_to_file(
+            job_recommendations,
+            os.path.join(output_dir, "ai_job_recommendations.txt")
         )
-        # Also print to console in the requested format
-        job_recommender.print_candidate_recommendations(candidate_job_recommendations)
-        print("✅ Candidate job recommendations completed")
     except Exception as e:
-        logger.error(f"Candidate job recommendation failed: {e}")
-        # Create error file
-        with open(os.path.join(output_dir, "candidate_job_recommendations.txt"), 'w', encoding='utf-8') as f:
-            f.write(f"Candidate job recommendation failed: {str(e)}")
-        print("❌ Candidate job recommendations failed")
+        logger.error(f"Job recommendation failed: {e}")
+        with open(os.path.join(output_dir, "ai_job_recommendations.txt"), 'w', encoding='utf-8') as f:
+            f.write(f"Job recommendation failed: {str(e)}")
     
-    # 3. Query-based candidate search
-    print("🔍 Processing query-based candidate search...")
-    query = "Who has work experience?"
-    try:
-        top_candidates = rag_engine.find_top_candidates(query, top_k=5)
-        all_relevant = rag_engine.get_all_candidates_for_skill("work experience")
+    # 3. Single custom query
+    print("\n" + "="*60)
+    print("CUSTOM QUERY SEARCH")
+    print("="*60)
+    
+    query = input("\nEnter your query: ").strip()
+    
+    top_query_candidates = []  # Store top candidates from query
+    
+    if query:
+        logger.info(f"Processing custom query: {query}")
+        try:
+            # Process query - now returns candidate names directly
+            top_candidates_text, all_relevant, top_query_candidates = process_custom_query(rag_engine, query)
+            
+            query_results = format_query_results(query, top_candidates_text, all_relevant)
+            save_to_txt(query_results, os.path.join(output_dir, "query_results.txt"))
+            print(f"\n✅ Query processed successfully!")
+            print(f"📄 Results saved to: {os.path.join(output_dir, 'query_results.txt')}")
+            
+            if top_query_candidates:
+                print(f"\n📋 Top {len(top_query_candidates)} candidates identified: {', '.join(top_query_candidates)}")
+            
+            # Show preview of top candidates
+                        # Show preview of top candidates
+            print("\n--- Preview of Top Candidates ---")
+            preview_lines = top_candidates_text.split('\n')[:10]
+            for line in preview_lines:
+                if line.strip():
+                    print(line)
+            if len(top_candidates_text.split('\n')) > 10:
+                print("...")
+                
+        except Exception as e:
+            logger.error(f"Query processing failed: {e}")
+            error_msg = f"Query processing failed: {str(e)}"
+            with open(os.path.join(output_dir, "query_results.txt"), 'w', encoding='utf-8') as f:
+                f.write(error_msg)
+            print(f"\n❌ {error_msg}")
+    else:
+        print("\n⚠️ No query entered. Skipping query processing.")
+    
+    # 4. Generate HR Questions for Top 5 Query Results
+    if top_query_candidates:
+        print("\n" + "="*60)
+        print("HR QUESTION GENERATION")
+        print("="*60)
+        print(f"\n🎯 Generating HR interview questions for top {len(top_query_candidates)} candidates from query results...")
         
-        # Format and save query results
-        query_results = format_query_results(top_candidates, all_relevant)
-        save_to_txt(query_results, os.path.join(output_dir, "query_results.txt"))
-        print("✅ Query-based search completed")
-    except Exception as e:
-        logger.error(f"Query processing failed: {e}")
-        with open(os.path.join(output_dir, "query_results.txt"), 'w', encoding='utf-8') as f:
-            f.write(f"Query processing failed: {str(e)}")
-        print("❌ Query-based search failed")
+        try:
+            # Debug: Check if candidates exist in CV map
+            logger.info(f"Candidates to generate questions for: {top_query_candidates}")
+            logger.info(f"Available candidates in CV map: {list(candidate_cv_map.keys())[:10]}...")
+            
+            # Ensure candidate names match exactly
+            matched_candidates = []
+            for candidate in top_query_candidates:
+                # Try exact match first
+                if candidate in candidate_cv_map:
+                    matched_candidates.append(candidate)
+                else:
+                    # Try case-insensitive match
+                    for cv_candidate in candidate_cv_map.keys():
+                        if candidate.lower() == cv_candidate.lower():
+                            matched_candidates.append(cv_candidate)
+                            break
+            
+            if matched_candidates:
+                logger.info(f"Matched candidates for HR questions: {matched_candidates}")
+                
+                # Generate questions for the matched candidates
+                hr_questions = hr_question_generator.generate_questions_for_top_candidates(
+                    candidate_cv_map, 
+                    matched_candidates
+                )
+                
+                # Save HR questions to file
+                hr_questions_file = os.path.join(output_dir, "hr_interview_questions.txt")
+                hr_question_generator.save_questions_to_file(hr_questions, hr_questions_file)
+                
+                print(f"\n✅ HR questions generated successfully!")
+                print(f"📄 Questions saved to: {hr_questions_file}")
+                
+                # Show summary of generated questions
+                print("\n--- HR Questions Summary ---")
+                for candidate in matched_candidates[:5]:
+                    if candidate in hr_questions:
+                        total_questions = sum(len(questions) for questions in hr_questions[candidate].values())
+                        print(f"• {candidate}: {total_questions} questions generated")
+            else:
+                print("\n⚠️ Could not match query candidates with CV database.")
+                logger.warning(f"No matches found. Query candidates: {top_query_candidates}")
+                logger.warning(f"CV candidates sample: {list(candidate_cv_map.keys())[:5]}")
+            
+        except Exception as e:
+            logger.error(f"HR question generation failed: {e}")
+            print(f"\n❌ HR question generation failed: {str(e)}")
+    else:
+        print("\n⚠️ No candidates identified from query. Skipping HR question generation.")
     
-    # 4. Job description matching
-    print("🎯 Processing job matching...")
+    # 5. Job description matching
+    logger.info("Processing job matching...")
     job_title = "Full Stack Developer"
     job_description = """
         Full Stack Developer needed for web application development.
@@ -228,7 +360,7 @@ def main():
         3+ years of full-stack development experience required.
     """
     
-    # Enhanced job description with skill weighting and detailed responsibilities
+    # Enhanced job matching with skill weighting and detailed responsibilities
     enhanced_job_description = """
         Job Title: Full Stack Developer
         Key Responsibilities:
@@ -257,29 +389,30 @@ def main():
         # Format and save job matching results
         job_match_results = format_job_match_results(job_title, job_description, formatted_job_results)
         save_to_txt(job_match_results, os.path.join(output_dir, "job_match_results.txt"))
-        print("✅ Job matching completed")
     except Exception as e:
         logger.error(f"Job matching failed: {e}")
         with open(os.path.join(output_dir, "job_match_results.txt"), 'w', encoding='utf-8') as f:
             f.write(f"Job matching failed: {str(e)}")
-        print("❌ Job matching failed")
     
-    # Summary of results
+    # 6. Final Summary
     print("\n" + "="*60)
-    print("📊 PROCESSING COMPLETE - SUMMARY")
+    print("✅ PROCESSING COMPLETE")
     print("="*60)
-    print(f"✅ Total candidates processed: {len(all_candidates)}")
-    print(f"✅ Documents added to vector store: {successful}")
-    print(f"✅ Summary files created: {len(all_candidates)} individual + 1 master")
-    print(f"✅ Job recommendations generated for: {len(candidate_cv_map)} candidates")
-    print(f"📁 All results saved to: {output_dir}/")
-    print("\n📋 Generated files:")
-    print(f"   - all_candidate_summaries.txt")
-    print(f"   - candidate_job_recommendations.txt")
-    print(f"   - query_results.txt")
-    print(f"   - job_match_results.txt")
-    print(f"   - summaries/ (individual summary files)")
-    print("="*60)
+    print(f"\n📁 All results saved to: {os.path.abspath(output_dir)}")
+    print("\nGenerated Files:")
+    print("1. all_candidate_summaries.txt - Summaries for all candidates")
+    print("2. ai_job_recommendations.txt - AI-powered job recommendations") 
+    print("3. query_results.txt - Results from your custom query")
+    if top_query_candidates:
+        print("4. hr_interview_questions.txt - HR questions for top 5 candidates from query")
+    print(f"{5 if top_query_candidates else 4}. job_match_results.txt - Job matching results")
+    
+    print("\n📊 Summary:")
+    print(f"• Total candidates processed: {len(all_candidates)}")
+    if top_query_candidates:
+        print(f"• Top candidates from query: {len(top_query_candidates)}")
+        if 'matched_candidates' in locals() and matched_candidates:
+            print(f"• HR questions generated for: {len(matched_candidates)} candidates")
 
 if __name__ == "__main__":
     main()
