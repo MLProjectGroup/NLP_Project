@@ -78,11 +78,11 @@ st.markdown(f"""
 
     .main-title {{
         color: {theme['primary']};
-        font-size: 42px;
+        font-size: 38px;
         font-weight: bold;
         text-align: center;
         margin: 20px 0 10px;
-        text-shadow: 0 0 8px {theme['accent']};
+        text-shadow: 0 0 8px {theme['primary']};
     }}
 
     .quote {{
@@ -155,7 +155,7 @@ st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=
 
 # --- Pages Content ---
 if current_page == "Home":
-    st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
         <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png" alt="HR Assistant">
