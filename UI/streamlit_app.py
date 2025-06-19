@@ -11,14 +11,14 @@ st.set_page_config(
 # --- Theme Colors ---
 theme = {
     "primary": "#490b4a",         
-    "secondary": "#FF6EC7",        # Pink Candy (يضيف life و playful tone)
+    "secondary": "#FF6EC7",        
     "accent": "#fefefe",          
-    "background": "#F8EAF9",       # Soft very light pink - light elegant
-    "text": "#2B002C"              # Very dark purple (for readability)
+    "background": "#F8EAF9",      
+    "text": "#2B002C"             
 }
 
 
-# --- Daily Roz Tips ---
+# --- Daily Tips ---
 daily_tips = [
     "Always personalize your hiring message! 🎯",
     "Look beyond keywords, consider potential. 💡",
@@ -30,11 +30,12 @@ daily_tips = [
 # --- Pages ---
 pages = {
     "🏠 Home": None,
-    "📂 Upload CVs": "Pages.01_Upload",
+    "  Upload CVs": "Pages.01_Upload",
     "💬 Chatbot Q&A": "Pages.02_Chatbot",
-    "📝 Matching & Summarizer": "Pages.03_Matcher",
-    "🎯 Recommender": "Pages.04_Recommender",
-    "📊 Dashboard": "Pages.05_Dashboard"
+    " Matcher": "Pages.03_Matcher",
+    " Summarizer": None , 
+    "Recommender": "Pages.04_Recommender",
+    "Dashboard": "Pages.05_Dashboard"
 }
 
 # --- Current Page ---
@@ -74,15 +75,15 @@ st.markdown(f"""
         font-weight: bold;
         text-align: center;
         margin: 20px 0 10px;
+        text-shadow: 0 0 8px {theme['accent']};
     }}
     .quote {{
         font-size: 22px;
-        color: {theme['accent']};
+        color: {theme['primary']};
         text-align: center;
         font-style: italic;
         font-weight: 600;
         margin: 30px 0 30px 0;
-        text-shadow: 0 0 8px {theme['accent']};
     }}
 
     .centered-image img {{
