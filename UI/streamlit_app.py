@@ -1,10 +1,3 @@
-import sys
-import os
-
-__import__('pysqlite3')
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
 import streamlit as st
 
 # App Config
@@ -24,17 +17,16 @@ st.sidebar.markdown("**with your helpful AI partner:**")
 st.sidebar.markdown("### Roz 🤓")
 st.sidebar.markdown("_Always watching... always recruiting!_")
 
-# --- Tabs Navigation (with Professional + Funny icons) ---
-tab = st.sidebar.radio(
-    "Navigate to:",
-    [
-        "📂 Upload CVs",
-        "💬 Chatbot Q&A",
-        "📝 Matching & Summarizer",
-        "🎯 Recommender",
-        "📊 Dashboard",
-    ]
-)
+# --- Tabs ---
+PAGES = {
+    "📂 Upload CVs": "pages/01_Upload.py",
+    "💬 Chatbot Q&A": "pages/02_Chatbot.py",
+    "📝 Matching & Summarizer": "pages/03_Matcher.py",
+    "🎯 Recommender": "pages/04_Recommender.py",
+    "📊 Dashboard": "pages/05_Dashboard.py",
+}
+
+tab = st.sidebar.radio("Navigate to:", list(PAGES.keys()))
 
 # --- Background Styling ---
 if tab == "📂 Upload CVs":
@@ -63,32 +55,10 @@ else:
         unsafe_allow_html=True
     )
 
-# --- Tabs Content ---
-if tab == "📂 Upload CVs":
-    st.header("📂 Upload CVs")
-    st.info("Upload your CVs here. Supported formats: PDF, DOCX, TXT.")
-    st.success("Roz is watching... 👀 Ready to analyze your CVs!")
-
-elif tab == "💬 Chatbot Q&A":
-    st.header("💬 Chatbot Q&A")
-    st.info("Ask questions about the candidates.")
-    st.markdown("Example: *'Who has time series experience?'*")
-    st.success("Roz is listening carefully... 🎧")
-
-elif tab == "📝 Matching & Summarizer":
-    st.header("📝 Matching & Summarizer")
-    st.info("Upload a job description and view top matching candidates.")
-    st.success("Roz is preparing her matches... 🔍")
-
-elif tab == "🎯 Recommender":
-    st.header("🎯 Recommender")
-    st.info("See job recommendations for each candidate.")
-    st.success("Roz's recommendation engine is running... 🧠")
-
-elif tab == "📊 Dashboard":
-    st.header("📊 Dashboard")
-    st.info("Overview of all candidates.")
-    st.success("Roz is generating analytics... 📊")
+# --- Import and run selected page ---
+with open(PAGES[tab]) as f:
+    code = f.read()
+    exec(code, globals())
 
 # --- Footer ---
 st.markdown(
@@ -101,4 +71,3 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
