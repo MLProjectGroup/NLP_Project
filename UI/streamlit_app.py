@@ -17,9 +17,6 @@ theme = {
     "text": "#222222"             
 }
 
-
-
-
 # --- Daily Tips ---
 daily_tips = [
     "Always personalize your hiring message!",
@@ -82,7 +79,6 @@ st.markdown(f"""
         font-weight: bold;
         text-align: center;
         margin: 20px 0 10px;
-        text-shadow: 0 0 8px {theme['primary']};
     }}
 
     .quote {{
@@ -143,9 +139,22 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Header Fixed ---
+# --- Header Fixed (centered) ---
 st.markdown(f"""
-<div style="background-color:{theme['primary']}; padding: 15px; color:white; text-align:center; font-weight:bold; font-size:26px; position: fixed; top:0; width:100%; z-index: 1000;">
+<div style="
+    background-color:{theme['primary']}; 
+    padding: 15px; 
+    color:white; 
+    font-weight:bold; 
+    font-size:26px; 
+    position: fixed; 
+    top:0; 
+    width:100%; 
+    z-index: 1000; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+">
     🤖 Smart Recruiter Assistant
 </div>
 """, unsafe_allow_html=True)
