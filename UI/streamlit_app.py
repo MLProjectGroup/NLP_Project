@@ -19,11 +19,11 @@ theme = {
 
 # --- Daily Roz Tips ---
 daily_tips = [
-    "Always personalize your hiring message! 🎯",
-    "Look beyond keywords, consider potential. 💡",
-    "Soft skills matter as much as experience. 🤝",
-    "Diversity is a strength in hiring! 🌍",
-    "Hiring is like dating... look for culture fit! 💌",
+    "Tip: Always personalize your hiring message! 🎯",
+    "Tip: Look beyond keywords, consider potential. 💡",
+    "Tip: Soft skills matter as much as experience. 🤝",
+    "Tip: Diversity is a strength in hiring! 🌍",
+    "Tip: Hiring is like dating... look for culture fit! 💌",
 ]
 
 # --- Pages ---
@@ -141,10 +141,10 @@ if current_page == "🏠 Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="https://drive.google.com/uc?export=view&id=1URZV700iY9k_L-kgM50t5DDQCned2DWF" alt="HR Assistant">
+        <img src="assets/hr.jpg" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
-    st.markdown(f'<div class="quote">✨ Daily Tip: {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="quote">✨ Daily {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
 else:
     load_page(current_page)
 
