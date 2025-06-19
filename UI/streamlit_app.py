@@ -5,7 +5,7 @@ import random
 st.set_page_config(
     page_title="Smart Recruiter Assistant 🤖",
     layout="wide",
-    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.jpg"
+    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.png"
 )
 
 # --- Theme Colors ---
