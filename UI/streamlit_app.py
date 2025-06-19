@@ -10,12 +10,13 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#af7378",         
-    "secondary": "#7D3C98",        
-    "accent": "#fefefe",          
-    "background": "#F4F4F4",      
-    "text": "#222222"             
+    "primary": "#7B3F48",          # Burgundy wine
+    "secondary": "#FF6EC7",        # Keep candy pink
+    "accent": "#fefefe",           # Keep white
+    "background": "#F8EAF9",       # Keep soft pink bg
+    "text": "#2B002C"              # Dark purple text
 }
+
 
 # --- Daily Tips ---
 daily_tips = [
