@@ -20,11 +20,11 @@ theme = {
 
 # --- Daily Roz Tips ---
 daily_tips = [
-    "Tip: Always personalize your hiring message! 🎯",
-    "Tip: Look beyond keywords, consider potential. 💡",
-    "Tip: Soft skills matter as much as experience. 🤝",
-    "Tip: Diversity is a strength in hiring! 🌍",
-    "Tip: Hiring is like dating... look for culture fit! 💌",
+    "Always personalize your hiring message! 🎯",
+    "Look beyond keywords, consider potential. 💡",
+    "Soft skills matter as much as experience. 🤝",
+    "Diversity is a strength in hiring! 🌍",
+    "Hiring is like dating... look for culture fit! 💌",
 ]
 
 # --- Pages ---
@@ -76,12 +76,15 @@ st.markdown(f"""
         margin: 20px 0 10px;
     }}
     .quote {{
-        font-size: 20px;
-        color: {theme['secondary']};
+        font-size: 22px;
+        color: {theme['accent']};
         text-align: center;
         font-style: italic;
-        margin-bottom: 20px;
+        font-weight: 600;
+        margin: 30px 0 30px 0;
+        text-shadow: 0 0 8px {theme['accent']};
     }}
+
     .centered-image img {{
         width: 400px;
         border-radius: 20px;
@@ -146,7 +149,7 @@ if current_page == "🏠 Home":
 
     </div>
     """, unsafe_allow_html=True)
-    st.markdown(f'<div class="quote">✨ Daily {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="quote">✨ Daily  Tip: <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
 else:
     load_page(current_page)
 
