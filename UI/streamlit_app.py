@@ -10,11 +10,11 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#7B3F48",          # Burgundy wine
-    "secondary": "#FF6EC7",        # Keep candy pink
+    "primary": "#5C1A1B",          # Burgundy wine
+    "secondary": "#7D3C98",        # Keep candy pink
     "accent": "#fefefe",           # Keep white
-    "background": "#F8EAF9",       # Keep soft pink bg
-    "text": "#2B002C"              # Dark purple text
+    "background": "#F4F4F4",       # Keep soft pink bg
+    "text": "#222222"              # Dark purple text
 }
 
 
