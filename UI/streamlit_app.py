@@ -134,7 +134,7 @@ st.markdown(f"""
 # --- Header Fixed ---
 st.markdown(f"""
 <div style="background-color:{theme['primary']}; padding: 15px; color:white; text-align:center; font-weight:bold; font-size:26px; position: fixed; top:0; width:100%; z-index: 1000;">
-    🤖 Smart Recruiter Assistant - powered by Roz 👀
+    🤖 Smart Recruiter Assistant
 </div>
 """, unsafe_allow_html=True)
 
