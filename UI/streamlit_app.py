@@ -8,21 +8,22 @@ st.set_page_config(
     page_icon="https://i.pinimg.com/originals/5b/d6/4a/5bd64ad031e917fcb1b4ad267b3e16d5.gif"
 )
 
-# --- Theme ---
+# --- Theme Colors ---
 theme = {
-    "primary": "#2F81F7",          # Blue HR
-    "secondary": "#2ECC71",        # Success Green
-    "accent": "#FFC107",           # Accent Yellow
-    "background": "#0E1117"        # Dark
+    "primary": "#A020F0",    # Violet Electric
+    "secondary": "#FF00FF",  # Magenta
+    "accent": "#00FFFF",     # Neon Cyan
+    "background": "#2D004D", # Dark Purple Base
+    "text": "#FFFFFF"        # White text
 }
 
 # --- Daily Roz Tips ---
 daily_tips = [
-    "Tip: Always personalize your hiring message! 🎯",
-    "Tip: Look beyond keywords, consider potential. 💡",
-    "Tip: Soft skills matter as much as experience. 🤝",
-    "Tip: Diversity is a strength in hiring! 🌍",
-    "Tip: Hiring is like dating... look for culture fit! 💌",
+    "Always personalize your hiring message! 🎯",
+    "Look beyond keywords, consider potential. 💡",
+    "Soft skills matter as much as experience. 🤝",
+    "Diversity is a strength in hiring! 🌍",
+    "Hiring is like dating... look for culture fit! 💌",
 ]
 
 # --- Pages ---
@@ -74,18 +75,18 @@ st.markdown(f"""
         margin: 20px 0 10px;
     }}
     .quote {{
-        font-size: 18px;
+        font-size: 20px;
         color: {theme['secondary']};
         text-align: center;
         font-style: italic;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }}
     .centered-image img {{
         width: 400px;
         border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         transition: transform 0.3s ease;
-        margin: 80px auto 40px auto;
+        margin: 40px auto 20px auto;
         display: block;
     }}
     .centered-image img:hover {{
@@ -126,26 +127,24 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- Header Fixed ---
-st.markdown("""
-<div style="background-color:#2F81F7; padding: 15px; color:white; text-align:center; font-weight:bold; font-size:26px; position: fixed; top:0; width:100%; z-index: 1000;">
+st.markdown(f"""
+<div style="background-color:{theme['primary']}; padding: 15px; color:white; text-align:center; font-weight:bold; font-size:26px; position: fixed; top:0; width:100%; z-index: 1000;">
     🤖 Smart Recruiter Assistant - powered by Roz 👀
 </div>
 """, unsafe_allow_html=True)
 
 # --- Fade In Start ---
-st.markdown('<div class="fade-in" style="margin-top:70px;">', unsafe_allow_html=True)
+st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
 # --- Pages Content ---
 if current_page == "🏠 Home":
-    st.markdown('<div class="main-title"> Welcome to Smart Recruiter Assistant 🤖</div>', unsafe_allow_html=True)
-    st.markdown('<div class="quote">“Always watching... always recruiting!” – Roz 👀</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="https://i.pinimg.com/originals/5b/d6/4a/5bd64ad031e917fcb1b4ad267b3e16d5.gif" alt="Roz">
+        <img src="https://drive.google.com/uc?export=view&id=1URZV700iY9k_L-kgM50t5DDQCned2DWF" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
     st.markdown(f'<div class="quote">✨ Daily Tip: {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
-
 else:
     load_page(current_page)
 
