@@ -19,11 +19,11 @@ st.sidebar.markdown("_Always watching... always recruiting!_")
 
 # --- Tabs ---
 PAGES = {
-    "📂 Upload CVs": "pages/01_Upload.py",
-    "💬 Chatbot Q&A": "pages/02_Chatbot.py",
-    "📝 Matching & Summarizer": "pages/03_Matcher.py",
-    "🎯 Recommender": "pages/04_Recommender.py",
-    "📊 Dashboard": "pages/05_Dashboard.py",
+    "📂 Upload CVs": "Pages/01_Upload.py",
+    "💬 Chatbot Q&A": "Pages/02_Chatbot.py",
+    "📝 Matching & Summarizer": "Pages/03_Matcher.py",
+    "🎯 Recommender": "Pages/04_Recommender.py",
+    "📊 Dashboard": "Pages/05_Dashboard.py",
 }
 
 tab = st.sidebar.radio("Navigate to:", list(PAGES.keys()))
