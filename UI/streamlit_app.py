@@ -5,16 +5,16 @@ import random
 st.set_page_config(
     page_title="Smart Recruiter Assistant 🤖",
     layout="wide",
-    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.png"
+    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png"
 )
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#017691",          # Teal Blue — Professional & trustworthy
-    "secondary": "#FF9F1C",        # Warm Orange/Amber — friendly, balances teal
-    "accent": "#F4F4F4",           # Light grey for subtle accents / separators
-    "background": "#FFFFFF",       # Pure white — clean, modern, B2B SaaS standard
-    "text": "#222222"              # Very dark grey — perfect readability
+    "primary": "#017691",          
+    "secondary": "#FF9F1C",       
+    "accent": "#F4F4F4",           
+    "background": "#dce3e4",       
+    "text": "#222222"             
 }
 
 
@@ -42,7 +42,7 @@ pages = {
 
 # --- Current Page ---
 query_params = st.query_params
-current_page = query_params.get("page", "Home")   # ← FIX 🏠 removed
+current_page = query_params.get("page", "Home")   
 
 if current_page not in pages:
     current_page = "Home"
@@ -158,7 +158,7 @@ if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.png" alt="HR Assistant">
+        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
     st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
