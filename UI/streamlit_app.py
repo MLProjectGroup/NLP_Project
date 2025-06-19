@@ -10,11 +10,11 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#5f273e",         
-    "secondary": "#FF6EC7",        
+    "primary": "#490b4a",         
+    "secondary": "#7D3C98",        
     "accent": "#fefefe",          
-    "background": "#F8EAF9",      
-    "text": "#2B002C"             
+    "background": "#F4F4F4",      
+    "text": "#222222"             
 }
 
 # --- Daily Tips ---
