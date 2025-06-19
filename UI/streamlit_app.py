@@ -79,7 +79,7 @@ st.markdown(f"""
         font-weight: bold;
         text-align: center;
         margin: 20px 0 10px;
-        text-shadow: 0 0 8px {theme['primary']};
+        text-shadow: 0 0 8px {theme['accent']};
     }}
 
     .quote {{
@@ -155,7 +155,7 @@ if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.jpg" alt="HR Assistant">
+        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.png" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
     st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
