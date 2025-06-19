@@ -1,5 +1,5 @@
 # rag_engine.py
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain.schema import BaseRetriever
@@ -63,12 +63,11 @@ class DiverseCVRetriever(BaseRetriever):
 
 class EnhancedRAGEngine:
     def __init__(self, vector_store, max_candidates_per_query=10):
-        # Initialize Gemini model
-        self.llm = ChatGoogleGenerativeAI(
-            model=os.getenv("GEMINI_MODEL"),
-            google_api_key=os.getenv("GOOGLE_API_KEY"),
-            temperature=0.1,
-            convert_system_message_to_human=True
+        # Initialize Groq model
+        self.llm = ChatGroq(
+            model=os.getenv("Groq_model2", "llama3-8b-8192"),
+            groq_api_key=os.getenv("Groq_API_KEY"),
+            temperature=0,
         )
         
         self.vector_store = vector_store
@@ -77,7 +76,7 @@ class EnhancedRAGEngine:
         # Create diverse retriever
         self.diverse_retriever = DiverseCVRetriever(
             vector_store=vector_store.vectorstore,
-            search_kwargs={"k": 500},  # Get many documents initially
+            search_kwargs={"k": 500},  
             max_candidates=max_candidates_per_query
         )
         
@@ -164,8 +163,8 @@ Answer:""",
             }
         )
     
-    def find_top_candidates(self, query: str, top_k: int = 5) -> str:
-        """Find and rank the top K candidates based on the query"""
+    def find_top_candidates(self, query: str, top_k: int = 5) -> Tuple[str, List[str]]:
+        """Find and rank the top K candidates based on the query - returns both text and candidate names"""
         try:
             logger.info(f"Finding top {top_k} candidates for query: {query}")
             
@@ -185,11 +184,33 @@ Answer:""",
             # Parse and clean the response to ensure no duplicates
             cleaned_response = self._clean_ranking_response(response, top_k)
             
-            return cleaned_response
+            # Extract ranked candidate names from the response
+            ranked_names = self._extract_ranked_names(cleaned_response)
+            
+            # If extraction failed, use the original candidate names
+            if not ranked_names:
+                ranked_names = candidate_names[:top_k]
+            
+            return cleaned_response, ranked_names
             
         except Exception as e:
             logger.error(f"Error finding top candidates: {e}")
-            return f"I encountered an error while ranking candidates: {str(e)}"
+            return f"I encountered an error while ranking candidates: {str(e)}", []
+    
+    def _extract_ranked_names(self, response: str) -> List[str]:
+        """Extract candidate names from the ranking response"""
+        names = []
+        lines = response.split('\n')
+        
+        for line in lines:
+            # Match ranking pattern
+            match = re.match(r'^\d+\.\s*([^-]+?)(?:\s*-\s*Score:|$)', line.strip())
+            if match:
+                name = match.group(1).strip()
+                if name and name not in names:
+                    names.append(name)
+        
+        return names[:5]
     
     def _clean_ranking_response(self, response: str, top_k: int) -> str:
         """Clean the ranking response to remove duplicates and limit results"""
@@ -237,22 +258,34 @@ Answer:""",
             return f"I encountered an error while processing your question: {str(e)}"
     
     def get_all_candidates_for_skill(self, skill: str) -> str:
-        """Get all candidates who have a specific skill"""
-        query = f"List ALL candidates who have {skill}. For each candidate, provide their name and relevant details about their {skill} experience."
-        return self.query(query)
+        """Get all candidates who have a specific skill or requirement"""
+        comprehensive_query = f"""
+        List ALL candidates who have any of the following:
+        - {skill}
+        - Experience with {skill}
+        - Knowledge of {skill}
+        - Skills in {skill}
+        - Background in {skill}
+        - Expertise in {skill}
+        - Worked with {skill}
+        - Proficient in {skill}
+        - Familiar with {skill}
+        
+        For each candidate found, provide:
+        1. Their name
+        2. Specific details about their {skill} experience/knowledge
+        3. Level of expertise if mentioned
+        
+        Include ALL candidates who have ANY relevant experience, even if minimal.
+        """
+        
+        return self.query(comprehensive_query)
     
     def get_candidate_summary_with_ranking(self, query: str, top_k: int = 5) -> Tuple[str, List[Dict]]:
         """Get both ranking and detailed candidate information"""
         try:
             # Get top candidates
-            ranking_result = self.find_top_candidates(query, top_k)
-            
-            # Extract candidate names from ranking
-            candidate_names = []
-            for line in ranking_result.split('\n'):
-                match = re.match(r'^\d+\.\s*([^-]+)', line.strip())
-                if match:
-                    candidate_names.append(match.group(1).strip())
+            ranking_result, candidate_names = self.find_top_candidates(query, top_k)
             
             # Get detailed info for each top candidate
             detailed_info = []
