@@ -10,12 +10,13 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#017691",          # Burgundy wine
-    "secondary": "#7D3C98",        # Keep candy pink
-    "accent": "#fefefe",           # Keep white
-    "background": "#F4F4F4",       # Keep soft pink bg
-    "text": "#222222"              # Dark purple text
+    "primary": "#017691",          # Teal Blue — ممتاز
+    "secondary": "#FFB703",        # Warm Gold/Yellow — contrast قوي مع teal
+    "accent": "#fefefe",           # White accent — ممتاز
+    "background": "#F9FAFB",       # Light neutral grey — very clean modern
+    "text": "#222222"              # Almost black — readability ممتازة
 }
+
 
 
 # --- Daily Tips ---
