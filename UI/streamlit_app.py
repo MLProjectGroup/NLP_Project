@@ -26,6 +26,7 @@ PAGES = {
     "📊 Dashboard": "Pages/05_Dashboard.py",
 }
 
+
 tab = st.sidebar.radio("Navigate to:", list(PAGES.keys()))
 
 # --- Background Styling ---
