@@ -141,7 +141,8 @@ if current_page == "🏠 Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="assets/hr.jpg" alt="HR Assistant">
+        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr.jpg" alt="HR Assistant">
+
     </div>
     """, unsafe_allow_html=True)
     st.markdown(f'<div class="quote">✨ Daily {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
