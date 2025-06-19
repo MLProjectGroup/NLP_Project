@@ -5,7 +5,7 @@ import random
 st.set_page_config(
     page_title="Smart Recruiter Assistant 🤖",
     layout="wide",
-    page_icon="https://i.pinimg.com/originals/5b/d6/4a/5bd64ad031e917fcb1b4ad267b3e16d5.gif"
+    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.jpg"
 )
 
 # --- Theme Colors ---
@@ -17,33 +17,32 @@ theme = {
     "text": "#2B002C"             
 }
 
-
 # --- Daily Tips ---
 daily_tips = [
-    "Always personalize your hiring message! 🎯",
-    "Look beyond keywords, consider potential. 💡",
-    "Soft skills matter as much as experience. 🤝",
-    "Diversity is a strength in hiring! 🌍",
-    "Hiring is like dating... look for culture fit! 💌",
+    "Always personalize your hiring message!",
+    "Look beyond keywords, consider potential.",
+    "Soft skills matter as much as experience.",
+    "Diversity is a strength in hiring!",
+    "Hiring is like dating... look for culture fit!",
 ]
 
 # --- Pages ---
 pages = {
-    "🏠 Home": None,
-    "  Upload CVs": "Pages.01_Upload",
-    "💬 Chatbot Q&A": "Pages.02_Chatbot",
-    " Matcher": "Pages.03_Matcher",
-    " Summarizer": None , 
-    "Recommender": "Pages.04_Recommender",
-    "Dashboard": "Pages.05_Dashboard"
+    "Home": None,
+    "Upload CVs": "pages.01_Upload",
+    "Chatbot Q&A": "pages.02_Chatbot",
+    "Matcher": "pages.03_Matcher",
+    "Summarizer": None , 
+    "Recommender": "pages.04_Recommender",
+    "Dashboard": "pages.05_Dashboard"
 }
 
 # --- Current Page ---
 query_params = st.query_params
-current_page = query_params.get("page", "🏠 Home")
+current_page = query_params.get("page", "Home")   # ← FIX 🏠 removed
 
 if current_page not in pages:
-    current_page = "🏠 Home"
+    current_page = "Home"
 
 # --- Load Page ---
 def load_page(page_key):
@@ -52,13 +51,18 @@ def load_page(page_key):
         mod = __import__(mod_name, fromlist=['app'])
         mod.app()
 
+# --- Google Fonts ---
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 # --- CSS Styling ---
 st.markdown(f"""
 <style>
     body, .stApp {{
         background-color: {theme['background']};
         direction: ltr;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Poppins', sans-serif;
     }}
 
     .fade-in {{
@@ -75,8 +79,9 @@ st.markdown(f"""
         font-weight: bold;
         text-align: center;
         margin: 20px 0 10px;
-        text-shadow: 0 0 8px {theme['accent']};
+        text-shadow: 0 0 8px {theme['primary']};
     }}
+
     .quote {{
         font-size: 22px;
         color: {theme['primary']};
@@ -97,6 +102,7 @@ st.markdown(f"""
     .centered-image img:hover {{
         transform: scale(1.05);
     }}
+
     .bottom-nav {{
         position: fixed;
         bottom: 0;
@@ -109,6 +115,7 @@ st.markdown(f"""
         border-top: 3px solid {theme['accent']};
         z-index: 999;
     }}
+
     .bottom-nav a {{
         color: white;
         margin: 0 15px;
@@ -120,10 +127,12 @@ st.markdown(f"""
         transition: background-color 0.3s;
         cursor: pointer;
     }}
+
     .bottom-nav a:hover {{
         background-color: {theme['accent']};
         color: black;
     }}
+
     .bottom-nav a.active {{
         background-color: {theme['accent']};
         color: black;
@@ -142,15 +151,14 @@ st.markdown(f"""
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
 # --- Pages Content ---
-if current_page == "🏠 Home":
+if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter: The Future of HR is Here. </div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="centered-image">
-        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr.jpg" alt="HR Assistant">
-
+        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/new_hr.jpg" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
-    st.markdown(f'<div class="quote">✨ Daily  Tip: <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
 else:
     load_page(current_page)
 
