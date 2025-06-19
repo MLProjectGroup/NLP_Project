@@ -10,11 +10,11 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#A020F0",    # Violet Electric
-    "secondary": "#FF00FF",  # Magenta
-    "accent": "#00FFFF",     # Neon Cyan
-    "background": "#2D004D", # Dark Purple Base
-    "text": "#FFFFFF"        # White text
+    "primary": "#490b4a",    
+    "secondary": "#b926a1",  
+    "accent": "#fefefe",     
+    "background": "#490b4a", 
+    "text": "#FFFFFF"       
 }
 
 # --- Daily Roz Tips ---
