@@ -12,7 +12,7 @@ st.set_page_config(
 theme = {
     "primary": "#017691",          
     "secondary": "#FF9F1C",       
-    "accent": "#F4F4F4",           
+    "accent": "#dce3e4",           
     "background": "#dce3e4",       
     "text": "#222222"             
 }
