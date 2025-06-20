@@ -165,4 +165,4 @@ with st.container():
         with nav_cols[i]:
             if st.button(page_name, use_container_width=True, key=f"nav_{page_name}"):
                 st.query_params.page = page_name
-                st.experimental_rerun()
+                st.rerun()
