@@ -1,7 +1,12 @@
 import os
 import sys
+from pathlib import Path
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(_file_), '..')))
 __import__('pysqlite3')
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(_file_), '..')))
 
 import streamlit as st
 from pathlib import Path
