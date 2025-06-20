@@ -62,7 +62,7 @@ def app():
 
     # --- Upload Section ---
     st.markdown("""
-     <p style='font-size:20px; color:#017691; font-weight:600;'>
+     <p style='font-size:10px; color:#017691; font-weight:400;'>
      📎 Select CV files to upload (PDF, DOCX)
      </p>
     """, unsafe_allow_html=True)
@@ -103,14 +103,14 @@ def app():
 
             # --- Processed Files ---
             st.markdown('<div class="section-box">', unsafe_allow_html=True)
-            st.markdown('<div class="section-title">📄 Processed Files:</div>', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">Processed Files:</div>', unsafe_allow_html=True)
             for fname in processed_files:
                 st.markdown(f"""
-                <p style="color:#017691; font-size:18px; margin-left:10px;">
+                <p style="color:#333; font-size:18px; margin-left:10px;">
                     • {fname}
                 </p>
                 """, unsafe_allow_html=True)
-            st.markdown('</div>', unsafe_allow_html=True)
+           
 
     else:
         st.info("No CVs uploaded yet. Please upload PDF or Word files to get started.")
