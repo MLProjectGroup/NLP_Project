@@ -1,5 +1,4 @@
 # job_matcher.py
-"""Enhanced Job Matcher for Smart Recruiter Assistant"""
 
 from collections import defaultdict
 from typing import List, Dict, Tuple, Any
@@ -31,9 +30,9 @@ class EnhancedJobMatcher:
         # Initialize Gemini for explanations
         self.llm = ChatGroq(
             model=os.getenv("Groq_model", "deepseek-r1-distill-llama-70b"),
-            google_api_key=os.getenv("Groq_API_KEY"),
+            groq_api_key=os.getenv("Groq_API_KEY"),
             temperature=0,
-            convert_system_message_to_human=True
+            # convert_system_message_to_human=True
         )
         
         # Enhanced stopwords for better keyword extraction
