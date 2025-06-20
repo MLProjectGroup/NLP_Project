@@ -1,4 +1,4 @@
-# Pages/01_Upload.py
+# pages/01_Upload.py
 
 import sys
 import os
@@ -12,6 +12,9 @@ def app():
     # --- Global Page Styles ---
     st.markdown(f"""
     <style>
+        body, .stApp {{
+            background-color: #f5f7fa;
+        }}
         .main-title {{
             color: #017691;
             font-size: 38px;
@@ -21,12 +24,13 @@ def app():
         }}
         .section-box {{
             color: #333;
-            padding: 16px;
+            padding: 20px;
             border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #ffffff;
+            border-radius: 12px;
+            background-color: #fff;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
             margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }}
         .section-title {{
             font-size: 22px;
@@ -60,20 +64,19 @@ def app():
     st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
     uploaded_files = st.file_uploader(
-        "**Select PDF CV files to upload**",
-        type=["pdf"],
+        "**Select CV files to upload (PDF, DOCX)**",
+        type=["pdf", "docx", "doc"],
         accept_multiple_files=True,
-        help="Upload multiple PDF CVs at once."
+        help="Upload multiple CVs (PDF or Word) at once."
     )
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-    st.write("")  # Spacer
 
     if uploaded_files:
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
 
         if st.button("🚀 Process CVs"):
+            st.info("Processing... please wait ⏳")
 
             all_chunks = []
             processed_files = []
@@ -92,4 +95,32 @@ def app():
                 finally:
                     os.remove(tmp_path)
 
-            st.success("Done ✅")
+            st.success(f"✅ Processed {len(processed_files)} CV(s) successfully!")
+
+            # --- Processed Files ---
+            st.markdown('<div class="section-box">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📄 Processed Files:</div>', unsafe_allow_html=True)
+            for fname in processed_files:
+                st.write(f"• {fname}")
+            st.markdown('</div>', unsafe_allow_html=True)
+
+            # --- Saved Text Files ---
+            txt_files_info = processor.get_txt_files_info()
+            st.markdown('<div class="section-box">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📄 Saved TXT Files:</div>', unsafe_allow_html=True)
+            for info in txt_files_info:
+                st.write(f"• {info['filename']} — {round(info['size_bytes'] / 1024, 2)} KB")
+            st.markdown('</div>', unsafe_allow_html=True)
+
+    else:
+        st.info("No CVs uploaded yet. Please upload PDF or Word files to get started.")
+
+    # --- Sidebar Tips ---
+    with st.sidebar:
+        st.markdown("### 📝 Tips for Better Matching:")
+        st.markdown("""
+        - Upload CVs in PDF or Word format
+        - Avoid scanned documents
+        - Use recent, updated CVs
+        - Upload more CVs for better analysis
+        """)
