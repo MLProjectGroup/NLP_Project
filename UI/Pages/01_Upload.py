@@ -82,7 +82,10 @@ def app():
             processed_files = []
 
             for uploaded_file in uploaded_files:
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                # Dynamic suffix based on uploaded file extension
+                suffix = os.path.splitext(uploaded_file.name)[1]
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
                     tmp_file.write(uploaded_file.read())
                     tmp_path = tmp_file.name
 
