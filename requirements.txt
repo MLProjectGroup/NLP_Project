@@ -32,3 +32,5 @@ sentence-transformers
 # 🤖 Google Gemini & Groq LLMs
 google-generativeai
 tiktoken
+
+streamlit==1.46.0

@@ -8,14 +8,21 @@ st.set_page_config(
     page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png"
 )
 
+
 # --- Theme Colors ---
 theme = {
-    "primary": "#017691",          
-    "secondary": "#FF9F1C",       
-    "accent": "#dce3e4",           
-    "background": "#dce3e4",       
-    "text": "#222222"             
+    "primary": "#017691",          # Main header, buttons
+    "secondary": "#FF9F1C",        # Highlights, accents
+    "accent": "#e0e0e0",           # Lines, borders
+    "background": "#dce3e4",       # App background
+    "text": "#222222"              # Base text
 }
+
+# Google Fonts
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 
 # --- Daily Tips ---
 daily_tips = [
@@ -56,108 +63,137 @@ st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# --- CSS Styling ---
+# --- Global Styles (CSS) ---
 st.markdown(f"""
 <style>
-    body, .stApp {{
-        background-color: {theme['background']};
-        direction: ltr;
-        font-family: 'Poppins', sans-serif;
-    }}
 
-    .fade-in {{
-        animation: fadeIn 0.8s ease-in-out;
-    }}
-    @keyframes fadeIn {{
-        from {{ opacity: 0; transform: translateY(20px); }}
-        to {{ opacity: 1; transform: translateY(0); }}
-    }}
+p, label {{
+    color: {theme['text']};
+}}
 
+/* General App Background & Font */
+body, .stApp {{
+    background-color: {theme['background']};
+    font-family: 'Poppins', sans-serif;
+    direction: ltr;
+}}
+
+/* Animation */
+.fade-in {{
+    animation: fadeIn 0.8s ease-in-out;
+}}
+@keyframes fadeIn {{
+    from {{ opacity: 0; transform: translateY(20px); }}
+    to {{ opacity: 1; transform: translateY(0); }}
+}}
+
+/* Main Title */
+.main-title {{
+    color: {theme['primary']};
+    font-size: 38px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0 10px;
+}}
+
+/* Quote or Daily Tip Box */
+.quote {{
+    font-size: 22px;
+    color: {theme['primary']};
+    text-align: center;
+    font-style: italic;
+    font-weight: 600;
+    margin: 30px 0;
+}}
+
+/* Image Block */
+.centered-image img {{
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    margin: 40px auto 20px auto;
+    display: block;
+}}
+.centered-image img:hover {{
+    transform: scale(1.05);
+}}
+
+/* Header Bar */
+.header {{
+    background-color: {theme['primary']};
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}}
+
+/* Bottom Navigation */
+.bottom-nav {{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: {theme['primary']};
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    border-top: 3px solid {theme['accent']};
+    z-index: 999;
+}}
+
+.bottom-nav a {{
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}}
+
+.bottom-nav a:hover,
+.bottom-nav a.active {{
+    background-color: {theme['accent']};
+    color: black;
+}}
+
+
+
+/* Responsive Styles for Small Screens */
+@media (max-width: 768px) {{
     .main-title {{
-        color: {theme['primary']};
-        font-size: 38px;
-        font-weight: bold;
-        text-align: center;
-        margin: 20px 0 10px;
+        font-size: 26px;
     }}
-
     .quote {{
-        font-size: 22px;
-        color: {theme['primary']};
-        text-align: center;
-        font-style: italic;
-        font-weight: 600;
-        margin: 30px 0 30px 0;
+        font-size: 18px;
     }}
-
     .centered-image img {{
-        width: 400px;
-        border-radius: 20px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-        margin: 40px auto 20px auto;
-        display: block;
+        width: 90%;
     }}
-    .centered-image img:hover {{
-        transform: scale(1.05);
+    .header {{
+        font-size: 20px;
+        padding: 10px;
     }}
-
-    .bottom-nav {{
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: {theme['primary']};
-        display: flex;
-        justify-content: center;
-        padding: 12px 0;
-        border-top: 3px solid {theme['accent']};
-        z-index: 999;
-    }}
-
     .bottom-nav a {{
-        color: white;
-        margin: 0 15px;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 14px;
-        padding: 6px 12px;
-        border-radius: 8px;
-        transition: background-color 0.3s;
-        cursor: pointer;
+        font-size: 12px;
+        padding: 4px 8px;
     }}
+}}
 
-    .bottom-nav a:hover {{
-        background-color: {theme['accent']};
-        color: black;
-    }}
-
-    .bottom-nav a.active {{
-        background-color: {theme['accent']};
-        color: black;
-    }}
 </style>
 """, unsafe_allow_html=True)
 
-# --- Header Fixed (centered) ---
-st.markdown(f"""
-<div style="
-    background-color:{theme['primary']}; 
-    padding: 15px; 
-    color:white; 
-    font-weight:bold; 
-    font-size:26px; 
-    position: fixed; 
-    top:0; 
-    width:100%; 
-    z-index: 1000; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-">
-    🤖 Smart Recruiter Assistant
-</div>
-""", unsafe_allow_html=True)
+# --- Header ---
+st.markdown(f'<div class="header">🤖 Smart Recruiter Assistant</div>', unsafe_allow_html=True)
 
 # --- Fade In Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
@@ -174,8 +210,10 @@ if current_page == "Home":
 else:
     load_page(current_page)
 
+
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
+
 
 # --- Bottom Nav ---
 footer_html = ""
