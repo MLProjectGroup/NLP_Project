@@ -1,15 +1,8 @@
 
 # === Main streamlit.py ===
-
-__import__('pysqlite3')
-import sys
-import os
-
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 import streamlit as st
 import random
-tempfile = __import__('tempfile')
+
 
 # --- App Config ---
 st.set_page_config(
