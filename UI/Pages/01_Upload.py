@@ -3,7 +3,7 @@
 import streamlit as st
 import os
 import tempfile
-from Preprocessing.document_processor.py import CVProcessor
+from Preprocessing.document_processor import CVProcessor
 
 def app():
     # --- Title ---
