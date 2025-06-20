@@ -26,7 +26,7 @@ daily_tips = [
     "Hiring is like dating... look for culture fit!",
 ]
 
-# --- Pages ---
+# --- Pages Dictionary ---
 pages = {
     "Home": None,
     "Upload CVs": "Pages.01_Upload",
@@ -37,8 +37,8 @@ pages = {
     "Dashboard": "Pages.05_Dashboard"
 }
 
-# --- Current Page ---
-query_params = st.experimental_get_query_params()
+# ✅ --- Current Page using new Streamlit syntax ---
+query_params = st.query_params
 current_page = query_params.get("page", ["Home"])[0]
 
 if current_page not in pages:
