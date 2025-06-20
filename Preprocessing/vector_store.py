@@ -52,15 +52,6 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
 
 class CVVectorStore:
     def __init__(self, reset_store=False):
-        # Load from env or fallback
-        persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./chroma_store")
-        collection_name = os.getenv("VECTOR_DB_COLLECTION", "cv_collection")
-
-        # 🧹 Clean corrupted store before anything else
-        if reset_store and os.path.exists(persist_directory):
-            logger.warning(f"Removing Chroma store at: {persist_directory}")
-            shutil.rmtree(persist_directory)
-
         # 🔐 Create fresh client and embeddings
         base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
@@ -68,16 +59,13 @@ class CVVectorStore:
         )
         self.embeddings = SafeGoogleGenerativeAIEmbeddings(base_embeddings)
 
-        # 💾 Start Chroma DB
-        self.client = chromadb.PersistentClient(path=persist_directory)
-
         # ✅ Create a new collection
         self.vectorstore = Chroma(
-            client=self.client,
-            collection_name=collection_name,
+            collection_name="cv_store",
             embedding_function=self.embeddings
         )
-        logger.info(f"✅ Chroma vector store initialized with collection: {collection_name}")
+
+        logger.info(f"✅ Chroma vector store initialized with collection: cv_store")
 
     def add_cvs(self, documents):
         logger.info(f"Adding {len(documents)} documents to Chroma vector store")
@@ -91,7 +79,7 @@ class CVVectorStore:
                 logger.error(f"Failed to add doc {i}: {e}")
                 failures.append((doc.metadata.get("candidate_name", "Unknown"), str(e)))
 
-        logger.info(f"✅ Successfully added {successes} documents. ❌ Failed: {len(failures)}")
+        logger.info(f"✅ Successfully added {successes} documents. ❌ Failed: {len(failures)})")
         return successes, failures
 
     def similarity_search(self, query, k=5):
