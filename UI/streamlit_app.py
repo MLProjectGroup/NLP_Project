@@ -48,7 +48,7 @@ if current_page not in pages:
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = _import_(mod_name, fromlist=["app"])
+        mod = __import__(mod_name, fromlist=["app"])
         mod.app()
 
 # --- Google Fonts ---
