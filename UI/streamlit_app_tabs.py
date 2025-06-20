@@ -1,12 +1,15 @@
-import sys
 import os
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import streamlit as st
 from pathlib import Path
 import random
+from collections import Counter
+import matplotlib.pyplot as plt
+import pandas as pd
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from collections import defaultdict, Counter
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
@@ -14,9 +17,6 @@ from RAG.job_matcher import EnhancedJobMatcher
 from RAG.cv_summarizer import CVSummarizer
 from RAG.job_recommender import JobRecommender
 from RAG.hr_question_generator import HRQuestionGenerator
-
-import matplotlib.pyplot as plt
-import pandas as pd
 
 # Initialize modules
 processor = CVProcessor(single_chunk=True)
@@ -28,16 +28,16 @@ job_recommender = JobRecommender()
 hr_question_generator = HRQuestionGenerator()
 
 st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
-st.title("🤖 Smart Recruiter Assistant")
+st.title("Smart Recruiter Assistant")
 st.write("Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.")
 
 if "uploaded_cvs" not in st.session_state:
     st.session_state.uploaded_cvs = {}
 
-st.header("📁 Upload CVs")
+st.subheader("Upload CVs")
 uploaded_files = st.file_uploader("Upload CVs (PDF/DOCX)", type=["pdf", "docx"], accept_multiple_files=True)
 
-if st.button("🔍 Process CVs"):
+if st.button("Process CVs"):
     if uploaded_files:
         for file in uploaded_files:
             file_path = os.path.join("uploaded_files", file.name)
@@ -57,19 +57,15 @@ if st.button("🔍 Process CVs"):
         st.warning("Please upload CV files first.")
 
 # TABS
-tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-    "Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions", "Debug"
-])
+tab0, tab1, tab2, tab3, tab4, tab5 = st.tabs(["Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions"])
 
 with tab0:
     st.subheader("Overview of Job Matches")
     job_counts = Counter()
     if st.session_state.uploaded_cvs:
-        for name, content in st.session_state.uploaded_cvs.items():
-            ranked_jobs = job_recommender.recommend_jobs(content, top_k=1)
-            if ranked_jobs:
-                top_job = ranked_jobs[0][0]['title']
-                job_counts[top_job] += 1
+        recommendations = job_recommender.get_top_candidates_for_jobs(st.session_state.uploaded_cvs, top_k=1)
+        for job, candidates in recommendations.items():
+            job_counts[job] = len(candidates)
 
         if job_counts:
             df = pd.DataFrame(job_counts.items(), columns=["Job Title", "Count"])
@@ -112,11 +108,12 @@ with tab3:
 with tab4:
     st.subheader("Job Recommendations")
     if st.button("Recommend Jobs"):
-        for name, content in st.session_state.uploaded_cvs.items():
-            st.markdown(f"### {name}")
-            ranked = job_recommender.recommend_jobs(content, top_k=3)
-            for job, score, reason in ranked:
-                st.markdown(f"**💼 {job['title']}** (Score: {score:.2f})")
+        recommendations = job_recommender.get_top_candidates_for_jobs(st.session_state.uploaded_cvs, top_k=3)
+        for job, candidates in recommendations.items():
+            st.markdown(f"### {job}")
+            for candidate, score, reason in candidates:
+                st.markdown(f"**Candidate:** {candidate}  ")
+                st.markdown(f"**Score:** {score:.2f}  ")
                 st.markdown(f"**Reason:** {reason}")
                 st.markdown("---")
 
@@ -125,9 +122,7 @@ with tab5:
     if st.button("Generate Questions"):
         if st.session_state.uploaded_cvs:
             top_names = list(st.session_state.uploaded_cvs.keys())[:5]
-            questions = hr_question_generator.generate_questions_for_top_candidates(
-                st.session_state.uploaded_cvs, top_names
-            )
+            questions = hr_question_generator.generate_questions_for_top_candidates(st.session_state.uploaded_cvs, top_names)
             for name in top_names:
                 st.markdown(f"### {name}")
                 for sec, qs in questions[name].items():
