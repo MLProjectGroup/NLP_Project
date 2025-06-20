@@ -63,7 +63,7 @@ def app():
     # --- Upload Section ---
     st.markdown("""
      <p style='font-size:20px; color:#017691; font-weight:600;'>
-     📎 Select PDF CV files to upload
+     📎 Select CV files to upload (PDF, DOCX)
      </p>
     """, unsafe_allow_html=True)
 
@@ -105,7 +105,11 @@ def app():
             st.markdown('<div class="section-box">', unsafe_allow_html=True)
             st.markdown('<div class="section-title">📄 Processed Files:</div>', unsafe_allow_html=True)
             for fname in processed_files:
-                st.write(f"• {fname}")
+                st.markdown(f"""
+                <p style="color:#017691; font-size:18px; margin-left:10px;">
+                    • {fname}
+                </p>
+                """, unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
 
     else:
