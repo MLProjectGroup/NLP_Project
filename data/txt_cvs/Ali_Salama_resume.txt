@@ -1,0 +1,86 @@
+Ali Salama Mohamed 
+Location: Cairo, Egypt (easy to relocate) 
+Email: alisalamapro@gmail.com Mobile: 201021269829 
+LinkedIn GitHub Kaggle Behance 
+ 
+Professional Summary 
+I am a passionate and driven software developer with a solid foundation in computer science and a growing 
+specialization in artificial intelligence and machine learning. Currently pursuing a 9-month professional diploma 
+in AI/ML at the Information Technology Institute (ITI), I recently earned my degree in Computer Science from 
+the Arab Open University. 
+I thrive on building innovative, impactful software solutions and enjoy solving complex problems through 
+analytical thinking and creativity. With strong technical skills, a quick learning ability, and a collaborative 
+mindset, I adapt easily to new challenges and dynamic environments. 
+I am eager to join a forward-thinking team where I can continue growing, contribute meaningfully, and help 
+drive success through cutting-edge technologies. 
+Education 
+9-Month Professional Diploma, Artificial Intelligence and Machine Learning Track (Oct 2024 Jun 2025) 
+(ITI) Information Technology Institute, (MCIT) Ministry of Communications and Information Technology, 
+Mansoura branch. 
+Bachelors degree in Computer Science (2024) 
+Arab Open University, Egypt 
+Projects 
+Local Guide App (university graduated project) 
+Brief Description: an Android application that enhances the tourism experience by connecting travelers with 
+local guides. It includes personalized recommendations, group planning, and modern Android development 
+tools and frameworks (Kotlin, Jetpack Compose, Firebase, Flask, REST APIs, etc.). 
+Fruits-360 Multi-Output Classification (GitHub) 
+Brief Description: A comprehensive deep learning solution for agricultural product classification using transfer 
+learning and multi-output neural networks. 
+Credit Score Classification (GitHub) 
+Brief Description: A machine learning model for classifying individuals into credit score categories to help 
+financial institutions assess creditworthiness 
+Multi Class Obesity Risk (GitHub) 
+Brief Description: A predictive model to classify individuals' obesity risk levels based on personal attributes, 
+aiding early preventive healthcare. 
+Wikipedia Biography Clustering (GitHub) 
+Brief Description: An unsupervised learning project that clusters Wikipedia biographies to reveal patterns and 
+group similar profiles based on textual features (NLP). 
+Twitter hate speech classification 
+Brief Description: A machine learning project to detect and classify hate speech in tweets using feature 
+extraction (BoW, TF-IDF, embeddings) and models like Logistic Regression, SVM, CNN, or LSTM.
+Certifications & Courses 
+Android Developer Track - Udacity (Certificate) 
+Techie kit program, Software Technology Track - Orange Digital Center, Egypt (Certificate) 
+Advanced Programming in Kotlin (20h) Meta (Certificate) 
+Manipulating Time Series Data in Python Datacamp (Certificate) 
+Image Processing in Python Datacamp (Certificate) 
+Skills 
+Programming Languages: Java, Python, C, Kotlin, C, C# 
+Tools and Technologies: Git, GitHub, SQL, IntelliJ IDEA, VS code, Anaconda, Firebase, Linux, Docker, No
+SQL, My
+SQL, 
+MongoDB, Power BI, Dash, Jupyter Notebooks, Agile, streamlit, flask, kafka 
+Artificial Intelligence &Machine Learning: Deep Learning, TensorFlow, Keras, PyTorch, Scikit-learn, Computer 
+Vision, Image Classification, Natural Language Processing (NLP), Recommender system, NLTK, spaCy, Transformers, 
+Sentiment Analysis, Model Evaluation, AI Project Lifecycle, AWS Cloud, GenAI, prompt engineering, hyperparameter 
+tuning, LLMs, MLops, Huggingface 
+Data science: Data Preprocessing, Feature Engineering, Time series analysis, NumPy, Pandas, Matplotlib, Web 
+Scraping, seaborn, data collection, data analysis, data manipulation, big data , Spark, data visualization 
+Mobile Development: Android, Java, Kotlin, REST APIs, JSON, Android Studio, APIs, SQLite, XML, Jetpack 
+compose, Unit testing, Android SDK, MVVM, MVP, Debugging, Kotlin Coroutines 
+Design: 
+ UI/UX: User research, Wireframing, Prototyping, Usability testing, Design Thinking, Figma 
+ Graphic Design: Typography, Layout, Branding, Logo design, social media design, Illustration, Adobe Photoshop, 
+Illustrator, After Effects, Premiere pro 
+Personal Skills: Problem-Solving, Teamwork, Communication skills, Analytical abilities, Leadership, motivated, self-
+learning, presentation skills, critical thinking, time-management skills, eager to learn. 
+Freelancing Experience 
+Highway Digital Marketing Agency, Cairo, Egypt Jan 2021 - Feb 2022, Dec 2023 - Mar 2024 
+Graphic Designer 
+Responsibilities: 
+ Designing and creating creative designs for social media. 
+ Building and designing the visual identity for different brands (logo design, business cardsetc.) 
+ Creating normal & motion ads videos and campaigns. 
+Volunteer and Leadership Experience 
+AOU ICPC Community, Cairo, Egypt Jan 2021 - Aug 2021, Jan 2024 - Aug 2025 
+Head of media team 
+Responsibilities: 
+ Team Leadership: Directed team operations, delegated tasks, and fostered a collaborative 
+environment. 
+ Content Creation: Wrote and edited educational articles on C, algorithms, data structures, and 
+problem-solving for ICPC-focused audiences. 
+ Social Media Management: Managed and grew social media presence across platforms. 
+ Graphic Design: Created engaging visual content using Adobe Photoshop and Illustrator. 
+Languages 
+ Arabic (native) English (Advanced)
