@@ -1,104 +1,138 @@
-import os
 import sys
-__import__('pysqlite3')
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import os
+import streamlit as st
+from pathlib import Path
+import random
 
-import shutil
-import time
-import json
-import logging
-import hashlib
-import numpy as np
-from typing import List
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import chromadb
-from dotenv import load_dotenv
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain.embeddings.base import Embeddings
+from collections import defaultdict, Counter
+from Preprocessing.document_processor import CVProcessor
+from Preprocessing.vector_store import CVVectorStore
+from RAG.rag_engine import EnhancedRAGEngine
+from RAG.job_matcher import EnhancedJobMatcher
+from RAG.cv_summarizer import CVSummarizer
+from RAG.job_recommender import JobRecommender
+from RAG.hr_question_generator import HRQuestionGenerator
 
-load_dotenv()
-logger = logging.getLogger(__name__)
+import matplotlib.pyplot as plt
+import pandas as pd
 
-class SafeGoogleGenerativeAIEmbeddings(Embeddings):
-    def __init__(self, base_embeddings, max_retries=3, initial_timeout=30):
-        self.base_embeddings = base_embeddings
-        self.max_retries = max_retries
-        self.initial_timeout = initial_timeout
+# Initialize modules
+processor = CVProcessor(single_chunk=True)
+vector_store = CVVectorStore()
+rag_engine = EnhancedRAGEngine(vector_store, max_candidates_per_query=15)
+job_matcher = EnhancedJobMatcher(vector_store, rag_engine)
+summarizer = CVSummarizer()
+job_recommender = JobRecommender()
+hr_question_generator = HRQuestionGenerator()
 
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        embeddings = []
-        for i, text in enumerate(texts):
-            for attempt in range(self.max_retries):
-                try:
-                    embedding = self.base_embeddings.embed_documents([text])[0]
-                    embeddings.append(embedding)
-                    break
-                except Exception as e:
-                    if attempt == self.max_retries - 1:
-                        logger.error(f"Failed to embed after {self.max_retries} attempts. Using fallback.")
-                        embeddings.append(self._create_fallback_embedding(text))
-                    else:
-                        logger.warning(f"Retrying embed... attempt {attempt+1}")
-                        time.sleep(3)
-        return embeddings
+st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
+st.title("🤖 Smart Recruiter Assistant")
+st.write("Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.")
 
-    def embed_query(self, text: str) -> List[float]:
-        try:
-            return self.base_embeddings.embed_query(text)
-        except Exception:
-            return self._create_fallback_embedding(text)
+if "uploaded_cvs" not in st.session_state:
+    st.session_state.uploaded_cvs = {}
 
-    def _create_fallback_embedding(self, text: str) -> List[float]:
-        hash_digest = hashlib.md5(text.encode()).hexdigest()
-        return [(int(hash_digest[i:i+2], 16) / 127.5 - 1.0) for i in range(0, len(hash_digest), 2)][:768]
+st.header("📁 Upload CVs")
+uploaded_files = st.file_uploader("Upload CVs (PDF/DOCX)", type=["pdf", "docx"], accept_multiple_files=True)
 
+if st.button("🔍 Process CVs"):
+    if uploaded_files:
+        for file in uploaded_files:
+            file_path = os.path.join("uploaded_files", file.name)
+            os.makedirs("uploaded_files", exist_ok=True)
+            with open(file_path, "wb") as f:
+                f.write(file.getbuffer())
+            chunks = processor.process_cv(file_path)
+            name = os.path.splitext(file.name)[0]
+            if chunks:
+                st.session_state.uploaded_cvs[name] = chunks[0].page_content
+                for chunk in chunks:
+                    chunk.metadata["candidate_name"] = name
+                    chunk.metadata["source_file"] = file.name
+                vector_store.add_cvs(chunks)
+        st.success(f"{len(st.session_state.uploaded_cvs)} CV(s) processed.")
+    else:
+        st.warning("Please upload CV files first.")
 
-class CVVectorStore:
-    def __init__(self, reset_store=False):
-        # Create embeddings
-        base_embeddings = GoogleGenerativeAIEmbeddings(
-            model="models/embedding-001",
-            google_api_key=os.getenv("GOOGLE_API_KEY")
-        )
-        self.embeddings = SafeGoogleGenerativeAIEmbeddings(base_embeddings)
+# TABS
+tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions", "Debug"
+])
 
-        # Create Chroma collection
-        self.vectorstore = Chroma(
-            collection_name="cv_store",
-            embedding_function=self.embeddings
-        )
+with tab0:
+    st.subheader("Overview of Job Matches")
+    job_counts = Counter()
+    if st.session_state.uploaded_cvs:
+        for name, content in st.session_state.uploaded_cvs.items():
+            ranked_jobs = job_recommender.recommend_jobs(content, top_k=1)
+            if ranked_jobs:
+                top_job = ranked_jobs[0][0]['title']
+                job_counts[top_job] += 1
 
-        logger.info(f"✅ Chroma vector store initialized with collection: cv_store")
+        if job_counts:
+            df = pd.DataFrame(job_counts.items(), columns=["Job Title", "Count"])
+            st.bar_chart(df.set_index("Job Title"))
+        else:
+            st.info("No job recommendations available yet. Process CVs first.")
+    else:
+        st.warning("Upload and process CVs to view overview.")
 
-    def add_cvs(self, documents):
-        logger.info(f"Adding {len(documents)} documents to Chroma vector store")
-        successes, failures = 0, []
+with tab1:
+    st.subheader("Ask a question")
+    query = st.text_input("Enter your query")
+    if st.button("Ask"):
+        if st.session_state.uploaded_cvs:
+            top_text, all_relevant, top_names = rag_engine.find_top_candidates(query, top_k=5)
+            st.text_area("Top Candidates", top_text)
+            st.text_area("All Relevant", all_relevant)
+        else:
+            st.warning("Upload and process CVs first.")
 
-        for i, doc in enumerate(documents):
-            try:
-                self.vectorstore.add_documents([doc])
-                successes += 1
-            except Exception as e:
-                logger.error(f"Failed to add doc {i}: {e}")
-                failures.append((doc.metadata.get("candidate_name", "Unknown"), str(e)))
+with tab2:
+    st.subheader("Match job description")
+    job_desc = st.text_area("Paste job description")
+    if st.button("Match"):
+        if st.session_state.uploaded_cvs:
+            results = job_matcher.match_job_to_cvs(job_desc, top_k=5, explain=True)
+            for res in job_matcher.format_results(results).split("\n"):
+                st.markdown(res)
+        else:
+            st.warning("Upload and process CVs first.")
 
-        logger.info(f"✅ Successfully added {successes} documents. ❌ Failed: {len(failures)})")
-        return successes, failures
+with tab3:
+    st.subheader("Summarize CVs")
+    if st.button("Summarize"):
+        for name, content in st.session_state.uploaded_cvs.items():
+            summary = summarizer.summarize_cv(content, name)
+            st.markdown(f"**{name}**")
+            st.success(summary)
 
-    def similarity_search(self, query, k=5):
-        try:
-            return self.vectorstore.similarity_search(query, k=k)
-        except Exception as e:
-            logger.error(f"Similarity search error: {e}")
-            return []
+with tab4:
+    st.subheader("Job Recommendations")
+    if st.button("Recommend Jobs"):
+        for name, content in st.session_state.uploaded_cvs.items():
+            st.markdown(f"### {name}")
+            ranked = job_recommender.recommend_jobs(content, top_k=3)
+            for job, score, reason in ranked:
+                st.markdown(f"**💼 {job['title']}** (Score: {score:.2f})")
+                st.markdown(f"**Reason:** {reason}")
+                st.markdown("---")
 
-    def get_all_candidates(self):
-        try:
-            results = self.vectorstore.get()
-            if "metadatas" in results:
-                return list({meta.get("candidate_name", "Unknown") for meta in results["metadatas"]})
-            return []
-        except Exception as e:
-            logger.error(f"Failed to get candidates: {e}")
-            return []
+with tab5:
+    st.subheader("HR Interview Questions")
+    if st.button("Generate Questions"):
+        if st.session_state.uploaded_cvs:
+            top_names = list(st.session_state.uploaded_cvs.keys())[:5]
+            questions = hr_question_generator.generate_questions_for_top_candidates(
+                st.session_state.uploaded_cvs, top_names
+            )
+            for name in top_names:
+                st.markdown(f"### {name}")
+                for sec, qs in questions[name].items():
+                    st.markdown(f"**{sec}**")
+                    for q in qs:
+                        st.markdown(f"- {q}")
+        else:
+            st.warning("Upload and process CVs first.")
