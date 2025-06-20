@@ -71,6 +71,26 @@ p, label {{
     color: {theme['text']};
 }}
 
+.stFileUploaderFileName {{
+    color: #000 !important;
+}}
+
+.stButton > button {{
+    background-color: white !important;  /* or any color */
+    color: white !important;
+}}
+
+.st-emotion-cache-1wbqy5l.e17qgqm80 {{
+    color: #222222 !important;  /* or use theme['text'] value */
+}}
+
+.section-box {{
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border: none !important;
+}}
+
 /* General App Background & Font */
 body, .stApp {{
     background-color: {theme['background']};
@@ -166,6 +186,14 @@ body, .stApp {{
     color: black;
 }}
 
+/* Force white background on file uploader box */
+div[role="presentation"] {{
+    background-color: white !important;
+    border: 2px dashed #ccc !important;
+    border-radius: 12px !important;
+    color: #222 !important;
+    padding: 20px !important;
+}}
 
 
 /* Responsive Styles for Small Screens */
