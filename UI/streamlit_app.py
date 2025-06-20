@@ -1,8 +1,6 @@
-
 # === Main streamlit.py ===
 import streamlit as st
 import random
-
 
 # --- App Config ---
 st.set_page_config(
@@ -43,6 +41,7 @@ current_page = query_params.get("page", "Home")
 if current_page not in pages:
     current_page = "Home"
 
+# --- Load Page ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
@@ -57,17 +56,83 @@ st.markdown("""
 # --- CSS Styling ---
 st.markdown(f"""
 <style>
-    body, .stApp {{ background-color: {theme['background']}; direction: ltr; font-family: 'Poppins', sans-serif; }}
-    .fade-in {{ animation: fadeIn 0.8s ease-in-out; }}
-    @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(20px); }} to {{ opacity: 1; transform: translateY(0); }} }}
-    .main-title {{ color: {theme['primary']}; font-size: 38px; font-weight: bold; text-align: center; margin: 20px 0 10px; }}
-    .quote {{ font-size: 22px; color: {theme['primary']}; text-align: center; font-style: italic; font-weight: 600; margin: 30px 0; }}
-    .centered-image img {{ width: 400px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease; margin: 40px auto; display: block; }}
-    .centered-image img:hover {{ transform: scale(1.05); }}
-    .bottom-nav {{ position: fixed; bottom: 0; left: 0; width: 100%; background-color: {theme['primary']}; display: flex; justify-content: center; padding: 12px 0; border-top: 3px solid {theme['accent']}; z-index: 999; }}
-    .bottom-nav a {{ color: white; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 14px; padding: 6px 12px; border-radius: 8px; transition: background-color 0.3s; cursor: pointer; }}
-    .bottom-nav a:hover {{ background-color: {theme['accent']}; color: black; }}
-    .bottom-nav a.active {{ background-color: {theme['accent']}; color: black; }}
+    body, .stApp {{
+        background-color: {theme['background']};
+        direction: ltr;
+        font-family: 'Poppins', sans-serif;
+    }}
+    .fade-in {{
+        animation: fadeIn 0.8s ease-in-out;
+    }}
+    @keyframes fadeIn {{
+        from {{ opacity: 0; transform: translateY(20px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+    }}
+    .main-title {{
+        color: {theme['primary']};
+        font-size: 38px;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0 10px;
+    }}
+    .quote {{
+        font-size: 22px;
+        color: {theme['primary']};
+        text-align: center;
+        font-style: italic;
+        font-weight: 600;
+        margin: 30px 0;
+    }}
+    .centered-image img {{
+        width: 400px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+        margin: 40px auto;
+        display: block;
+    }}
+    .centered-image img:hover {{
+        transform: scale(1.05);
+    }}
+    .bottom-nav {{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f9f9f9;  /* lighter background */
+        border-top: 2px solid {theme['accent']};
+        display: flex;
+        justify-content: center;
+        padding: 10px 0;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        z-index: 999;
+    }}
+    .bottom-nav a {{
+        color: {theme['primary']};
+        margin: 0 20px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }}
+    .bottom-nav a:hover {{
+        background-color: {theme['accent']};
+        color: black;
+    }}
+    .bottom-nav a.active {{
+        background-color: {theme['accent']};
+        color: black;
+    }}
+    .footer-text {{
+        text-align: center;
+        font-size: 12px;
+        color: #777;
+        margin-top: 6px;
+        padding-bottom: 8px;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -93,6 +158,8 @@ if current_page == "Home":
 
     st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
 
+else:
+    load_page(current_page)
 
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
@@ -104,3 +171,10 @@ for page_name in pages.keys():
     footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
 
 st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
+
+# --- Copyright Text ---
+st.markdown("""
+<p class="footer-text">
+    © 2025 Smart Recruiter Assistant. All rights reserved.
+</p>
+""", unsafe_allow_html=True)
