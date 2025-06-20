@@ -5,6 +5,12 @@ import logging
 import re
 from collections import defaultdict
 import time # Import time for potential delays if needed
+import sys
+import os
+import streamlit as st
+from pathlib import Path
+import random
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Adjust sys.path if necessary for local module imports in a deployed environment
 import sys
