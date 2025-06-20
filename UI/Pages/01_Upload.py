@@ -61,22 +61,18 @@ def app():
     )
 
     # --- Upload Section ---
-
     st.markdown("""
      <p style='font-size:20px; color:#017691; font-weight:600;'>
      📎 Select PDF CV files to upload
      </p>
-       """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    # File uploader بدون عنوان
     uploaded_files = st.file_uploader(
-    label="",
-    type=["pdf", "docx", "doc"],
-    accept_multiple_files=True,
-    help="Upload multiple CVs (PDF or Word) at once."
+        label="",
+        type=["pdf", "docx", "doc"],
+        accept_multiple_files=True,
+        help="Upload multiple CVs (PDF or Word) at once."
     )
-
-    st.markdown('</div>', unsafe_allow_html=True)
 
     if uploaded_files:
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
@@ -88,7 +84,6 @@ def app():
             processed_files = []
 
             for uploaded_file in uploaded_files:
-                # Dynamic suffix based on uploaded file extension
                 suffix = os.path.splitext(uploaded_file.name)[1]
 
                 with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
@@ -113,7 +108,7 @@ def app():
                 st.write(f"• {fname}")
             st.markdown('</div>', unsafe_allow_html=True)
 
-        else:
+    else:
         st.info("No CVs uploaded yet. Please upload PDF or Word files to get started.")
 
     # --- Sidebar Tips ---
