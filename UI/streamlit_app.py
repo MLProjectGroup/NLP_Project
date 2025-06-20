@@ -32,7 +32,7 @@ daily_tips = [
 pages = {
     "Home  ": None,
     "   Start Recruiting   ": "Pages.Chatbot_02",
-    "   About Us": None
+    "   About Us": "Pages.About"
 }
 
 # --- Current Page ---
