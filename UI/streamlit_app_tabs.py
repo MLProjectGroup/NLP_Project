@@ -4,7 +4,7 @@ import streamlit as st
 from pathlib import Path
 import random
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from collections import Counter
+from collections import defaultdict, Counter
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
@@ -25,20 +25,20 @@ job_recommender = JobRecommender()
 hr_question_generator = HRQuestionGenerator()
 
 st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
-st.title("🤖 Smart Recruiter Assistant")
+st.title("Smart Recruiter Assistant")
 st.write("Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.")
 
 if "uploaded_cvs" not in st.session_state:
     st.session_state.uploaded_cvs = {}
 
-st.subheader("📁 Upload CVs")
+st.subheader("Upload CVs")
 uploaded_files = st.file_uploader("Upload CVs (PDF/DOCX)", type=["pdf", "docx"], accept_multiple_files=True)
 
-if st.button("🔍 Process CVs"):
+if st.button("Process CVs"):
     if uploaded_files:
-        os.makedirs("uploaded_files", exist_ok=True)
         for file in uploaded_files:
             file_path = os.path.join("uploaded_files", file.name)
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, "wb") as f:
                 f.write(file.getbuffer())
             chunks = processor.process_cv(file_path)
@@ -54,7 +54,9 @@ if st.button("🔍 Process CVs"):
         st.warning("Please upload CV files first.")
 
 # TABS
-tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["\ud83d\udcca Overview", "\u2753 Ask", "\ud83c\udfaf Match", "\ud83d\udcdd Summarize", "\ud83d\udcbc Recommend", "\ud83e\udd16 HR Questions", "\ud83d\udc83 Debug"])
+tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions", "Debug"
+])
 
 with tab0:
     st.subheader("Overview of Job Matches")
@@ -111,7 +113,7 @@ with tab4:
             st.markdown(f"### {name}")
             ranked = job_recommender.recommend_jobs(content, top_k=3)
             for job, score, reason in ranked:
-                st.markdown(f"**\ud83d\udcbc {job['title']}** (Score: {score:.2f})")
+                st.markdown(f"**{job['title']}** (Score: {score:.2f})")
                 st.markdown(f"**Reason:** {reason}")
                 st.markdown("---")
 
