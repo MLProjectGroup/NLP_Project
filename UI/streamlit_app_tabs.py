@@ -82,13 +82,18 @@ with tab0:
 with tab1:
     st.subheader("Ask a question")
     query = st.text_input("Enter your query")
-    if st.button("Ask"):
-        if st.session_state.uploaded_cvs:
-            top_text, all_relevant, top_names = rag_engine.find_top_candidates(query, top_k=5)
-            st.text_area("Top Candidates", top_text)
-            st.text_area("All Relevant", all_relevant)
-        else:
-            st.warning("Upload and process CVs first.")
+
+    if st.button("Run Query") and query.strip():
+        try:
+            top_text = rag_engine.find_top_candidates(query, top_k=5)
+            all_relevant = rag_engine.get_all_candidates_for_skill(query)
+            st.subheader("🎯 Top Candidates")
+            st.code(top_text[0], language="markdown")
+
+            st.subheader("📌 All Relevant Candidates")
+            st.text(all_relevant)
+        except Exception as e:
+            st.error(f"❌ Failed to process query: {e}")
 
 with tab2:
     st.subheader("Match job description")
