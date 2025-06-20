@@ -29,12 +29,12 @@ daily_tips = [
 # --- Pages ---
 pages = {
     "Home": None,
-    "Upload CVs": "pages.01_Upload",
-    "Chatbot Q&A": "pages.02_Chatbot",
-    "Matcher": "pages.03_Matcher",
+    "Upload CVs": "Pages.01_Upload",
+    "Chatbot Q&A": "Pages.02_Chatbot",
+    "Matcher": "Pages.03_Matcher",
     "Summarizer": None , 
-    "Recommender": "pages.04_Recommender",
-    "Dashboard": "pages.05_Dashboard"
+    "Recommender": "Pages.04_Recommender",
+    "Dashboard": "Pages.05_Dashboard"
 }
 
 # --- Current Page ---
