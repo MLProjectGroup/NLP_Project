@@ -2,24 +2,27 @@
 
 import sys
 import os
+import tempfile
+import streamlit as st
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-import streamlit as st
-import tempfile
 from Preprocessing.document_processor import CVProcessor
+from Preprocessing.vector_store import CVVectorStore
+
 
 def app():
     # --- Global Page Styles ---
-    st.markdown(f"""
+    st.markdown("""
     <style>
-        .main-title {{
+        .main-title {
             color: #017691;
             font-size: 38px;
             font-weight: bold;
             text-align: center;
             margin: 20px 0 10px;
-        }}
-        .section-box {{
+        }
+        .section-box {
             color: #333;
             padding: 16px;
             border: 1px solid #ccc;
@@ -27,13 +30,13 @@ def app():
             background-color: #ffffff;
             margin-top: 20px;
             margin-bottom: 20px;
-        }}
-        .section-title {{
+        }
+        .section-title {
             font-size: 22px;
             color: #017691;
             font-weight: 600;
             margin-bottom: 12px;
-        }}
+        }
     </style>
     """, unsafe_allow_html=True)
 
@@ -57,8 +60,6 @@ def app():
     )
 
     # --- Upload Section ---
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
-
     uploaded_files = st.file_uploader(
         "**Select PDF CV files to upload**",
         type=["pdf"],
@@ -66,15 +67,10 @@ def app():
         help="Upload multiple PDF CVs at once."
     )
 
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.write("")  # Spacer
-
     if uploaded_files:
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
 
         if st.button("🚀 Process CVs"):
-
             all_chunks = []
             processed_files = []
 
@@ -92,4 +88,10 @@ def app():
                 finally:
                     os.remove(tmp_path)
 
-            st.success("Done ✅")
+            if all_chunks:
+                vector_store = CVVectorStore(reset_store=True)  # clean ONCE only
+                vector_store.add_cvs(all_chunks)
+                st.session_state["vector_store"] = vector_store
+                st.success("✅ CVs processed and stored in the Chroma vector database!")
+            else:
+                st.warning("⚠️ No valid CV chunks found to process.")

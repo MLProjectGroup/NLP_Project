@@ -51,14 +51,14 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
 
 
 class CVVectorStore:
-    def __init__(self):
+    def __init__(self, reset_store=False):
         # Load from env or fallback
         persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./chroma_store")
         collection_name = os.getenv("VECTOR_DB_COLLECTION", "cv_collection")
 
         # 🧹 Clean corrupted store before anything else
-        if os.path.exists(persist_directory):
-            logger.warning(f"Removing corrupted Chroma store at: {persist_directory}")
+        if reset_store and os.path.exists(persist_directory):
+            logger.warning(f"Removing Chroma store at: {persist_directory}")
             shutil.rmtree(persist_directory)
 
         # 🔐 Create fresh client and embeddings

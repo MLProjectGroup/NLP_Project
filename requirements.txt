@@ -34,3 +34,5 @@ google-generativeai
 tiktoken
 
 streamlit==1.46.0
+
+matplotlib
