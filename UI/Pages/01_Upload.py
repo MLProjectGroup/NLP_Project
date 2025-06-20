@@ -24,7 +24,8 @@ def app():
             padding: 16px;
             border: 1px solid #ccc;
             border-radius: 10px;
-            background-color: #ffffff;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
             margin-bottom: 20px;
         }}
@@ -60,10 +61,10 @@ def app():
     st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
     uploaded_files = st.file_uploader(
-        "**Select PDF CV files to upload**",
-        type=["pdf"],
+        "**Select CV files to upload (PDF, DOCX)**",
+        type=["pdf", "docx", "doc"],
         accept_multiple_files=True,
-        help="Upload multiple PDF CVs at once."
+        help="Upload multiple CVs (PDF or Word) at once."
     )
 
     st.markdown('</div>', unsafe_allow_html=True)
@@ -80,7 +81,11 @@ def app():
             processed_files = []
 
             for uploaded_file in uploaded_files:
-                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                # Determine file extension
+                file_ext = os.path.splitext(uploaded_file.name)[1].lower()
+                suffix = file_ext if file_ext in ['.pdf', '.docx', '.doc'] else '.pdf'
+
+                with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
                     tmp_file.write(uploaded_file.read())
                     tmp_path = tmp_file.name
 
@@ -116,13 +121,13 @@ def app():
             st.markdown('</div>', unsafe_allow_html=True)
 
     else:
-        st.info("No CVs uploaded yet. Please upload PDF files to get started.")
+        st.info("No CVs uploaded yet. Please upload PDF or DOCX files to get started.")
 
     # --- Sidebar Tips ---
     with st.sidebar:
-        st.markdown("### 📝 Tips for Better Matching:")
+        st.markdown("### 💡Tips for Better Matching:")
         st.markdown("""
-        - Upload PDF format CVs
+        - Upload PDF or Word (DOCX) format CVs
         - Make sure text is extractable (not scanned images)
         - Upload updated CVs
         - Multiple CVs improve matching quality
