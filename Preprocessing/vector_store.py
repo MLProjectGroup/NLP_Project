@@ -1,4 +1,8 @@
 import os
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import shutil
 import time
 import json
@@ -52,14 +56,14 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
 
 class CVVectorStore:
     def __init__(self, reset_store=False):
-        # 🔐 Create fresh client and embeddings
+        # Create embeddings
         base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
             google_api_key=os.getenv("GOOGLE_API_KEY")
         )
         self.embeddings = SafeGoogleGenerativeAIEmbeddings(base_embeddings)
 
-        # ✅ Create a new collection
+        # Create Chroma collection
         self.vectorstore = Chroma(
             collection_name="cv_store",
             embedding_function=self.embeddings
