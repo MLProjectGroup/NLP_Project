@@ -77,28 +77,29 @@ def app():
 
             if "all_cv_chunks" not in st.session_state:
                 st.session_state.all_cv_chunks = []
-
+        
             for uploaded_file in uploaded_files:
                 suffix = os.path.splitext(uploaded_file.name)[1]
-
+        
                 with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
                     tmp_file.write(uploaded_file.read())
                     tmp_path = tmp_file.name
-
+        
                 try:
                     chunks = processor.process_cv(tmp_path)
-
+        
                     # 🟢 Store chunks in all_cv_chunks session state
                     st.session_state.all_cv_chunks.extend(chunks)
-
+        
                     st.success(f"✅ Processed and saved {uploaded_file.name} ({len(chunks)} chunks)")
-
+        
                 except Exception as e:
                     st.error(f"❌ Failed to process {uploaded_file.name}: {e}")
-
+        
                 finally:
                     os.remove(tmp_path)
-
+        
             st.info(f"Total chunks stored: {len(st.session_state.all_cv_chunks)}")
-
-
+        
+            # 🚀 Force rerun to refresh session_state for other pages
+            st.rerun()
