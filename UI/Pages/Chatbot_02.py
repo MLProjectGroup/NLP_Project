@@ -9,7 +9,7 @@ import random
 
 # --- Import your engine ---
 from Preprocessing.vector_store import CVVectorStore
-from Rag.rag_engine import EnhancedRAGEngine
+from RAG.rag_engine import EnhancedRAGEngine
 
 # --- Global Variables ---
 PRIMARY_COLOR = "#017691"
