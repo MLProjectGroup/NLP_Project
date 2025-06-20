@@ -9,6 +9,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
 import random
+
 tempfile = __import__('tempfile')
 
 # --- App Config ---
@@ -27,31 +28,17 @@ theme = {
     "text": "#222222"
 }
 
-# --- Daily Tips ---
-daily_tips = [
-    "Always personalize your hiring message!",
-    "Look beyond keywords, consider potential.",
-    "Soft skills matter as much as experience.",
-    "Diversity is a strength in hiring!",
-    "Hiring is like dating... look for culture fit!",
-]
-
 # --- Pages Dictionary ---
 pages = {
-    "Home": None,
-    "Chatbot": "Pages.Chatbot_02",
-    "Matcher": "Pages.Matcher_03",
-    "Summarizer": None,
-    "Recommender": "Pages.Recommender_04",
-    "Dashboard": "Pages.Dashboard_05"
+    "Let's Recruit": "Pages.Chatbot_02"
 }
 
 # --- Current Page ---
 query_params = st.query_params
-current_page = query_params.get("page", "Home")
+current_page = query_params.get("page", "Let's Recruit")
 
 if current_page not in pages:
-    current_page = "Home"
+    current_page = "Let's Recruit"
 
 def load_page(page_key):
     mod_name = pages.get(page_key)
@@ -71,7 +58,6 @@ st.markdown(f"""
     .fade-in {{ animation: fadeIn 0.8s ease-in-out; }}
     @keyframes fadeIn {{ from {{ opacity: 0; transform: translateY(20px); }} to {{ opacity: 1; transform: translateY(0); }} }}
     .main-title {{ color: {theme['primary']}; font-size: 38px; font-weight: bold; text-align: center; margin: 20px 0 10px; }}
-    .quote {{ font-size: 22px; color: {theme['primary']}; text-align: center; font-style: italic; font-weight: 600; margin: 30px 0; }}
     .centered-image img {{ width: 400px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease; margin: 40px auto; display: block; }}
     .centered-image img:hover {{ transform: scale(1.05); }}
     .bottom-nav {{ position: fixed; bottom: 0; left: 0; width: 100%; background-color: {theme['primary']}; display: flex; justify-content: center; padding: 12px 0; border-top: 3px solid {theme['accent']}; z-index: 999; }}
@@ -91,73 +77,8 @@ st.markdown(f"""
 # --- Fade In Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
-# --- Pages Content ---
-if current_page == "Home":
-    st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
-
-    st.markdown("""
-    <div class="centered-image">
-        <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png" alt="HR Assistant">
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
-
-    # --- Upload CV Section ---
-    with st.expander("📂 Upload CVs"):
-        from Preprocessing.document_processor import CVProcessor
-        from Preprocessing.vector_store import CVVectorStore
-        from RAG.rag_engine import EnhancedRAGEngine
-
-        processor = CVProcessor(
-            chunk_size=1000,
-            chunk_overlap=200,
-            single_chunk=True,
-            save_txt=True,
-            txt_output_dir="data/txt_cvs"
-        )
-
-        uploaded_files = st.file_uploader("Select PDF CV files", type=["pdf"], accept_multiple_files=True)
-
-        if uploaded_files:
-            st.success(f"Uploaded {len(uploaded_files)} CV(s)")
-
-            if st.button("🚀 Process CVs"):
-                if "all_cv_chunks" not in st.session_state:
-                    st.session_state.all_cv_chunks = []
-
-                for uploaded_file in uploaded_files:
-                    suffix = os.path.splitext(uploaded_file.name)[1]
-
-                    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
-                        tmp_file.write(uploaded_file.read())
-                        tmp_path = tmp_file.name
-
-                    try:
-                        chunks = processor.process_cv(tmp_path)
-                        st.session_state.all_cv_chunks.extend(chunks)
-
-                        st.success(f"✅ Processed and saved {uploaded_file.name} ({len(chunks)} chunks)")
-
-                    except Exception as e:
-                        st.error(f"❌ Failed to process {uploaded_file.name}: {e}")
-
-                    finally:
-                        os.remove(tmp_path)
-
-                # --- Initialize Vector Store ---
-                vector_store = CVVectorStore()
-                rag_engine = EnhancedRAGEngine(vector_store)
-
-                vector_store.vectorstore.add_documents(st.session_state.all_cv_chunks)
-
-                st.session_state.vector_store = vector_store
-                st.session_state.rag_engine = rag_engine
-
-                st.info(f"✅ All CVs uploaded successfully! Feel free to recruit with us.")
-
-else:
-    load_page(current_page)
+# --- Load Page Content ---
+load_page(current_page)
 
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
@@ -169,4 +90,4 @@ for page_name in pages.keys():
     footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
 
 st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
----
+
