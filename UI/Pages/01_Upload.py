@@ -61,13 +61,19 @@ def app():
     )
 
     # --- Upload Section ---
-    st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
+    st.markdown("""
+     <p style='font-size:20px; color:#017691; font-weight:600;'>
+     📎 Select PDF CV files to upload
+     </p>
+       """, unsafe_allow_html=True)
+
+    # File uploader بدون عنوان
     uploaded_files = st.file_uploader(
-        "**Select CV files to upload (PDF, DOCX)**",
-        type=["pdf", "docx", "doc"],
-        accept_multiple_files=True,
-        help="Upload multiple CVs (PDF or Word) at once."
+    label="",
+    type=["pdf", "docx", "doc"],
+    accept_multiple_files=True,
+    help="Upload multiple CVs (PDF or Word) at once."
     )
 
     st.markdown('</div>', unsafe_allow_html=True)
@@ -107,20 +113,12 @@ def app():
                 st.write(f"• {fname}")
             st.markdown('</div>', unsafe_allow_html=True)
 
-            # --- Saved Text Files ---
-            txt_files_info = processor.get_txt_files_info()
-            st.markdown('<div class="section-box">', unsafe_allow_html=True)
-            st.markdown('<div class="section-title">📄 Saved TXT Files:</div>', unsafe_allow_html=True)
-            for info in txt_files_info:
-                st.write(f"• {info['filename']} — {round(info['size_bytes'] / 1024, 2)} KB")
-            st.markdown('</div>', unsafe_allow_html=True)
-
-    else:
+        else:
         st.info("No CVs uploaded yet. Please upload PDF or Word files to get started.")
 
     # --- Sidebar Tips ---
     with st.sidebar:
-        st.markdown("### 📝 Tips for Better Matching:")
+        st.markdown("### 💡 Tips for Better Matching:")
         st.markdown("""
         - Upload CVs in PDF or Word format
         - Avoid scanned documents
