@@ -1,7 +1,7 @@
 import streamlit as st
 
 def app():
-     theme = {
+    theme = {
         "primary": "#017691",
         "secondary": "#FF9F1C",
         "accent": "#dce3e4",
@@ -9,8 +9,6 @@ def app():
         "text": "#222222",
         "highlight": "#AED581"
     }
-
-       
     
     st.markdown(f"""
     <style>
@@ -160,7 +158,6 @@ def app():
 
     st.markdown('<div class="fade-in container">', unsafe_allow_html=True)
 
- 
     st.markdown("""
     <div class="why-choose">
         <h3>Smart Recruiter Assistant</h3>
