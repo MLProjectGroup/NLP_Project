@@ -1,14 +1,17 @@
 import streamlit as st
 
 def app():
-    theme = {
+     theme = {
         "primary": "#017691",
         "secondary": "#FF9F1C",
         "accent": "#dce3e4",
         "background": "#dce3e4",
-        "text": "#222222"
+        "text": "#222222",
+        "highlight": "#AED581"
     }
 
+       
+    
     st.markdown(f"""
     <style>
         html, body, .main {{
@@ -16,8 +19,6 @@ def app():
             background-color: {theme['background']};
             margin: 0;
             padding: 0;
-            direction: ltr;
-            font-family: 'Poppins', sans-serif;
         }}
         .fade-in {{
             animation: fadeIn 0.9s ease-in-out;
@@ -27,9 +28,10 @@ def app():
             to {{ opacity: 1; transform: translateY(0); }}
         }}
         .container {{
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto 60px auto;
             padding: 40px 40px 50px 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: {theme['text']};
             line-height: 1.65;
             display: flex;
@@ -41,38 +43,48 @@ def app():
         }}
         .main-title {{
             color: {theme['primary']};
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+        }}
+        .decor-line {{
+            width: 80px;
+            height: 4px;
+            background-color: {theme['accent']};
+            border-radius: 4px;
+            margin: 10px auto 40px auto;
         }}
         .subtitle {{
             color: {theme['secondary']};
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             max-width: 100%;
         }}
         .features {{
             list-style: none;
             padding: 0;
             max-width: 100%;
+            text-align: right;
         }}
         .features li {{
-            background: {theme['accent']};
+            background: {theme['highlight']};
             color: {theme['primary']};
             font-weight: 600;
-            font-size: 1.1rem;
-            margin: 12px 0;
-            padding: 14px 22px;
+            font-size: 1.15rem;
+            margin: 14px 0;
+            padding: 14px 22px 14px 50px;
             border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(1, 118, 145, 0.15);
+            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.15);
             position: relative;
             transition: background-color 0.3s ease;
+            direction: ltr;
         }}
         .features li:hover {{
-            background-color: {theme['secondary']};
-            color: white;
+            background-color: {theme['accent']};
+            color: #222;
             cursor: default;
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
         }}
         .features li::before {{
             content: "✔";
@@ -83,6 +95,12 @@ def app():
             font-weight: 900;
             font-size: 1.3rem;
             color: {theme['primary']};
+        }}
+        .why-choose {{
+            max-width: 100%;
+            margin-top: 80px;
+            text-align: center;
+            direction: ltr;
         }}
         .why-choose h3 {{
             color: {theme['primary']};
@@ -95,72 +113,88 @@ def app():
             color: {theme['secondary']};
             line-height: 1.6;
         }}
+        .contact {{
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: {theme['secondary']};
+            letter-spacing: 0.05em;
+        }}
+        .contact a {{
+            color: {theme['accent']};
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }}
+        .contact a:hover {{
+            color: {theme['primary']};
+            text-decoration: underline;
+            cursor: pointer;
+        }}
+        @media (max-width: 768px) {{
+            .container {{
+                margin: 0 20px 40px 20px;
+                padding: 30px 20px 30px 20px;
+            }}
+            .main-title {{
+                font-size: 1.7rem;
+            }}
+            .subtitle {{
+                font-size: 1rem;
+                margin-bottom: 28px;
+            }}
+            .features li {{
+                font-size: 1rem;
+                padding: 12px 18px 12px 45px;
+            }}
+            .why-choose h3 {{
+                font-size: 1.5rem;
+            }}
+            .why-choose p {{
+                font-size: 1rem;
+            }}
+        }}
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown('<div class="fade-in container">', unsafe_allow_html=True)
 
+ 
     st.markdown("""
-    <div class="main-title">Smart Recruiter Assistant</div>
-    <div class="subtitle">Empowering Recruiters with AI-driven insights and tools</div>
+    <div class="why-choose">
+        <h3>Smart Recruiter Assistant</h3>
+    </div>
+    <div class="decor-line"></div>
     """, unsafe_allow_html=True)
 
+    st.markdown('<p class="subtitle">Reclaim Your Time, Recruit Smarter.</p>', unsafe_allow_html=True)
+
+    # Features list
     st.markdown("""
     <ul class="features">
-        <li>AI-powered candidate screening</li>
-        <li>Smart interview scheduling and follow-ups</li>
-        <li>Real-time insights on candidate fit</li>
-        <li>Automated communication and engagement</li>
-        <li>Data-driven hiring recommendations</li>
+        <li>AI helps you quickly find the right candidates.</li>
+        <li>A smart assistant guides you through hiring.</li>
+        <li>Clear reports help you make better decisions.</li>
+        <li>Automates repetitive tasks to save you time.</li>
+        <li>Easy-to-use and secure platform for recruiters.</li>
     </ul>
     """, unsafe_allow_html=True)
 
+    # Why choose section
     st.markdown("""
     <div class="why-choose">
-        <h3>Why Choose Us?</h3>
-        <p>Because we blend cutting-edge AI with human intuition to streamline your hiring process, save you time, and help you find the best candidates faster and more effectively.</p>
+        <h3>Why Choose Smart Recruiter Assistant?</h3>
+        <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient. Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
     </div>
     """, unsafe_allow_html=True)
 
+    # Contact info
     st.markdown("""
     <div class="contact">
-        For more info: <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a>
+        For more informations: 
+        <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-    # --- Footer Navigation ---
-    pages = {
-        "Home  ": None,
-        "   Start Recruiting   ": "Pages.Chatbot_02",
-        "   About Us": "Pages.About"
-    }
-
-    query_params = st.query_params
-    current_page = query_params.get("page", "   About Us")
-
-    footer_html = ""
-    for page_name in pages.keys():
-        active = "active" if page_name == current_page else ""
-        footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name.strip()}</a>'
-
-    st.markdown(f"""
-    <div class="bottom-nav" style="
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: {theme['primary']};
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        padding: 10px 0 4px 0;
-        border-top: 3px solid {theme['accent']};
-        z-index: 999;">
-        {footer_html}
-    </div>
-    <p class="footer-text" style="text-align: center; font-size: 13px; color: #444; margin-top: 8px; margin-bottom: 8px;">
-        © 2025 Smart Recruiter Assistant. All rights reserved.
-    </p>
-    """, unsafe_allow_html=True)
