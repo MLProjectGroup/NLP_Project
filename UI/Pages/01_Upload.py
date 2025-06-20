@@ -74,7 +74,6 @@ def app():
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
 
         if st.button("🚀 Process CVs"):
-            st.info("Processing... please wait ⏳")
 
             all_chunks = []
             processed_files = []
@@ -93,4 +92,4 @@ def app():
                 finally:
                     os.remove(tmp_path)
 
-            st.success
+            st.success("Done ✅")
