@@ -10,11 +10,11 @@ st.set_page_config(
 
 # --- Theme Colors ---
 theme = {
-    "primary": "#017691",          
-    "secondary": "#FF9F1C",       
-    "accent": "#dce3e4",           
-    "background": "#dce3e4",       
-    "text": "#222222"             
+    "primary": "#017691",
+    "secondary": "#FF9F1C",
+    "accent": "#dce3e4",
+    "background": "#dce3e4",
+    "text": "#222222"
 }
 
 # --- Daily Tips ---
@@ -32,14 +32,14 @@ pages = {
     "Upload CVs": "Pages.01_Upload",
     "Chatbot Q&A": "Pages.02_Chatbot",
     "Matcher": "Pages.03_Matcher",
-    "Summarizer": None , 
+    "Summarizer": None,
     "Recommender": "Pages.04_Recommender",
     "Dashboard": "Pages.05_Dashboard"
 }
 
 # --- Current Page ---
-query_params = st.query_params
-current_page = query_params.get("page", "Home")   
+query_params = st.experimental_get_query_params()
+current_page = query_params.get("page", ["Home"])[0]
 
 if current_page not in pages:
     current_page = "Home"
@@ -48,7 +48,7 @@ if current_page not in pages:
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = __import__(mod_name, fromlist=['app'])
+        mod = _import_(mod_name, fromlist=['app'])
         mod.app()
 
 # --- Google Fonts ---
