@@ -37,26 +37,25 @@ pages = {
     "Dashboard": "Pages.05_Dashboard"
 }
 
-# ✅ --- Get current page using modern Streamlit method ---
-query_params = st.query_params
-current_page = query_params.get("page", ["Home"])[0]
+# --- Set Default Page in Session ---
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
 
-if current_page not in pages:
-    current_page = "Home"
+current_page = st.session_state.page
 
-# --- Load Page Dynamically ---
+# --- Load Page ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = __import__(mod_name, fromlist=['app'])
+        mod = _import_(mod_name, fromlist=['app'])
         mod.app()
 
-# --- Load Google Fonts ---
+# --- Google Fonts ---
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# --- Styling ---
+# --- CSS Styling ---
 st.markdown(f"""
 <style>
     body, .stApp {{
@@ -102,25 +101,22 @@ st.markdown(f"""
         transform: scale(1.05);
     }}
 
-    .nav-button {{
+    .bottom-nav {{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
         background-color: {theme['primary']};
-        color: white;
-        font-weight: bold;
-        border-radius: 8px;
-        padding: 10px 20px;
-        margin: 5px;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }}
-    .nav-button:hover {{
-        background-color: {theme['secondary']};
-        color: black;
+        display: flex;
+        justify-content: center;
+        padding: 12px 0;
+        border-top: 3px solid {theme['accent']};
+        z-index: 999;
     }}
 </style>
 """, unsafe_allow_html=True)
 
-# --- Fixed Header ---
+# --- Header Fixed ---
 st.markdown(f"""
 <div style="
     background-color:{theme['primary']}; 
@@ -134,16 +130,15 @@ st.markdown(f"""
     z-index: 1000; 
     display: flex; 
     justify-content: center; 
-    align-items: center;
-">
+    align-items: center;">
     🤖 Smart Recruiter Assistant
 </div>
 """, unsafe_allow_html=True)
 
-# --- Fade-In Container Start ---
+# --- Fade In Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
-# --- Render Page Content ---
+# --- Pages Content ---
 if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -155,14 +150,20 @@ if current_page == "Home":
 else:
     load_page(current_page)
 
-# --- Fade-In Container End ---
+# --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Bottom Navigation ---
-with st.container():
-    nav_cols = st.columns(len(pages))
-    for i, (page_name, page_module) in enumerate(pages.items()):
-        with nav_cols[i]:
-            if st.button(page_name, use_container_width=True, key=f"nav_{page_name}"):
-                st.query_params.page = page_name
-                st.rerun()
+# --- Bottom Nav (Working with buttons) ---
+st.markdown('<div class="bottom-nav">', unsafe_allow_html=True)
+
+cols = st.columns(len(pages))
+for i, page_name in enumerate(pages.keys()):
+    is_active = page_name == current_page
+    btn_color = '#dce3e4' if is_active else theme['primary']
+    text_color = 'black' if is_active else 'white'
+
+    if cols[i].button(page_name, key=f"nav_{page_name}"):
+        st.session_state.page = page_name
+        st.rerun()
+
+st.markdown('</div>', unsafe_allow_html=True)
