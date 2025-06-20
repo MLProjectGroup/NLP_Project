@@ -6,7 +6,7 @@ import tempfile
 import streamlit as st
 
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(_file_), '..', '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from Preprocessing.document_processor import CVProcessor
 
