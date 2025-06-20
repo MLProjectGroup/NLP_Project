@@ -17,6 +17,9 @@ ACCENT_COLOR = "#FF9F1C"
 BACKGROUND_COLOR = "#f5f7fa"
 
 # --- Initialize Vector Store & Engine ---
+from dotenv import load_dotenv
+load_dotenv()
+
 @st.cache_resource
 def load_rag_engine():
     vector_store = CVVectorStore()
