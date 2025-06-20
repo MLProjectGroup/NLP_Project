@@ -93,4 +93,37 @@ def app():
                 finally:
                     os.remove(tmp_path)
 
-            st.success
+            st.success(f"✅ Processed {len(processed_files)} CV(s) successfully!")
+
+            # --- Processed Files Section ---
+            st.markdown('<div class="section-box">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📄 Processed Files:</div>', unsafe_allow_html=True)
+
+            for fname in processed_files:
+                st.write(f"• {fname}")
+
+            st.markdown('</div>', unsafe_allow_html=True)
+
+            # --- Saved TXT Files Section ---
+            txt_files_info = processor.get_txt_files_info()
+
+            st.markdown('<div class="section-box">', unsafe_allow_html=True)
+            st.markdown('<div class="section-title">📄 Saved TXT Files:</div>', unsafe_allow_html=True)
+
+            for info in txt_files_info:
+                st.write(f"• {info['filename']} — {round(info['size_bytes'] / 1024, 2)} KB")
+
+            st.markdown('</div>', unsafe_allow_html=True)
+
+    else:
+        st.info("No CVs uploaded yet. Please upload PDF files to get started.")
+
+    # --- Sidebar Tips ---
+    with st.sidebar:
+        st.markdown("### 📝 Tips for Better Matching:")
+        st.markdown("""
+        - Upload PDF format CVs
+        - Make sure text is extractable (not scanned images)
+        - Upload updated CVs
+        - Multiple CVs improve matching quality
+        """)
