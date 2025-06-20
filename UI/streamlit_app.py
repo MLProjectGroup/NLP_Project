@@ -48,7 +48,7 @@ if current_page not in pages:
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = _import_(mod_name, fromlist=['app'])
+        mod = __import__(mod_name, fromlist=['app'])
         mod.app()
 
 # --- Load Google Fonts ---
@@ -102,38 +102,19 @@ st.markdown(f"""
         transform: scale(1.05);
     }}
 
-    .bottom-nav {{
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
+    .nav-button {{
         background-color: {theme['primary']};
-        display: flex;
-        justify-content: center;
-        padding: 12px 0;
-        border-top: 3px solid {theme['accent']};
-        z-index: 999;
-    }}
-
-    .bottom-nav a {{
         color: white;
-        margin: 0 15px;
-        text-decoration: none;
         font-weight: bold;
-        font-size: 14px;
-        padding: 6px 12px;
         border-radius: 8px;
-        transition: background-color 0.3s;
+        padding: 10px 20px;
+        margin: 5px;
+        border: none;
         cursor: pointer;
+        transition: all 0.3s ease;
     }}
-
-    .bottom-nav a:hover {{
-        background-color: {theme['accent']};
-        color: black;
-    }}
-
-    .bottom-nav a.active {{
-        background-color: {theme['accent']};
+    .nav-button:hover {{
+        background-color: {theme['secondary']};
         color: black;
     }}
 </style>
@@ -178,9 +159,10 @@ else:
 st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Bottom Navigation ---
-footer_html = ""
-for page_name in pages:
-    active_class = "active" if page_name == current_page else ""
-    footer_html += f'<a href="/?page={page_name}" class="{active_class}">{page_name}</a>'
-
-st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
+with st.container():
+    nav_cols = st.columns(len(pages))
+    for i, (page_name, page_module) in enumerate(pages.items()):
+        with nav_cols[i]:
+            if st.button(page_name, use_container_width=True, key=f"nav_{page_name}"):
+                st.query_params.page = page_name
+                st.experimental_rerun()
