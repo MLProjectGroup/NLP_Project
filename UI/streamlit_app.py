@@ -30,7 +30,7 @@ daily_tips = [
 pages = {
     "Home": None,
     "Upload CVs": "Pages.Upload_01",
-    "Chatbot Q&A": "Pages.Chatbot_02",
+    "Chatbot Q&A":"Pages.Chatbot_02",
     "Matcher": "Pages.Matcher_03",
     "Summarizer": None,
     "Recommender": "Pages.Recommender_04",
