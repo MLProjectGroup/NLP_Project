@@ -3,11 +3,11 @@
 import streamlit as st
 import os
 import tempfile
-from Preprocessing.document_processor.pyr import CVProcessor
+from Preprocessing.document_processor.py import CVProcessor
 
 def app():
     # --- Title ---
-    st.markdown('<div class="main-title">📂 Upload CVs</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-title">Upload CVs</div>', unsafe_allow_html=True)
     st.markdown("""
     <p style="text-align:center; font-size:18px; color:#444;">
     Upload candidates' CVs here to process and prepare for analysis!
@@ -18,7 +18,7 @@ def app():
     processor = CVProcessor(
         chunk_size=1000,
         chunk_overlap=200,
-        single_chunk=True,         # You can change to False if needed
+        single_chunk=True,         
         save_txt=True,
         txt_output_dir="data/txt_cvs"
     )
@@ -35,7 +35,7 @@ def app():
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
 
         # --- Process Button ---
-        if st.button("🚀 Process CVs"):
+        if st.button("Process CVs"):
             st.info("Processing... please wait ⏳")
 
             all_chunks = []
