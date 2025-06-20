@@ -9,6 +9,34 @@ import tempfile
 from Preprocessing.document_processor import CVProcessor
 
 def app():
+    # --- Global Page Styles ---
+    st.markdown(f"""
+    <style>
+        .main-title {{
+            color: #017691;
+            font-size: 38px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0 10px;
+        }}
+        .section-box {{
+            color: #333;
+            padding: 16px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }}
+        .section-title {{
+            font-size: 22px;
+            color: #017691;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }}
+    </style>
+    """, unsafe_allow_html=True)
+
     # --- Title ---
     st.markdown('<div class="main-title">📂 Upload CVs</div>', unsafe_allow_html=True)
 
@@ -18,8 +46,6 @@ def app():
     The system will extract and clean the content to help you match top candidates faster.
     </p>
     """, unsafe_allow_html=True)
-
-    st.write("")  # Spacer
 
     # --- Initialize Processor ---
     processor = CVProcessor(
@@ -31,9 +57,7 @@ def app():
     )
 
     # --- Upload Section ---
-    st.markdown("""
-    <div style="padding: 16px; border: 1px solid #ccc; border-radius: 10px; background-color: #ffffff;">
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="section-box">', unsafe_allow_html=True)
 
     uploaded_files = st.file_uploader(
         "**Select PDF CV files to upload**",
@@ -42,14 +66,13 @@ def app():
         help="Upload multiple PDF CVs at once."
     )
 
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.write("")  # Spacer
 
     if uploaded_files:
         st.success(f"Uploaded {len(uploaded_files)} CV(s)")
 
-        # --- Process Button ---
         if st.button("🚀 Process CVs"):
             st.info("Processing... please wait ⏳")
 
@@ -70,28 +93,4 @@ def app():
                 finally:
                     os.remove(tmp_path)
 
-            st.success(f"✅ Processed {len(processed_files)} CV(s) successfully!")
-
-            # --- Processed Files List ---
-            st.markdown("### 📄 Processed Files:")
-            for fname in processed_files:
-                st.write(f"• {fname}")
-
-            # --- Saved TXT Files Info ---
-            txt_files_info = processor.get_txt_files_info()
-            st.markdown("### 📄 Saved TXT Files:")
-            for info in txt_files_info:
-                st.write(f"• {info['filename']} — {round(info['size_bytes'] / 1024, 2)} KB")
-
-    else:
-        st.info("No CVs uploaded yet. Please upload PDF files to get started.")
-
-    # --- Sidebar Tips ---
-    with st.sidebar:
-        st.markdown("### 📝 Tips for Better Matching:")
-        st.markdown("""
-        - Upload PDF format CVs
-        - Make sure text is extractable (not scanned images)
-        - Upload updated CVs
-        - Multiple CVs improve matching quality
-        """)
+            st.success
