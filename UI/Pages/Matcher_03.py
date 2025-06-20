@@ -5,12 +5,14 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 import streamlit as st
+
 from dotenv import load_dotenv
+load_dotenv()
+
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
 from RAG.job_matcher import EnhancedJobMatcher
 
-load_dotenv()
 
 # --- Theme Colors ---
 PRIMARY_COLOR = "#017691"
