@@ -36,3 +36,4 @@ tiktoken
 streamlit==1.46.0
 
 matplotlib
+plotly>=5.20.0
