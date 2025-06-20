@@ -10,6 +10,10 @@ import os
 import streamlit as st
 from pathlib import Path
 import random
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Adjust sys.path if necessary for local module imports in a deployed environment
