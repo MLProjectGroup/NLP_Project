@@ -6,6 +6,7 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
 import random
+tempfile = __import__('tempfile')
 
 # --- App Config ---
 st.set_page_config(
@@ -35,8 +36,7 @@ daily_tips = [
 # --- Pages Dictionary ---
 pages = {
     "Home": None,
-    "Upload CVs": "Pages.Upload_01",
-    "Chatbot":"Pages.Chatbot_02",
+    "Chatbot": "Pages.Chatbot_02",
     "Matcher": "Pages.Matcher_03",
     "Summarizer": None,
     "Recommender": "Pages.Recommender_04",
@@ -168,33 +168,72 @@ st.markdown(f"""
 # --- Fade In Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
-
-
-
-
 # --- Pages Content ---
 if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
+
     st.markdown("""
     <div class="centered-image">
         <img src="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png" alt="HR Assistant">
     </div>
     """, unsafe_allow_html=True)
+
     st.markdown(f'<div class="quote"><b>Daily Tip:</b> <br> {random.choice(daily_tips)}</div>', unsafe_allow_html=True)
+
+    # --- Upload CV Section ---
+    with st.expander("📂 Upload CVs"):
+        from Preprocessing.document_processor import CVProcessor
+
+        processor = CVProcessor(
+            chunk_size=1000,
+            chunk_overlap=200,
+            single_chunk=True,
+            save_txt=True,
+            txt_output_dir="data/txt_cvs"
+        )
+
+        uploaded_files = st.file_uploader(
+            "Select PDF CV files", type=["pdf"], accept_multiple_files=True
+        )
+
+        if uploaded_files:
+            st.success(f"Uploaded {len(uploaded_files)} CV(s)")
+
+            if st.button("🚀 Process CVs"):
+                if "all_cv_chunks" not in st.session_state:
+                    st.session_state.all_cv_chunks = []
+
+                for uploaded_file in uploaded_files:
+                    suffix = os.path.splitext(uploaded_file.name)[1]
+
+                    with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp_file:
+                        tmp_file.write(uploaded_file.read())
+                        tmp_path = tmp_file.name
+
+                    try:
+                        chunks = processor.process_cv(tmp_path)
+                        st.session_state.all_cv_chunks.extend(chunks)
+
+                        st.success(f"✅ Processed and saved {uploaded_file.name} ({len(chunks)} chunks)")
+
+                    except Exception as e:
+                        st.error(f"❌ Failed to process {uploaded_file.name}: {e}")
+
+                    finally:
+                        os.remove(tmp_path)
+
+                st.info(f"✅ All CVs uploaded successfully! Feel free to recruit with us.")
+
 else:
     load_page(current_page)
 
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
 
-
 # --- Bottom Nav ---
-
 footer_html = ""
 for page_name in pages.keys():
     active = "active" if page_name == current_page else ""
     footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
 
 st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
-
-
