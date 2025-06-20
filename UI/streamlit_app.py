@@ -99,8 +99,8 @@ st.markdown(f"""
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #f9f9f9;  /* lighter background */
-        border-top: 2px solid {theme['accent']};
+        background-color: #f9f9f9;  
+        border-top: 2px solid {theme['primary']};
         display: flex;
         justify-content: center;
         padding: 10px 0;
@@ -108,7 +108,7 @@ st.markdown(f"""
         z-index: 999;
     }}
     .bottom-nav a {{
-        color: {theme['primary']};
+        color: {theme['accent']};
         margin: 0 20px;
         text-decoration: none;
         font-weight: bold;
