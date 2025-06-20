@@ -29,17 +29,17 @@ daily_tips = [
 # --- Pages Dictionary ---
 pages = {
     "Home": None,
-    "Upload CVs": "Pages.01_Upload",
-    "Chatbot Q&A": "Pages.02_Chatbot",
-    "Matcher": "Pages.03_Matcher",
+    "Upload CVs": "Pages.Upload_01",
+    "Chatbot Q&A": "Pages.Chatbot_02",
+    "Matcher": "Pages.Matcher_03",
     "Summarizer": None,
-    "Recommender": "Pages.04_Recommender",
-    "Dashboard": "Pages.05_Dashboard"
+    "Recommender": "Pages.Recommender_04",
+    "Dashboard": "Pages.Dashboard_05"
 }
 
 # ✅ --- Current Page from query params ---
 query_params = st.query_params
-current_page = query_params.get("page", ["Home"])[0]
+current_page = query_params.get("page", "Home")
 
 if current_page not in pages:
     current_page = "Home"
@@ -162,6 +162,10 @@ st.markdown(f"""
 # --- Fade In Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
+
+
+
+
 # --- Pages Content ---
 if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
@@ -177,11 +181,14 @@ else:
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Bottom Nav (with links instead of buttons) ---
-footer_html = '<div class="bottom-nav">'
-for page_name in pages.keys():
-    active_class = "active" if page_name == current_page else ""
-    footer_html += f'<a href="/?page={page_name}" class="{active_class}">{page_name}</a>'
-footer_html += '</div>'
 
-st.markdown(footer_html, unsafe_allow_html=True)
+# --- Bottom Nav ---
+
+footer_html = ""
+for page_name in pages.keys():
+    active = "active" if page_name == current_page else ""
+    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
+
+st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
+
+
