@@ -1,4 +1,4 @@
-# pages/01_Upload.py
+# Pages/01_Upload.py
 
 import sys
 import os

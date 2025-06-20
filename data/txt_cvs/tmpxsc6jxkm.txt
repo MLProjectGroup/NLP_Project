@@ -1,0 +1,111 @@
+Alaa Hussien Fathy
+alaahussiefathy@gmail.com
+ 
+01028637713
+ 
+Kafr Elsheikh (open to relocate)
+ 
+Linkedin
+ 
+Github
+ 
+kaggle
+ 
+PROFILE
+Artificial Intelligence Engineer with a strong foundation in AI, machine learning, and deep 
+learning. Passionate about leveraging data-driven solutions to tackle complex challenges. Skilled 
+in computer vision, NLP, and cloud computing with hands-on experience in diverse projects. 
+Enthusiastic about applying AI techniques in innovative and real-world applications.
+EDUCATION
+9-Month Diploma (ITI) Information Technology Institute ,(MCIT) 
+Ministry Of Communications And Information Technology , AI track 
+,Mansoura Branch
+10/2024 07/2025
+Faculty of Artificial Intelligence, Kafrelsheikh University
+BS Artificial Intelligence
+10/2020 07/2024
+GPA: 3.96
+Relevant Courses:
+Math for AI     Machine Learning   Deep Learning     Cloud Computing  
+Big Data    Natural Language Processing     Computer Vision
+INTERNSHIPS
+Digital Egypt Pioneers Initiative (DPEI) @ AMIT
+AI & Data Science - Microsoft Machine Learning Engineer
+07/2024
+Data Analyst Intern Meri
+SKILL
+Analyzed sales data using Power BI to derive insights and trends.
+09/2023
+Processed and visualized Diabetes Patients Dataset for healthcare 
+analysis.
+Developed an HR Analytics Dashboard using Python and Power BI.
+Business Intelligence Trainee Information Technology Institute(ITI)
+Developed data warehouse solutions and optimized database 
+management.
+07/2023
+Conducted statistical analyses using Power BI, Tableau, and Excel.
+Visualized data trends to support business intelligence operations
+SKILLS
+Programming Languages: Python, C
+Artificial Intelligence & Machine Learning:Deep Learning, Natural Language Processing (NLP), 
+Computer Vision
+Libraries & Frameworks: TensorFlow, Keras, PyTorch, OpenCV, spaCy, NLTK, Transformers 
+(Hugging Face)
+Data Science & Visualization: Data Analysis, Power BI, Tableau
+Software Development: Object-Oriented Programming (OOP), Data Structures & Algorithms
+Libraries: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn
+PROJECTS
+Research_paper_summarizer
+Developed a multi-agent system for end-to-end automation of research paper analysis.
+Automated the discovery, extraction, and summarization of academic papers
+Image Inpainting Using GAN
+Implemented an end-to-end GAN-based solution for image completion.
+Part-of-speech_arabic-text
+Built a POS tagging system for Arabic text using deep learning.
+Utilized the asafaya/bert-base-arabic model from Hugging Face Transformers.
+Rossmann Store Sales Time Series Forecasting
+Perform detailed analysis on Rossmann store sales data.
+Apply forecasting models and evaluate them using competition metrics.
+Two-Way Sign Language Translator (Graduation Project)
+Designed an AI-powered sign language translator for real-time text conversion.
+Integrated computer vision and NLP models for seamless translation.
+Autism Detection Using YOLO v8
+Trained a YOLO v8 model for early autism detection using facial patterns.
+Utilized deep learning techniques for precise feature extraction.
+Brain Tumor Classification
+Developed a CNN model to detect tumors from MRI scans with high accuracy.
+Applied image preprocessing and augmentation for better performance.
+Sentiment Analysis Using NLP
+Developed a sentiment classification system using TF-IDF feature extraction and a Support 
+Vector Machine (SVM) classifier
+OCR Project Using Computer Vision
+Built an Optical Character Recognition (OCR) system using OpenCV and Tesseract.
+Enhanced text extraction from scanned documents with high accuracy.
+CERTIFICATES
+Machine Learning - 
+Coursera
+OOP- maharatech
+Deep Learning - Coursera
+Data Structures and 
+Algorithms in python - 
+datacamp
+Generative AI - Udemy
+RESEARCH & PUBLICATIONS
+Optimizing Medical Image Classification: Leveraging Advanced Segmentation Models for 
+Enhanced Object Detection in Real-World Scenarios
+Published in: IEEE Xplore during the 2024 International Conference on Future 
+Telecommunications and Artificial Intelligence (IC-FTAI)
+ACTIVITIES & INVOLVEMENT:
+Data Structures Member at Google Developer Student Club (GDSC) 2023 Worked on 
+strengthening core CS concepts and contributed to peer learning and problem-solving initiatives.
+Participated in the International Collegiate Programming Contest (ICPC) 2022 Engaged in 
+algorithmic problem-solving and team-based programming challenges.
+Member of IEEE Machine Learning Track 2022 Collaborated in technical sessions, workshops, 
+and research discussions in the ML domain.
+SOFT SKILLS
+Communication Skills
+Teamwork
+Self Study and Continuous Learning
+Problem Solving Skills
+LANGUAGES
+Arabic (Native) English (B2)

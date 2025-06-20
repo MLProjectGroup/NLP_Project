@@ -1,0 +1,89 @@
+Aya Attia 
+ 
+ayaattia261@gmail.com 20 1272439739 Al-Sharika, Egypt (easy Relocated) 
+LinkedIn Profile GitHub Profile 
+ 
+Summary 
+AI Engineer with expertise in Data Analysis, Machine Learning, Deep Learning, and Computer Vision. Skilled in using 
+TensorFlow, Keras, PyCaret, and Scikit-learn to build and deploy AI solutions. Experienced with deep learning models 
+and advanced techniques. Strong in performing data analysis and optimizing models for better performance. Proficient in 
+web scraping, NLP, and data visualization with Python and Streamlit. 
+ 
+Education 
+ October June 2025 9-Month Diploma (ITI) Information Technology Institute, (MCIT) Ministry of 
+Communications and Information Technology, AI track, Mansoura Branch 
+ 
+ Sep 2020 Jul 2024 Bachelor of Computer and Information 
+ Faculty of Computers and Information, Medical Informatics, Zagazig University 
+ GPA: 3.93 / 4 
+ 
+Internships 
+ Digital Egypt Pioneers Initiative (DEPI) Ministry of Communications and Information Technology 
+ 2024 
+Completed an advanced training program focused on machine learning, data science methodologies, 
+and industry best practices, and gained practical experience applying advanced machine learning 
+techniques to real-world problems. 
+Data Analysis Professional Nanodegree Udacity, FWD Jan 2023 Feb 2023 
+Learned how to clean, analyze, and visualize data using Python. Completed projects involving data 
+wrangling, exploration, and drawing insights from real-world datasets. 
+ 
+Projects 
+ Handwritten Digit Classification using LSTM and Conv
+LSTM MNIST Dataset 
+Built LSTM and Conv
+LSTM models to classify MNIST handwritten digits using sequential and 
+spatiotemporal features. 
+ 
+ Using Machine Learning algorithms on the Credit Score dataset 
+Used a Decision Tree model to classify individuals by credit score after preprocessing and evaluation. 
+ 
+ Unsupervised Text Clustering with NLP and Machine Learning 
+Worked on an NLP project using unsupervised learning to cluster and analyze text data. Focused on 
+preprocessing (tokenization, stopword removal, vectorization), feature extraction (TF-IDF, embeddings), clustering 
+(K-Means), and evaluation (silhouette score, Davies-Bouldin index). 
+ 
+ Web Scraping Projects 
+Created Selenium web scrapers to collect titles, prices, ratings, and reviews from Amazon and Jumia for 
+market analysis.
+ Crowdfunding console app using Python 
+Developed a Python console app for user registration, login, and project management with data stored in 
+JSON files. 
+ 
+ Build Your PyCaret Report 
+Automated model training and evaluation with PyCaret, boosting prediction accuracy by 20%. 
+ 
+ Airbnb Listing EDA 
+Performed EDA on Chicago Airbnb data, cleaning and visualizing trends in pricing and bookings. 
+ 
+ Automated Exploratory Data Analysis Tool 
+ Built a Streamlit app to automate EDA, reducing analysis time by 50% with dynamic preprocessing and 
+ Visualization. 
+ 
+Technical Skills 
+ Programming Languages: Python, C, C, SQL 
+ Machine Learning & Deep Learning: Scikit-learn (sklearn), TensorFlow, Keras, PyCaret, LSTM, 
+Conv
+LSTM 
+ Data Science & Analysis: Data Preprocessing, Feature Engineering, Model Evaluation, 
+Hyperparameter Tuning 
+ Web Scraping & Automation: Selenium 
+ Tools & Frameworks: Streamlit, Jupyter Notebooks, Git 
+ Data Visualization: Matplotlib, Seaborn 
+ Natural Language Processing (NLP): Text Processing, Tokenization, Word Embeddings 
+ 
+Courses 
+ Unsupervised Learning Foundation 
+ Supervised Learning Foundation 
+ Exploratory Data Analysis 
+ Python Programming Master 
+ 
+Certifications 
+ DEPI Certificate 
+Supervised Machine Learning: Regression and Classification Coursera 
+Data Analysis Professional Nanodegree 
+ 
+Personal Skills: 
+ Problem-solving Continuous Learning Communication Adaptability 
+ Teamwork Time Management Attention to Detail Collaboration 
+ 
+Languages Arabic: Native proficiency English: B2
