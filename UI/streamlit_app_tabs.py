@@ -4,7 +4,7 @@ import streamlit as st
 from pathlib import Path
 import random
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from collections import defaultdict, Counter
+from collections import Counter
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
@@ -36,6 +36,7 @@ uploaded_files = st.file_uploader("Upload CVs (PDF/DOCX)", type=["pdf", "docx"],
 
 if st.button("🔍 Process CVs"):
     if uploaded_files:
+        os.makedirs("uploaded_files", exist_ok=True)
         for file in uploaded_files:
             file_path = os.path.join("uploaded_files", file.name)
             with open(file_path, "wb") as f:
@@ -53,7 +54,7 @@ if st.button("🔍 Process CVs"):
         st.warning("Please upload CV files first.")
 
 # TABS
-tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["📊 Overview", "❓ Ask", "🎯 Match", "📝 Summarize", "💼 Recommend", "🤖 HR Questions", "🗃 Debug"])
+tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["\ud83d\udcca Overview", "\u2753 Ask", "\ud83c\udfaf Match", "\ud83d\udcdd Summarize", "\ud83d\udcbc Recommend", "\ud83e\udd16 HR Questions", "\ud83d\udc83 Debug"])
 
 with tab0:
     st.subheader("Overview of Job Matches")
@@ -110,7 +111,7 @@ with tab4:
             st.markdown(f"### {name}")
             ranked = job_recommender.recommend_jobs(content, top_k=3)
             for job, score, reason in ranked:
-                st.markdown(f"**💼 {job['title']}** (Score: {score:.2f})")
+                st.markdown(f"**\ud83d\udcbc {job['title']}** (Score: {score:.2f})")
                 st.markdown(f"**Reason:** {reason}")
                 st.markdown("---")
 
