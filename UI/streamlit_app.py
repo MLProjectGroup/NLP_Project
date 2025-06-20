@@ -37,17 +37,18 @@ pages = {
     "Dashboard": "Pages.05_Dashboard"
 }
 
-# --- Set Default Page in Session ---
-if "page" not in st.session_state:
-    st.session_state.page = "Home"
+# ✅ --- Current Page from query params ---
+query_params = st.query_params
+current_page = query_params.get("page", ["Home"])[0]
 
-current_page = st.session_state.page
+if current_page not in pages:
+    current_page = "Home"
 
 # --- Load Page ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = _import_(mod_name, fromlist=['app'])
+        mod = _import_(mod_name, fromlist=["app"])
         mod.app()
 
 # --- Google Fonts ---
@@ -113,10 +114,32 @@ st.markdown(f"""
         border-top: 3px solid {theme['accent']};
         z-index: 999;
     }}
+
+    .bottom-nav a {{
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+        cursor: pointer;
+    }}
+
+    .bottom-nav a:hover {{
+        background-color: {theme['accent']};
+        color: black;
+    }}
+
+    .bottom-nav a.active {{
+        background-color: {theme['accent']};
+        color: black;
+    }}
 </style>
 """, unsafe_allow_html=True)
 
-# --- Header Fixed ---
+# --- Header Fixed (centered) ---
 st.markdown(f"""
 <div style="
     background-color:{theme['primary']}; 
@@ -130,7 +153,8 @@ st.markdown(f"""
     z-index: 1000; 
     display: flex; 
     justify-content: center; 
-    align-items: center;">
+    align-items: center;
+">
     🤖 Smart Recruiter Assistant
 </div>
 """, unsafe_allow_html=True)
@@ -153,17 +177,11 @@ else:
 # --- Fade In End ---
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Bottom Nav (Working with buttons) ---
-st.markdown('<div class="bottom-nav">', unsafe_allow_html=True)
+# --- Bottom Nav (with links instead of buttons) ---
+footer_html = '<div class="bottom-nav">'
+for page_name in pages.keys():
+    active_class = "active" if page_name == current_page else ""
+    footer_html += f'<a href="/?page={page_name}" class="{active_class}">{page_name}</a>'
+footer_html += '</div>'
 
-cols = st.columns(len(pages))
-for i, page_name in enumerate(pages.keys()):
-    is_active = page_name == current_page
-    btn_color = '#dce3e4' if is_active else theme['primary']
-    text_color = 'black' if is_active else 'white'
-
-    if cols[i].button(page_name, key=f"nav_{page_name}"):
-        st.session_state.page = page_name
-        st.rerun()
-
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown(footer_html, unsafe_allow_html=True)
