@@ -99,23 +99,23 @@ st.markdown(f"""
         bottom: 0;
         left: 0;
         width: 100%;
-        background-color: #f9f9f9;  
-        border-top: 2px solid {theme['primary']};
+        background-color: {theme['primary']};
         display: flex;
         justify-content: center;
-        padding: 10px 0;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        flex-wrap: wrap;
+        padding: 10px 0 4px 0;
+        border-top: 3px solid {theme['accent']};
         z-index: 999;
     }}
     .bottom-nav a {{
-        color: {theme['accent']};
-        margin: 0 20px;
+        color: white;
+        margin: 0 10px;
         text-decoration: none;
         font-weight: bold;
         font-size: 14px;
         padding: 6px 12px;
         border-radius: 8px;
-        transition: all 0.3s ease;
+        transition: background-color 0.3s;
         cursor: pointer;
     }}
     .bottom-nav a:hover {{
@@ -128,10 +128,10 @@ st.markdown(f"""
     }}
     .footer-text {{
         text-align: center;
-        font-size: 12px;
-        color: #777;
-        margin-top: 6px;
-        padding-bottom: 8px;
+        font-size: 13px;
+        color: #444;
+        margin-top: 8px;
+        margin-bottom: 8px;
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -168,12 +168,12 @@ st.markdown('</div>', unsafe_allow_html=True)
 footer_html = ""
 for page_name in pages.keys():
     active = "active" if page_name == current_page else ""
-    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
+    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name.strip()}</a>'
 
-st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
-
-# --- Copyright Text ---
-st.markdown("""
+st.markdown(f"""
+<div class="bottom-nav">
+    {footer_html}
+</div>
 <p class="footer-text">
     © 2025 Smart Recruiter Assistant. All rights reserved.
 </p>
