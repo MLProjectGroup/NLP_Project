@@ -37,26 +37,26 @@ pages = {
     "Dashboard": "Pages.05_Dashboard"
 }
 
-# ✅ --- Current Page using new Streamlit syntax ---
+# ✅ --- Get current page using modern Streamlit method ---
 query_params = st.query_params
 current_page = query_params.get("page", ["Home"])[0]
 
 if current_page not in pages:
     current_page = "Home"
 
-# --- Load Page ---
+# --- Load Page Dynamically ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
         mod = _import_(mod_name, fromlist=['app'])
         mod.app()
 
-# --- Google Fonts ---
+# --- Load Google Fonts ---
 st.markdown("""
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# --- CSS Styling ---
+# --- Styling ---
 st.markdown(f"""
 <style>
     body, .stApp {{
@@ -139,7 +139,7 @@ st.markdown(f"""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Header Fixed (centered) ---
+# --- Fixed Header ---
 st.markdown(f"""
 <div style="
     background-color:{theme['primary']}; 
@@ -159,10 +159,10 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Fade In Start ---
+# --- Fade-In Container Start ---
 st.markdown('<div class="fade-in" style="margin-top:80px;">', unsafe_allow_html=True)
 
-# --- Pages Content ---
+# --- Render Page Content ---
 if current_page == "Home":
     st.markdown('<div class="main-title"> Reclaim Your Time, Recruit Smarter.</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -174,13 +174,13 @@ if current_page == "Home":
 else:
     load_page(current_page)
 
-# --- Fade In End ---
+# --- Fade-In Container End ---
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- Bottom Nav ---
+# --- Bottom Navigation ---
 footer_html = ""
-for page_name in pages.keys():
-    active = "active" if page_name == current_page else ""
-    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
+for page_name in pages:
+    active_class = "active" if page_name == current_page else ""
+    footer_html += f'<a href="/?page={page_name}" class="{active_class}">{page_name}</a>'
 
 st.markdown(f'<div class="bottom-nav">{footer_html}</div>', unsafe_allow_html=True)
