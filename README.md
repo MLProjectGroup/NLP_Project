@@ -412,7 +412,31 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 - Update documentation as needed
 
 ---
+## Demo 
+Explore the comprehensive and detailed layout of the HR Assistant on larger screens, designed for in-depth analysis and management.
 
+### Mobile :
+
+* **Home Dashboard**
+
+  <img src="UI/assets/HomePage.jpeg" alt="The main dashboard with key metrics and charts on desktop." width="600" />
+
+* **Upload & Processing Interface**
+
+  <img src="UI/assets/Upload.jpeg" alt="Uploading CVs and initiating processing on desktop." width="600" />
+
+* **Job Recommendation Feature**
+
+  <img src="UI/assets/JobRecommendation.jpeg" alt="AI-powered job recommendations on the desktop interface." width="600" />
+
+* **HR Interview Question Generation**
+
+<img src="UI/assets/HR_Questions.jpeg" alt="Generating tailored HR interview questions on desktop." width="600" />
+
+### Desktop : 
+attached in LinkedIn post: 
+
+---
 ## 🙏 Acknowledgments
 
 * **[LangChain Team](https://www.langchain.com/)** for the excellent LLM framework
