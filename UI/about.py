@@ -27,7 +27,12 @@ def app():
         }}
         
         .stApp {{
-            background: {theme['background']};
+            background: {theme['background']} !important;
+        }}
+        
+        .main .block-container {{
+            padding: 0 !important;
+            max-width: none !important;
         }}
         
         .fade-in {{
