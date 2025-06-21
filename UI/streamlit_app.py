@@ -31,26 +31,18 @@ daily_tips = [
 # --- Pages Dictionary ---
 pages = {
     "Home": None,
-    "Start Recruiting": "Pages.recruiter",   # هنا لازم تتأكدي الملف اسمه recruiter.py
+    "Start Recruiting": "Pages.recruiter",   
     "About Us": "Pages.about"
 }
 
-# --- Get Current Page ---
-query_params = st.query_params
-current_page_param = query_params.get("page", "Home")
-
-# normalize the page name to match dictionary keys exactly
-page_names = list(pages.keys())
-if current_page_param in page_names:
-    current_page = current_page_param
-else:
+if current_page not in pages:
     current_page = "Home"
-
+    
 # --- Load Page ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = __import__(mod_name, fromlist=["app"])
+        mod = __import__(mod_name, fromlist=['app'])
         mod.app()
 
 # --- Google Fonts ---
@@ -171,10 +163,10 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # --- Bottom Nav ---
 footer_html = ""
-for page_name in page_names:
+for page_name in pages.keys():
     active = "active" if page_name == current_page else ""
-    page_param = urllib.parse.quote(page_name)  # encode to avoid issues with spaces
-    footer_html += f'<a href="/?page={page_param}" class="{active}">{page_name.strip()}</a>'
+    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
+
 
 st.markdown(f"""
 <div class="bottom-nav">
