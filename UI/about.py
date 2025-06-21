@@ -2,16 +2,16 @@ import streamlit as st
 
 def app():
     theme = {
-        "primary": "#2563eb",
-        "primary_dark": "#1d4ed8",
-        "secondary": "#64748b",
-        "accent": "#f1f5f9",
-        "background": "#ffffff",
-        "text": "#1e293b",
-        "text_light": "#64748b",
-        "highlight": "#dbeafe",
-        "success": "#10b981",
-        "gradient": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+        "primary": "#017691",
+        "primary_dark": "#015a71",
+        "secondary": "#333",
+        "accent": "#dce3e4",
+        "background": "#dce3e4",
+        "text": "#222222",
+        "text_light": "#333",
+        "highlight": "#abc2c7",
+        "success": "#017691",
+        "gradient": "linear-gradient(135deg, #017691 0%, #015a71 100%)"
     }
     
     st.markdown(f"""
@@ -196,7 +196,7 @@ def app():
         /* Features Section */
         .features-section {{
             padding: 100px 0;
-            background: {theme['accent']};
+            background: white;
         }}
         
         .section-title {{
@@ -267,7 +267,7 @@ def app():
         /* Why Choose Section */
         .why-choose-section {{
             padding: 100px 0;
-            background: white;
+            background: {theme['accent']};
         }}
         
         .why-choose-content {{
