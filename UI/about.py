@@ -12,7 +12,7 @@ def app():
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #222222;
+            color: #017691;
             background-color: #dce3e4;
         }
         .container {
@@ -26,8 +26,6 @@ def app():
             color: white;
             padding: 100px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
         .hero h1 {
             font-size: 3.5rem;
@@ -45,12 +43,12 @@ def app():
         .features {
             padding: 80px 0;
             background: white;
+            color: #017691;
         }
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 600;
-            color: #222222;
             margin-bottom: 3rem;
         }
         .features-grid {
@@ -80,7 +78,6 @@ def app():
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            flex-shrink: 0;
         }
         .checkmark::after {
             content: '✓';
@@ -92,17 +89,14 @@ def app():
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #222222;
         }
         .feature-content p {
-            color: #333;
             font-size: 0.95rem;
         }
         /* Why Choose */
         .why-choose-us {
             padding: 80px 0;
             background: #dce3e4;
-            color:#017691;
         }
         .why-content {
             max-width: 800px;
@@ -112,33 +106,7 @@ def app():
         .why-content p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #333;
             margin-bottom: 1.5rem;
-        }
-        /* CTA */
-        .cta-section {
-            padding: 80px 0;
-            background: white;
-            text-align: center;
-            color:#017691;
-        }
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #017691 0%, #015a70 100%);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(1, 118, 145, 0.3);
-            margin-top: 1rem;
-            text-decoration: none;
-        }
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(1, 118, 145, 0.4);
-            color: white;
         }
         /* Contact */
         .contact {
@@ -158,6 +126,7 @@ def app():
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            word-wrap: break-word;
         }
         .contact-item:hover {
             transform: translateY(-5px);
@@ -169,12 +138,13 @@ def app():
             margin-bottom: 1rem;
         }
         .contact-item a {
-            color: #333;
+            color: #017691;
             text-decoration: none;
             font-size: 0.95rem;
+            word-wrap: break-word;
         }
         .contact-item a:hover {
-            color: #017691;
+            color: #015a70;
         }
         /* Responsive */
         @media (max-width: 768px) {
@@ -240,15 +210,9 @@ def app():
         <div class="container">
             <h2 class="section-title">Why Choose Us</h2>
             <div class="why-content">
-                <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient.</p>
-                <p>Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
+                <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient.
+                   Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
             </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container">
-            <h2 class="section-title">Ready to Get Started?</h2>
         </div>
     </section>
 
