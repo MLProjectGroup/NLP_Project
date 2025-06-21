@@ -415,11 +415,11 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 
 ## 🙏 Acknowledgments
 
-- **LangChain Team** for the excellent LLM framework
-- **Groq** for high-performance LLM inference
-- **Google AI** for powerful embedding models
-- **ChromaDB** for efficient vector storage
-- **Streamlit** for the intuitive web interface
+* **[LangChain Team](https://www.langchain.com/)** for the excellent LLM framework
+* **[Groq](https://groq.com/)** for high-performance LLM inference
+* **[Google AI](https://ai.google/)** for powerful embedding models
+* **[ChromaDB](https://www.trychroma.com/)** for efficient vector storage
+* **[Streamlit](https://streamlit.io/)** for the intuitive web interface
 
 ---
 
@@ -431,7 +431,6 @@ For project-related inquiries, reach out to our team:
 - **Israa Abdelghany** - [israaabdelghany9@gmail.com](mailto:israaabdelghany9@gmail.com)
 - **Menna Tarek** - [menatarek04@gmail.com](mailto:menatarek04@gmail.com)
 - **Nagwa Mohamed** - [nagwammatia919@gmail.com](mailto:nagwammatia919@gmail.com)
-
 
 
 ---
