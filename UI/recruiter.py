@@ -41,7 +41,7 @@ def app():
         "secondary": "#FF9F1C",     # Orange
         "accent": "#e0e0e0",
         "background": "#dce3e4",
-        "text": "#222222",          # Black
+        "text": "#333",          # Black
     }
 
     # --- Google Fonts ---
