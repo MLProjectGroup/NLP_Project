@@ -1,39 +1,38 @@
 # 🔧 Core Libraries
-streamlit
-python-dotenv
-pandas
-numpy
-tqdm
-scikit-learn
-pydantic
+streamlit==1.46.0
+python-dotenv==1.1.0
+pandas==2.3.0
+numpy==2.3.1
+tqdm==4.67.1
+scikit-learn==1.7.0
+pydantic==2.11.7
 protobuf==3.20.3
 
 # 🧠 LangChain Ecosystem
-langchain
-langchain-core
-langchain-community
-langchain-chroma
-langchain-google-genai
-langchain-groq
+langchain==0.3.26
+langchain-core==0.3.66
+langchain-community==0.3.26
+langchain-chroma==0.2.4
+langchain-google-genai==2.1.5
+langchain-groq==0.3.2
 
 # 📄 Document Processing
-pypdf
-python-docx
-docx2txt
-pymupdf
+pypdf==5.6.0
+python-docx==1.2.0
+docx2txt==0.9
+pymupdf==1.26.1
 
 # 🔍 Vector Store
 chromadb==0.4.14
-pysqlite3-binary
+pysqlite3-binary==0.5.4
 
 # 🔡 Embeddings
-sentence-transformers
+sentence-transformers==4.1.0
 
 # 🤖 Google Gemini & Groq LLMs
-google-generativeai
-tiktoken
+google-generativeai==0.8.5
+tiktoken==0.9.0
 
-streamlit==1.46.0
-
-matplotlib
+# Visualizations 
+matplotlib==3.10.3
 plotly>=5.20.0
