@@ -44,6 +44,7 @@ def app():
             font-size: 2.5rem;
             font-weight: 900;
             margin-bottom: 12px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }}
         .decor-line {{
             width: 90px;
@@ -62,37 +63,25 @@ def app():
         .features {{
             list-style: none;
             padding: 0;
-            max-width: 100%;
+            margin: 0 auto;
+            max-width: 600px;
             text-align: left;
         }}
         .features li {{
-            background: {theme['highlight']};
-            color: {theme['primary']};
-            font-weight: 600;
+            display: flex;
+            align-items: flex-start;
             font-size: 1.15rem;
-            margin: 14px 0;
-            padding: 14px 20px 14px 50px;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.12);
-            position: relative;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            direction: ltr;
-        }}
-        .features li:hover {{
-            background-color: {theme['accent']};
-            color: #222;
-            cursor: default;
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+            color: {theme['text']};
+            margin-bottom: 18px;
+            line-height: 1.6;
         }}
         .features li::before {{
             content: "✔";
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: 900;
-            font-size: 1.3rem;
             color: {theme['primary']};
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.3rem;
+            flex-shrink: 0;
         }}
         .why-choose {{
             max-width: 100%;
@@ -114,7 +103,7 @@ def app():
         .contact {{
             margin-top: 50px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: {theme['secondary']};
             letter-spacing: 0.05em;
@@ -144,7 +133,6 @@ def app():
             }}
             .features li {{
                 font-size: 1rem;
-                padding: 12px 18px 12px 45px;
             }}
             .why-choose h3 {{
                 font-size: 1.7rem;
