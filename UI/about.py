@@ -1,67 +1,73 @@
 import streamlit as st
 
 def app():
-    theme = {
-        "primary": "#017691",
-        "primary_dark": "#015a71",
-        "secondary": "#333",
-        "accent": "#dce3e4",
-        "background": "#dce3e4",
-        "text": "#222222",
-        "text_light": "#333",
-        "highlight": "#abc2c7",
-        "success": "#017691",
-        "gradient": "linear-gradient(135deg, #017691 0%, #015a71 100%)"
-    }
+    # Hide Streamlit's default elements
+    st.set_page_config(
+        page_title="Smart Recruiter Assistant",
+        page_icon="🎯",
+        layout="wide",
+        initial_sidebar_state="collapsed"
+    )
+
+    # Hide Streamlit menu and footer
+    hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .stApp > div:first-child {margin-top: -80px;}
+    </style>
+    """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
     
-    st.markdown(f"""
+    st.markdown("""
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
-        html, body, .main {{
+        html, body, .main {
             height: 100%;
-            background-color: {theme['background']};
+            background-color: #dce3e4;
             margin: 0;
             padding: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }}
+        }
         
-        .stApp {{
-            background: {theme['background']} !important;
-        }}
+        .stApp {
+            background: #dce3e4 !important;
+        }
         
-        .main .block-container {{
+        .main .block-container {
             padding: 0 !important;
             max-width: none !important;
-        }}
+        }
         
-        .fade-in {{
+        .fade-in {
             animation: fadeIn 1.2s ease-out;
-        }}
+        }
         
-        @keyframes fadeIn {{
-            from {{ opacity: 0; transform: translateY(30px); }}
-            to {{ opacity: 1; transform: translateY(0); }}
-        }}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
-        .slide-up {{
+        .slide-up {
             animation: slideUp 0.8s ease-out forwards;
             opacity: 0;
             transform: translateY(50px);
-        }}
+        }
         
-        @keyframes slideUp {{
-            to {{ opacity: 1; transform: translateY(0); }}
-        }}
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
         
-        .container {{
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }}
+        }
         
         /* Header */
-        .header {{
+        .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             position: fixed;
@@ -71,52 +77,52 @@ def app():
             z-index: 1000;
             border-bottom: 1px solid #e2e8f0;
             padding: 15px 0;
-        }}
+        }
         
-        .nav {{
+        .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }}
+        }
         
-        .logo {{
+        .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: {theme['primary']};
+            color: #017691;
             text-decoration: none;
-        }}
+        }
         
-        .nav-links {{
+        .nav-links {
             display: flex;
             gap: 30px;
             align-items: center;
-        }}
+        }
         
-        .nav-links a {{
+        .nav-links a {
             text-decoration: none;
-            color: {theme['text']};
+            color: #222222;
             font-weight: 500;
             transition: color 0.3s ease;
-        }}
+        }
         
-        .nav-links a:hover {{
-            color: {theme['primary']};
-        }}
+        .nav-links a:hover {
+            color: #017691;
+        }
         
         /* Hero Section */
-        .hero {{
-            background: linear-gradient(135deg, {theme['primary']} 0%, {theme['primary_dark']} 100%);
+        .hero {
+            background: linear-gradient(135deg, #017691 0%, #015a71 100%);
             color: white;
             padding: 140px 0 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
-        }}
+        }
         
-        .hero::before {{
+        .hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -125,22 +131,22 @@ def app():
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,0 1000,100 1000,0"/></svg>');
             background-size: cover;
-        }}
+        }
         
-        .hero-content {{
+        .hero-content {
             position: relative;
             z-index: 2;
-        }}
+        }
         
-        .hero-title {{
+        .hero-title {
             font-size: 3.5rem;
             font-weight: 900;
             margin-bottom: 20px;
             line-height: 1.1;
             letter-spacing: -0.02em;
-        }}
+        }
         
-        .hero-subtitle {{
+        .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 40px;
             opacity: 0.9;
@@ -148,19 +154,19 @@ def app():
             margin-left: auto;
             margin-right: auto;
             font-weight: 400;
-        }}
+        }
         
-        .hero-buttons {{
+        .hero-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 40px;
-        }}
+        }
         
-        .btn-primary {{
+        .btn-primary {
             background: white;
-            color: {theme['primary']};
+            color: #017691;
             border: none;
             border-radius: 50px;
             padding: 16px 32px;
@@ -171,14 +177,14 @@ def app():
             text-decoration: none;
             display: inline-block;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }}
+        }
         
-        .btn-primary:hover {{
+        .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }}
+        }
         
-        .btn-secondary {{
+        .btn-secondary {
             background: transparent;
             color: white;
             border: 2px solid white;
@@ -190,46 +196,46 @@ def app():
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-        }}
+        }
         
-        .btn-secondary:hover {{
+        .btn-secondary:hover {
             background: white;
-            color: {theme['primary']};
+            color: #017691;
             transform: translateY(-2px);
-        }}
+        }
         
         /* Features Section */
-        .features-section {{
+        .features-section {
             padding: 100px 0;
             background: white;
-        }}
+        }
         
-        .section-title {{
+        .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 800;
-            color: {theme['text']};
+            color: #222222;
             margin-bottom: 20px;
-        }}
+        }
         
-        .section-subtitle {{
+        .section-subtitle {
             text-align: center;
             font-size: 1.2rem;
-            color: {theme['text_light']};
+            color: #333;
             margin-bottom: 60px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-        }}
+        }
         
-        .features-grid {{
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             margin-top: 60px;
-        }}
+        }
         
-        .feature-card {{
+        .feature-card {
             background: white;
             padding: 40px 30px;
             border-radius: 20px;
@@ -237,107 +243,107 @@ def app():
             box-shadow: 0 4px 30px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             border: 1px solid #e2e8f0;
-        }}
+        }
         
-        .feature-card:hover {{
+        .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 40px rgba(0,0,0,0.12);
-        }}
+        }
         
-        .feature-icon {{
+        .feature-icon {
             width: 80px;
             height: 80px;
-            background: {theme['highlight']};
+            background: #abc2c7;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 25px auto;
             font-size: 2rem;
-        }}
+        }
         
-        .feature-title {{
+        .feature-title {
             font-size: 1.4rem;
             font-weight: 700;
-            color: {theme['text']};
+            color: #222222;
             margin-bottom: 15px;
-        }}
+        }
         
-        .feature-description {{
-            color: {theme['text_light']};
+        .feature-description {
+            color: #333;
             line-height: 1.6;
             font-size: 1rem;
-        }}
+        }
         
         /* Why Choose Section */
-        .why-choose-section {{
+        .why-choose-section {
             padding: 100px 0;
-            background: {theme['accent']};
-        }}
+            background: #dce3e4;
+        }
         
-        .why-choose-content {{
+        .why-choose-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
             align-items: center;
-        }}
+        }
         
-        .why-choose-text h3 {{
+        .why-choose-text h3 {
             font-size: 2.5rem;
             font-weight: 800;
-            color: {theme['text']};
+            color: #222222;
             margin-bottom: 25px;
             line-height: 1.2;
-        }}
+        }
         
-        .why-choose-text p {{
+        .why-choose-text p {
             font-size: 1.1rem;
-            color: {theme['text_light']};
+            color: #333;
             line-height: 1.7;
             margin-bottom: 30px;
-        }}
+        }
         
-        .stats {{
+        .stats {
             display: flex;
             gap: 40px;
             margin-top: 40px;
-        }}
+        }
         
-        .stat {{
+        .stat {
             text-align: center;
-        }}
+        }
         
-        .stat-number {{
+        .stat-number {
             font-size: 2.5rem;
             font-weight: 900;
-            color: {theme['primary']};
+            color: #017691;
             display: block;
-        }}
+        }
         
-        .stat-label {{
+        .stat-label {
             font-size: 0.9rem;
-            color: {theme['text_light']};
+            color: #333;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 500;
-        }}
+        }
         
-        .benefits-list {{
+        .benefits-list {
             list-style: none;
             padding: 0;
-        }}
+        }
         
-        .benefits-list li {{
+        .benefits-list li {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
             font-size: 1.1rem;
-            color: {theme['text']};
-        }}
+            color: #222222;
+        }
         
-        .benefits-list li::before {{
+        .benefits-list li::before {
             content: "✓";
-            background: {theme['success']};
+            background: #017691;
             color: white;
             width: 24px;
             height: 24px;
@@ -349,124 +355,124 @@ def app():
             font-weight: bold;
             font-size: 0.9rem;
             flex-shrink: 0;
-        }}
+        }
         
         /* CTA Section */
-        .cta-section {{
-            background: {theme['primary']};
+        .cta-section {
+            background: #017691;
             color: white;
             padding: 80px 0;
             text-align: center;
-        }}
+        }
         
-        .cta-title {{
+        .cta-title {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 20px;
-        }}
+        }
         
-        .cta-subtitle {{
+        .cta-subtitle {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-bottom: 40px;
-        }}
+        }
         
         /* Footer */
-        .footer {{
+        .footer {
             background: #1e293b;
             color: white;
             padding: 60px 0 30px 0;
-        }}
+        }
         
-        .footer-content {{
+        .footer-content {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
             gap: 60px;
             margin-bottom: 40px;
-        }}
+        }
         
-        .footer-brand {{
+        .footer-brand {
             font-size: 1.5rem;
             font-weight: 800;
             margin-bottom: 20px;
-        }}
+        }
         
-        .footer-description {{
+        .footer-description {
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 30px;
-        }}
+        }
         
-        .footer-title {{
+        .footer-title {
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 20px;
-        }}
+        }
         
-        .footer-links {{
+        .footer-links {
             list-style: none;
             padding: 0;
-        }}
+        }
         
-        .footer-links li {{
+        .footer-links li {
             margin-bottom: 10px;
-        }}
+        }
         
-        .footer-links a {{
+        .footer-links a {
             color: #94a3b8;
             text-decoration: none;
             transition: color 0.3s ease;
-        }}
+        }
         
-        .footer-links a:hover {{
+        .footer-links a:hover {
             color: white;
-        }}
+        }
         
-        .footer-bottom {{
+        .footer-bottom {
             border-top: 1px solid #374151;
             padding-top: 30px;
             text-align: center;
             color: #94a3b8;
-        }}
+        }
         
         /* Responsive Design */
-        @media (max-width: 768px) {{
-            .hero-title {{
+        @media (max-width: 768px) {
+            .hero-title {
                 font-size: 2.5rem;
-            }}
+            }
             
-            .hero-buttons {{
+            .hero-buttons {
                 flex-direction: column;
                 align-items: center;
-            }}
+            }
             
-            .features-grid {{
+            .features-grid {
                 grid-template-columns: 1fr;
-            }}
+            }
             
-            .why-choose-content {{
+            .why-choose-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
-            }}
+            }
             
-            .stats {{
+            .stats {
                 justify-content: center;
-            }}
+            }
             
-            .footer-content {{
+            .footer-content {
                 grid-template-columns: 1fr;
                 gap: 40px;
-            }}
+            }
             
-            .nav-links {{
+            .nav-links {
                 display: none;
-            }}
-        }}
+            }
+        }
     </style>
     """, unsafe_allow_html=True)
 
     # Header
-    st.markdown(f"""
+    st.markdown("""
     <div class="header">
         <div class="nav">
             <a href="#" class="logo">Smart Recruiter</a>
