@@ -325,9 +325,8 @@ NLP_Project/
 │   └── rag_engine.py           # Query-based CV retrieval engine
 ├── 📁 UI/
 │   ├── .streamlit/             # Streamlit configuration
-│   ├── Pages/                  # Streamlit page components
-│   ├── assets/                 # Static assets (images, CSS, etc.)
-│   ├── about.py                # About page
+│   ├── assets/                 # Static assets (images)
+│   ├── about.py                # About us page
 │   ├── recruiter.py            # Recruiter interface
 │   └── streamlit_app.py        # Main Streamlit application
 ├── 📁 results/
@@ -342,7 +341,8 @@ NLP_Project/
 │   └── 📁 cv_database/         # ChromaDB vector database storage
 ├── 📄 .env                      # Environment variables
 ├── 📄 requirements.txt          # Python dependencies
-└── 📄 README.md                # Project documentation
+├── 📄 README.md                # Project documentation
+└── 📄 LICENSE.md  # <--- NEW FILE ADDED HERE
 ```
 
 ---
