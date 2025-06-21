@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # Virtual environments
-.env
+# .env  ## we upload it for testing and deleveries requirements you can add it to the .gitignore
 .venv
 env/
 ENV/
