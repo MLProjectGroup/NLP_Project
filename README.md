@@ -427,12 +427,26 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 
 ### 📧 Team Contact
 For project-related inquiries, reach out to our team:
-- **Mohamed Salama** - [mohamedsalama152019@gmail.com](mailto:mohamedsalama152019@gmail.com)
-- **Israa Abdelghany** - [israaabdelghany9@gmail.com](mailto:israaabdelghany9@gmail.com)
-- **Menna Tarek** - [menatarek04@gmail.com](mailto:menatarek04@gmail.com)
-- **Nagwa Mohamed** - [nagwammatia919@gmail.com](mailto:nagwammatia919@gmail.com)
 
+- **Mohamed Salama**
+  - 🔗 LinkedIn: [Mohamed Salama's Profile](https://www.linkedin.com/in/mohamed-salama-a9947b206/)
+  - 📧 Gmail: [mohamedsalama152019@gmail.com](mailto:mohamedsalama152019@gmail.com)
+  - 🐙 GitHub: [MohamedSalama-GitHub](https://github.com/mohamedsalama677)
 
+- **Israa Abdelghany**
+  - 🔗 LinkedIn: [Israa Abdelghany's Profile](https://www.linkedin.com/in/israa-abdelghany/)
+  - 📧 Gmail: [israaabdelghany9@gmail.com](mailto:israaabdelghany9@gmail.com)
+  - 🐙 GitHub: [IsraaAbdelghany-GitHub](https://github.com/IsraaAbdelghany9)
+
+- **Menna Tarek**
+  - 🔗 LinkedIn: [Menna Tarek's_Profile](https://www.linkedin.com/in/mennatullahtarek/)
+  - 📧 Gmail: [menatarek04@gmail.com](mailto:menatarek04@gmail.com)
+  - 🐙 GitHub: [MennaTarek-GitHub](https://github.com/MennatullahTarek)
+
+- **Nagwa Mohamed**
+  - 🔗 LinkedIn: [Nagwa Mohamed's Profile](https://www.linkedin.com/in/nagwa-mohamed-b81453216/)
+  - 📧 Gmail: [nagwammatia919@gmail.com](mailto:nagwammatia919@gmail.com)
+  - 🐙 GitHub: [NagwaMohamed-GitHub](https://github.com/Nagwam18)
 ---
 
 <div align="center">
