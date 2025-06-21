@@ -156,7 +156,7 @@ def app():
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="fade-in container">', unsafe_allow_html=True)
+    #st.markdown('<div class="fade-in container">', unsafe_allow_html=True)
 
     st.markdown("""
     <div class="why-choose">
