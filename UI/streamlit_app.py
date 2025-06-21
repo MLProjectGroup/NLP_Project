@@ -33,6 +33,8 @@ pages = {
     "Home": None,
     "Start": "recruiter",   
     "About Us": "about"
+
+
 }
 
 
@@ -46,7 +48,7 @@ if current_page not in pages:
 def load_page(page_key):
     mod_name = pages.get(page_key)
     if mod_name:
-        mod = __import__(mod_name, fromlist=['app'])
+        mod = __import__(mod_name, fromlist=["app"])
         mod.app()
 
 # --- Google Fonts ---
@@ -169,7 +171,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 footer_html = ""
 for page_name in pages.keys():
     active = "active" if page_name == current_page else ""
-    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name}</a>'
+    footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name.strip()}</a>'
 
 
 st.markdown(f"""
