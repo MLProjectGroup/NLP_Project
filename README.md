@@ -339,10 +339,12 @@ NLP_Project/
 ├── 📁 data/
 │   ├── 📁 txt_cvs/             # Processed CV text files
 │   └── 📁 cv_database/         # ChromaDB vector database storage
-├── 📄 .env                      # Environment variables
-├── 📄 requirements.txt          # Python dependencies
+├── 📄 .env                     # Environment variables
+├── 📄 requirements.txt         # Python dependencies
 ├── 📄 README.md                # Project documentation
-└── 📄 LICENSE.md  # <--- NEW FILE ADDED HERE
+├── 📄 LICENSE.md               # LICENSE
+└── 📄 .gitignore               # files git ignore when update
+
 ```
 
 ---
