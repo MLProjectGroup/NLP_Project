@@ -50,6 +50,7 @@ def app():
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 3rem;
+            color: #017691;
         }
         .features-grid {
             display: grid;
@@ -98,6 +99,9 @@ def app():
             padding: 80px 0;
             background: #dce3e4;
         }
+        .why-choose-us .section-title {
+            color: #017691;
+        }
         .why-content {
             max-width: 800px;
             margin: 0 auto;
@@ -107,6 +111,7 @@ def app():
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 1.5rem;
+            color: #000000; /* BLACK */
         }
         /* Contact */
         .contact {
@@ -138,10 +143,12 @@ def app():
             margin-bottom: 1rem;
         }
         .contact-item a {
+            display: inline-block;
             color: #017691;
-            text-decoration: none;
+            text-decoration: underline;
             font-size: 0.95rem;
-            word-wrap: break-word;
+            word-break: break-word;
+            margin-top: 0.5rem;
         }
         .contact-item a:hover {
             color: #015a70;
@@ -210,8 +217,8 @@ def app():
         <div class="container">
             <h2 class="section-title">Why Choose Us</h2>
             <div class="why-content">
-                <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient.
-                   Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
+                <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient.</p>
+                <p>Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
             </div>
         </div>
     </section>
