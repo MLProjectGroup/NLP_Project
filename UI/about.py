@@ -26,12 +26,12 @@ def app():
             to {{ opacity: 1; transform: translateY(0); }}
         }}
         .container {{
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto 60px auto;
             padding: 40px 40px 50px 40px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: {theme['text']};
-            line-height: 1.65;
+            line-height: 1.75;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -41,29 +41,29 @@ def app():
         }}
         .main-title {{
             color: {theme['primary']};
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
         }}
         .decor-line {{
-            width: 80px;
+            width: 90px;
             height: 4px;
             background-color: {theme['accent']};
             border-radius: 4px;
-            margin: 10px auto 40px auto;
+            margin: 12px auto 40px auto;
         }}
         .subtitle {{
             color: {theme['secondary']};
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-style: italic;
             margin-bottom: 40px;
-            max-width: 100%;
+            max-width: 90%;
         }}
         .features {{
             list-style: none;
             padding: 0;
             max-width: 100%;
-            text-align: right;
+            text-align: left;
         }}
         .features li {{
             background: {theme['highlight']};
@@ -71,11 +71,11 @@ def app():
             font-weight: 600;
             font-size: 1.15rem;
             margin: 14px 0;
-            padding: 14px 22px 14px 50px;
+            padding: 14px 20px 14px 50px;
             border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.15);
+            box-shadow: 0 3px 8px rgba(46, 125, 50, 0.12);
             position: relative;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
             direction: ltr;
         }}
         .features li:hover {{
@@ -102,17 +102,17 @@ def app():
         }}
         .why-choose h3 {{
             color: {theme['primary']};
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            font-weight: 800;
+            font-weight: 900;
         }}
         .why-choose p {{
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: {theme['secondary']};
-            line-height: 1.6;
+            line-height: 1.7;
         }}
         .contact {{
-            margin-top: 30px;
+            margin-top: 50px;
             text-align: center;
             font-size: 1.2rem;
             font-weight: 600;
@@ -120,13 +120,13 @@ def app():
             letter-spacing: 0.05em;
         }}
         .contact a {{
-            color: {theme['accent']};
+            color: {theme['primary']};
             text-decoration: none;
             font-weight: 700;
             transition: color 0.3s ease;
         }}
         .contact a:hover {{
-            color: {theme['primary']};
+            color: #000;
             text-decoration: underline;
             cursor: pointer;
         }}
@@ -136,10 +136,10 @@ def app():
                 padding: 30px 20px 30px 20px;
             }}
             .main-title {{
-                font-size: 1.7rem;
+                font-size: 2rem;
             }}
             .subtitle {{
-                font-size: 1rem;
+                font-size: 1.1rem;
                 margin-bottom: 28px;
             }}
             .features li {{
@@ -147,28 +147,23 @@ def app():
                 padding: 12px 18px 12px 45px;
             }}
             .why-choose h3 {{
-                font-size: 1.5rem;
+                font-size: 1.7rem;
             }}
             .why-choose p {{
-                font-size: 1rem;
+                font-size: 1.05rem;
             }}
         }}
     </style>
     """, unsafe_allow_html=True)
 
-    #st.markdown('<div class="fade-in container">', unsafe_allow_html=True)
+    # Main container start
+    st.markdown('<div class="container fade-in">', unsafe_allow_html=True)
 
+    # Title + subtitle + features
     st.markdown("""
-    <div class="why-choose">
-        <h3>Smart Recruiter Assistant</h3>
-    </div>
+    <h1 class="main-title">Smart Recruiter Assistant</h1>
     <div class="decor-line"></div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<p class="subtitle">Reclaim Your Time, Recruit Smarter.</p>', unsafe_allow_html=True)
-
-    # Features list
-    st.markdown("""
+    <p class="subtitle">Reclaim Your Time, Recruit Smarter.</p>
     <ul class="features">
         <li>AI helps you quickly find the right candidates.</li>
         <li>A smart assistant guides you through hiring.</li>
@@ -178,7 +173,7 @@ def app():
     </ul>
     """, unsafe_allow_html=True)
 
-    # Why choose section
+    # Why Choose section
     st.markdown("""
     <div class="why-choose">
         <h3>Why Choose Smart Recruiter Assistant?</h3>
@@ -186,5 +181,17 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
- 
-  
+    # Contact section
+    st.markdown("""
+    <div class="contact">
+        <p>Contact us: 
+            <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a> | 
+            <a href="mailto:israaabdelghany9@gmail.com">israaabdelghany9@gmail.com</a> | 
+            <a href="mailto:nagwammatia919@gmail.com">nagwammatia919@gmail.com</a> | 
+            <a href="mailto:mohamedsalama152019@gmail.com">mohamedsalama152019@gmail.com</a>
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Main container end
+    st.markdown('</div>', unsafe_allow_html=True)
