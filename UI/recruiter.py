@@ -390,6 +390,7 @@ def app():
             if st.session_state.uploaded_cvs:
                 top_names = list(st.session_state.uploaded_cvs.keys())[:5]
                 questions = hr_question_generator.generate_questions_for_top_candidates(st.session_state.uploaded_cvs, top_names)
+                questions = hr_question_generator.generate_questions_for_top_candidates(st.session_state.uploaded_cvs, top_names)
                 for name in top_names:
                     st.markdown(f"### {name}")
                     for sec, qs in questions[name].items():
