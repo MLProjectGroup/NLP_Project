@@ -102,6 +102,7 @@ def app():
         .why-choose-us {
             padding: 80px 0;
             background: #dce3e4;
+            color:#017691;
         }
         .why-content {
             max-width: 800px;
@@ -119,6 +120,7 @@ def app():
             padding: 80px 0;
             background: white;
             text-align: center;
+            color:#017691;
         }
         .cta-button {
             display: inline-block;
@@ -152,7 +154,7 @@ def app():
         .contact-item {
             background: white;
             padding: 2rem;
-            border-radius: 12px;
+            border-radius: 14px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
@@ -186,7 +188,7 @@ def app():
 
     <section class="hero">
         <div class="container">
-            <h1>Transform Your Business</h1>
+            <h1>Recruite Smarter</h1>
             <p>Innovative solutions designed to streamline your operations and accelerate growth with cutting-edge technology</p>
         </div>
     </section>
@@ -198,36 +200,36 @@ def app():
                 <div class="feature-item">
                     <div class="checkmark"></div>
                     <div class="feature-content">
+                        <h3>Fast</h3>
+                        <p>AI helps you quickly find the right candidates.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
                         <h3>Advanced Analytics</h3>
-                        <p>Deep insights into your data with real-time reporting capabilities.</p>
+                        <p>Clear reports help you make better decisions.</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="checkmark"></div>
                     <div class="feature-content">
-                        <h3>Seamless Integration</h3>
-                        <p>Connect with your tools and workflows via our API.</p>
+                        <h3>Smart</h3>
+                        <p>A smart assistant guides you through hiring</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="checkmark"></div>
                     <div class="feature-content">
-                        <h3>Enterprise Security</h3>
-                        <p>Bank-level security with advanced threat protection.</p>
+                        <h3>Save Time</h3>
+                        <p>Automates repetitive tasks to save you time.</p>
                     </div>
                 </div>
                 <div class="feature-item">
                     <div class="checkmark"></div>
                     <div class="feature-content">
-                        <h3>24/7 Support</h3>
-                        <p>Expert support team ready to help you around the clock.</p>
-                    </div>
-                </div>
-                <div class="feature-item">
-                    <div class="checkmark"></div>
-                    <div class="feature-content">
-                        <h3>Scalable Architecture</h3>
-                        <p>Built to grow with your business, from startup to enterprise.</p>
+                        <h3>Easy Usage</h3>
+                        <p>Easy-to-use and secure platform for recruiters.</p>
                     </div>
                 </div>
             </div>
@@ -238,8 +240,8 @@ def app():
         <div class="container">
             <h2 class="section-title">Why Choose Us</h2>
             <div class="why-content">
-                <p>We combine cutting-edge technology with intuitive design, making complex processes simple and efficient.</p>
-                <p>99.9% uptime, enterprise-grade security, and a team dedicated to your success.</p>
+                <p>We combine advanced AI with an easy-to-use design to make your hiring process faster, smarter, and more efficient.</p>
+                <p>Our platform saves you time, improves decision-making, and helps you build stronger teams — all with security and simplicity at its core.</p>
             </div>
         </div>
     </section>
@@ -247,8 +249,6 @@ def app():
     <section class="cta-section">
         <div class="container">
             <h2 class="section-title">Ready to Get Started?</h2>
-            <p>Experience our platform with a personalized demo for your business needs.</p>
-            <a href="#" class="cta-button">Request a Demo</a>
         </div>
     </section>
 
