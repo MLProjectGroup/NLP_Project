@@ -26,53 +26,54 @@ def app():
             to {{ opacity: 1; transform: translateY(0); }}
         }}
         .container {{
-            max-width: 800px;
-            margin: 0 auto 60px auto;
-            padding: 40px 40px 50px 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 40px 80px 40px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: {theme['text']};
             line-height: 1.75;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        }}
+        .hero {{
             text-align: center;
-            min-height: 100vh;
-            justify-content: center;
+            padding-top: 60px;
+            padding-bottom: 60px;
         }}
         .main-title {{
             color: {theme['primary']};
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 900;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }}
         .decor-line {{
-            width: 90px;
+            width: 100px;
             height: 4px;
             background-color: {theme['accent']};
             border-radius: 4px;
-            margin: 12px auto 40px auto;
+            margin: 14px auto 40px auto;
         }}
         .subtitle {{
             color: {theme['secondary']};
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-style: italic;
-            margin-bottom: 40px;
-            max-width: 90%;
+            margin-bottom: 50px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }}
         .features {{
             list-style: none;
             padding: 0;
-            margin: 0 auto;
-            max-width: 600px;
+            margin: 0 auto 60px auto;
+            max-width: 700px;
             text-align: left;
         }}
         .features li {{
             display: flex;
             align-items: flex-start;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: {theme['text']};
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }}
         .features li::before {{
@@ -80,28 +81,47 @@ def app():
             color: {theme['primary']};
             font-weight: bold;
             margin-right: 12px;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
         }}
         .why-choose {{
-            max-width: 100%;
-            margin-top: 80px;
             text-align: center;
-            direction: ltr;
+            margin-bottom: 60px;
         }}
         .why-choose h3 {{
             color: {theme['primary']};
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             margin-bottom: 20px;
             font-weight: 900;
         }}
         .why-choose p {{
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: {theme['secondary']};
-            line-height: 1.7;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }}
+        .cta {{
+            text-align: center;
+            margin-top: 60px;
+        }}
+        .cta button {{
+            background-color: {theme['primary']};
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 28px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }}
+        .cta button:hover {{
+            background-color: #015a71;
+            transform: translateY(-2px);
         }}
         .contact {{
-            margin-top: 50px;
+            margin-top: 80px;
             text-align: center;
             font-size: 1.1rem;
             font-weight: 600;
@@ -120,25 +140,24 @@ def app():
             cursor: pointer;
         }}
         @media (max-width: 768px) {{
-            .container {{
-                margin: 0 20px 40px 20px;
-                padding: 30px 20px 30px 20px;
-            }}
             .main-title {{
-                font-size: 2rem;
+                font-size: 2.2rem;
             }}
             .subtitle {{
-                font-size: 1.1rem;
-                margin-bottom: 28px;
+                font-size: 1.15rem;
             }}
             .features li {{
-                font-size: 1rem;
+                font-size: 1.05rem;
             }}
             .why-choose h3 {{
-                font-size: 1.7rem;
+                font-size: 2rem;
             }}
             .why-choose p {{
                 font-size: 1.05rem;
+            }}
+            .cta button {{
+                font-size: 1.05rem;
+                padding: 12px 24px;
             }}
         }}
     </style>
@@ -147,11 +166,17 @@ def app():
     # Main container start
     st.markdown('<div class="container fade-in">', unsafe_allow_html=True)
 
-    # Title + subtitle + features
+    # Hero Section
     st.markdown("""
-    <h1 class="main-title">Smart Recruiter Assistant</h1>
-    <div class="decor-line"></div>
-    <p class="subtitle">Reclaim Your Time, Recruit Smarter.</p>
+    <div class="hero">
+        <h1 class="main-title">Smart Recruiter Assistant</h1>
+        <div class="decor-line"></div>
+        <p class="subtitle">Reclaim Your Time, Recruit Smarter.</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Features Section
+    st.markdown("""
     <ul class="features">
         <li>AI helps you quickly find the right candidates.</li>
         <li>A smart assistant guides you through hiring.</li>
@@ -161,7 +186,7 @@ def app():
     </ul>
     """, unsafe_allow_html=True)
 
-    # Why Choose section
+    # Why Choose Section
     st.markdown("""
     <div class="why-choose">
         <h3>Why Choose Smart Recruiter Assistant?</h3>
@@ -169,7 +194,14 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    # Contact section
+    # CTA Section
+    st.markdown("""
+    <div class="cta">
+        <button onclick="window.location.href='mailto:menatarek04@gmail.com'">Request a Demo</button>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Contact Section
     st.markdown("""
     <div class="contact">
         <p>Contact us: 
