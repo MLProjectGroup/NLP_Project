@@ -307,10 +307,10 @@ def app():
     tab0, tab1, tab2, tab3, tab4, tab5 = st.tabs(["Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions"])
 
     with tab0:
-        st.header("📊 Overview Dashboard")
+        st.header("Overview Dashboard")
 
         if not st.session_state.candidate_cv_map:
-            st.info("👆 Upload and process CVs in the section above to view the overview dashboard.")
+            pass
         else:
             col1, col2, col3 = st.columns(3)
             
@@ -413,9 +413,6 @@ def app():
                 all_relevant = rag_engine.get_all_candidates_for_skill(query)
                 st.subheader("🎯 Top Candidates")
                 st.code(top_text[0], language="markdown")
-
-                st.subheader("📌 All Relevant Candidates")
-                st.text(all_relevant)
             except Exception as e:
                 st.error(f"❌ Failed to process query: {e}")
 
