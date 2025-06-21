@@ -1,3 +1,5 @@
+import streamlit as st
+
 def app():    
     landing_page_html = """[
     <!DOCTYPE html>
