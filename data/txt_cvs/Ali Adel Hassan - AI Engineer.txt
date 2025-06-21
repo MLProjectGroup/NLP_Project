@@ -1,0 +1,94 @@
+Ali Adel Hassan AI Engineer
+aliadel922@gmail.com
+ 
+2 01100696256
+ 
+Egypt
+ 
+linkedin.com/in/ali-adel-84b390101
+ 
+github.com/adelian14
+ 
+Profile
+AI Developer with hands-on experience in building machine learning and deep learning models using TensorFlow 
+and scikit-learn.Strong foundation in computer science, with a problem-solving mindset sharpened through 
+competitive programming and teaching.
+Education
+Information Technology Institute (ITI), Ministry Of Communications And 
+Information Technology (MCIT)
+9-Month Diploma, Artificial Intelligence and Machine Learning track
+10/2024 07/2025
+Mansoura Branch
+Misr Higher Institute
+Bachelor's degree in Computer Science
+Excellent with honors (Ranked first with cumulative score of 87.1%)
+09/2019 06/2023
+Mansoura
+Technical Skills
+Proficient in Python and fundamental packages
+NumPy, Pandas
+Competent in data visualization tools
+Matplotlib, Seaborn, BowerBi, Plotly, Dash
+Strong knowledge of machine learning and deep 
+learning models
+Tools and Platforms
+Git, GitHub, Docker, Jupyter, VS Code, Google Colab
+Competent in machine and deep learning packages
+TensorFlow, Scikit-Learn
+Strong understanding of mathematics
+Linear Algebra, Probability, Statistics, Numerical 
+Optimization
+Experience in several programming languages
+C, Javascript, C#, Java
+Database
+SQL(My
+SQL, Microsoft SQL Server), No
+SQL(Mongodb)
+Honors and Awards
+Programming and problem solving instructor (Volunteer)
+Taught data structures, algorithms, and problem-solving techniques to students 
+preparing for ECPC and other competitions
+10/2022 09/2024
+Mansoura
+ACPC finalist
+Africa and Arab Collegiate Programming Championship
+03/2024
+Luxor
+Personal Skills
+Public Speaking and Presentation
+Excellent
+Problem-Solving Skills
+Excellent
+Analytical Thinking
+Very Good
+Team Collaboration
+Very Good
+Self Study and Continuous Learning
+Very Good
+Attention to Detail
+Very Good
+Projects
+Handwritten Digit Recognition
+Tools and Technologies: Python, Streamlit, OpenCV, TensorFlow
+Developed an interactive web application that allows users to upload images of handwritten digits, processes the 
+images through custom image processing techniques, segments them, and predicts the digits using a CNN model 
+trained on the MNIST dataset. Enabled users to adjust preprocessing parameters dynamically for better 
+visualization and understanding.
+Obesity Prediction: A Machine Learning Approach (Team Project)
+Role: Developer
+Tools and Technologies: Python, Scikit-learn, Light
+GBM, Pandas, GridSearchCV
+Contributed to building a machine learning pipeline for predicting obesity levels (NObeyesdad) based on 
+demographic, lifestyle, and dietary inputs. Developed preprocessing pipelines using ColumnTransformer and 
+Pipeline to handle categorical encoding, scaling, and missing values. Participated in feature selection and model 
+evaluation processes using Random Forest, Gradient Boosting, and Light
+GBM.
+Dynamic Console Menu System using Object-Oriented Design
+Tools and Technologies: C, Object-Oriented Programming (OOP)
+Built an extensible C library for designing interactive console menus, applying OOP principles (abstraction, 
+inheritance, polymorphism). Supported dynamic navigation, nested menus, and customizable user actions.
+Languages
+English
+Advanced
+Arabic
+Native

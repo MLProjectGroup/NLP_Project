@@ -1,14 +1,16 @@
 import os
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import shutil
 import time
-import json
 import logging
 import hashlib
-import numpy as np
 from typing import List
 
-import chromadb
 from dotenv import load_dotenv
+import chromadb
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.base import Embeddings
@@ -49,35 +51,28 @@ class SafeGoogleGenerativeAIEmbeddings(Embeddings):
         hash_digest = hashlib.md5(text.encode()).hexdigest()
         return [(int(hash_digest[i:i+2], 16) / 127.5 - 1.0) for i in range(0, len(hash_digest), 2)][:768]
 
-
 class CVVectorStore:
-    def __init__(self):
-        # Load from env or fallback
-        persist_directory = os.getenv("CHROMA_PERSIST_DIRECTORY", "./chroma_store")
-        collection_name = os.getenv("VECTOR_DB_COLLECTION", "cv_collection")
+    def __init__(self, reset_store=False):
+        persist_directory = "./chroma_store"
 
-        # 🧹 Clean corrupted store before anything else
-        if os.path.exists(persist_directory):
-            logger.warning(f"Removing corrupted Chroma store at: {persist_directory}")
+        if reset_store and os.path.exists(persist_directory):
             shutil.rmtree(persist_directory)
+            logger.warning(f"🗑️ Removed existing Chroma store: {persist_directory}")
 
-        # 🔐 Create fresh client and embeddings
+        # Init embeddings
         base_embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
             google_api_key=os.getenv("GOOGLE_API_KEY")
         )
         self.embeddings = SafeGoogleGenerativeAIEmbeddings(base_embeddings)
 
-        # 💾 Start Chroma DB
-        self.client = chromadb.PersistentClient(path=persist_directory)
-
-        # ✅ Create a new collection
+        # Init vector store
         self.vectorstore = Chroma(
-            client=self.client,
-            collection_name=collection_name,
-            embedding_function=self.embeddings
+            collection_name="cv_store",
+            embedding_function=self.embeddings,
+            persist_directory=persist_directory
         )
-        logger.info(f"✅ Chroma vector store initialized with collection: {collection_name}")
+        logger.info(f"✅ Chroma vector store initialized: cv_store")
 
     def add_cvs(self, documents):
         logger.info(f"Adding {len(documents)} documents to Chroma vector store")

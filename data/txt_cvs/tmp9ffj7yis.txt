@@ -1,0 +1,114 @@
+Ali Ayman Soliman
+201276862221
+ ali.ayman.solimann@gmail.com
+ Cairo, Egypt
+Ali Ayman
+ Ali Ayman
+ Ali Ayman
+PROFILE
+Passionate and eager Data Scientist with a strong foundation in AI, machine learning, natural language
+processing, computer vision, craving to implement the tools, skills, and concepts he acquired, further develop his skill
+set and explore the practical horizons of Data Science field.
+EDUCATION
+Postgraduate Diploma of AI-Pro, 9-Month Program Oct. 2024 Aug. 2025
+Information Technology Institute (ITI), Egypt EPITA School of Engineering and Computer Science, France
+The program core focuses on ML pipeline, starting from data ETL, all the way to model selection, hyper-parameter
+tuning, and validation. Moreover, the program includes additional courses related to big data, AWS services, etc.
+B.Sc. in Artificial Intelligence Sep. 2020 Jul. 2024
+Egyptian Russian University, Egypt
+ Ranked 7th in Class.
+WORK EXPERIENCE
+Teaching Assistant (Full Time) Oct. 2024 Present
+Faculty Of Artificial Intelligence (Egyptian Russian University), Cairo, Egypt
+ Assisted in delivering Machine Learning and Deep Learning courses, including lectures, labs, and assessments.
+ Guided students through practical projects and hands-on assignments to reinforce theoretical concepts.
+ Supported students in understanding core AI topics, Improving their problem-solving skills.
+Insructor (Part Time) June. 2024 Oct. 2024
+YAT (Digital Egypt CUBS), Cairo, Egypt
+ Instructed courses on AI, mobile app development, and web development.
+ Guided students through various topics and practical projects, enhancing their understanding in these fields.
+RELEVANT PROJECTS
+Document Clustering Project Project Repo
+Project aims to apply unsupervised learning techniques to cluster documents from two datasets: the People Wikipedia
+Dataset and the 20 Newsgroups Dataset.
+ Models: K-means - Agglomerative clustering - PCA - Doc2Vec - TF-IDF
+ Tools: Python NumPy Pandas SciKit-Learn Seaborn - NLTK
+Obesity Classification Project Project Repo
+Project to classify individuals based on obesity levels using health and lifestyle data. Applied preprocessing, feature
+selection, and various classification algorithms to achieve high accuracy and interpretability.
+ Models: Light
+GBM Classifier - Decision tree - KNN
+ Tools: Python NumPy Pandas SciKit-Learn Seaborn - Streamlit
+Hate Speech Classification Project Project Repo
+NLP project focuses on building a robust hate speech classification system can detect and differentiate
+between hate speech, offensive language, and neutral content.
+ Models: Logistic regression - Decision tree - SVM - RNN - LSTM - GRU
+ Tools: Python - Pandas - SciKit-Learn - Plotly - NLTK - Tensorflow - Streamlit - GloVe - Fast-text - TF-IDF
+Build Transformer & BERT from Scratch Project Repo
+Built Transformer and BERT models from scratch to understand each component, including architecture, attention
+mechanisms, and positional encoding, for translation tasks.
+ Models: BERT - Transformer
+ Tools: Numpy - torch
+Detecting Offensive Vs Normal Text Project Repo
+Employed NLP techniques, including specific Arabic text preprocessing tools like ArabertPreprocessor, to prepare and
+clean a diverse Twitter dataset, and used Multinomial Naive Bayes with CountVectorizer to achieve highly accurate
+classification of Arabic Twitter text as offensive or normal..
+ Models: Multinomial Naive Bayes - ArabertPreprocessor
+ Tools: Pandas - SciKit-Learn -- NLTK - CountVectorizer
+Potato Disease Leaf Classification Project Repo
+Project focuses on detecting potato leaf diseases (Early Blight, Late Blight) and distinguishing them from Healthy
+leaves using Deep Learning and Transfer Learning techniques. We use the Potato Leaf Disease (PLD) dataset, apply a
+powerful model based on EfficientNetB0 architecture.
+ Models: CNN - EfficientNetB0
+ Tools: Open-cv -Numpy - Tensorflow - SciKit-Learn
+Computer Vision Repo with a Practical Projects Project Repo
+Analyze images and videos to extract meaningful information through techniques like image segmentation, object
+detection, OCR, facial recognition, pose estimation, object tracking, and image restoration.
+ Models: CNN
+ Tools: Open-cv -Numpy
+EXTRACURRICULAR ACTIVITIES
+Computatily Community, Egyptian Russian University, Egypt
+Technical Team Leader Dec. 2023 Jun. 2024
+ Led a team of 10 developers in organizing and maintaining technical workshops and coding bootcamps.
+ Conducted weekly sessions on supervised and unsupervised learning techniques.
+Technical Committee Member Oct. 2022 May 2023
+ Participated in organizing technical events and internal hackathons.
+ Contributed tutorials and documentation for new members on using Python, Git, and ML frameworks.
+TECHNICAL SKILLS
+Programming
+ Python
+ SQL
+ Java
+ C
+Libraries / Frameworks
+ NumPy, Pandas
+ SciKit-Learn
+ Transformers
+ Seaborn
+ Plotly, Dash
+ PyTorch
+ PySpark
+ TensorFlow Keras
+ Flask
+ Power Bi
+Others
+ Docker, Compose
+ Web Scraping
+ Data Wrangling
+ Jupyter Notebooks
+ Data Visualization
+COURSES
+ Machine Learning Artificial Intelligence, (iTi) Certificate
+ AI Diploma Using C , (Orange Digital Center) Certificate
+ Introduction to Natural Language Processing, (Analytics Vidhya) Certificate
+ Big Data Fundamentals, (Orange Digital Center) Certificate
+ Huawei Python Course, (Huawei & Ministry of Youth and Sports) Certificate
+SOFT SKILLS
+ Leadership Commitment Communication Presentation
+LANGUAGES SKILLS
+ English: Proficient Arabic: Native
+PUBLICATIONS
+ Advances in ASL Detection: YOLOv8 approach 2024 Paper Link
+PERSONAL INFO
+ Military Status: Exempted
+ Ready to relocate.

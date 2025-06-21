@@ -1,6 +1,7 @@
 # === Main streamlit.py ===
 import streamlit as st
 import random
+import urllib.parse
 
 # --- App Config ---
 st.set_page_config(
@@ -29,18 +30,20 @@ daily_tips = [
 
 # --- Pages Dictionary ---
 pages = {
-    "Home  ": None,
-    "   Start Recruiting   ": "Pages.Chatbot_02",
-    "   About Us": None
+    "Home": None,
+    "Start": "recruiter",   
+    "About Us": "about"
+
+
 }
 
-# --- Current Page ---
+
 query_params = st.query_params
 current_page = query_params.get("page", "Home")
 
 if current_page not in pages:
     current_page = "Home"
-
+    
 # --- Load Page ---
 def load_page(page_key):
     mod_name = pages.get(page_key)
@@ -169,6 +172,7 @@ footer_html = ""
 for page_name in pages.keys():
     active = "active" if page_name == current_page else ""
     footer_html += f'<a href="/?page={page_name}" class="{active}">{page_name.strip()}</a>'
+
 
 st.markdown(f"""
 <div class="bottom-nav">
