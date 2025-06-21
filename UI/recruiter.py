@@ -35,6 +35,9 @@ def app():
     # --- Theme Colors ---
     theme = {
         "primary": "#017691",       # Blue
+        "primary2": "#7DBBC9",       # Blue
+        "primary3": "#A1CFDD",       # Blue
+
         "secondary": "#FF9F1C",     # Orange
         "accent": "#e0e0e0",
         "background": "#dce3e4",
@@ -70,7 +73,38 @@ def app():
     }}
 
 
+    /* Directly target the tab list (stronger selector) */
+    div[data-baseweb="tab-list"] {{
+        background-color: transparent !important;
+        justify-content: center !important;
+        box-shadow: none !important;
+        border: none !important;
+    }}
+    .stTabs [data-baseweb="tab-list"] {{
+        justify-content: center;
+    }}
 
+    .stTabs [data-baseweb="tab"] {{
+        background-color: {theme['primary2']};
+        color: white;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+    }}
+
+    .stTabs [data-baseweb="tab"]:hover {{
+        background-color: {theme['background']};
+    }}
+
+    .stTabs [aria-selected="true"] {{
+        background-color: {theme['background']};
+        color: white;
+    }}
+
+.e10vaf9m1.st-emotion-cache-1f3w014.ex0cdmw0 {{
+    color: black !important;
+}}
     h2, h3, .main-title {{
         color: {theme['primary']};
         font-weight: 700;
@@ -81,7 +115,7 @@ def app():
     }}
 
     .stButton > button {{
-        background-color: white !important;
+        background-color: #A1CFDD !important;
         color: white !important;
         font-weight: 600;
     }}
@@ -269,6 +303,7 @@ def app():
             st.warning("Please upload CV files first.")
 
     # TABS
+    
     tab0, tab1, tab2, tab3, tab4, tab5 = st.tabs(["Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions"])
 
     with tab0:
