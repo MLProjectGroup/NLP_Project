@@ -1,5 +1,4 @@
-    
- def app():   
+def app():   
     import os
     import sys
     from pathlib import Path
