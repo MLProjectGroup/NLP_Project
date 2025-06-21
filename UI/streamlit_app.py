@@ -35,6 +35,10 @@ pages = {
     "About Us": "Pages.about"
 }
 
+
+query_params = st.query_params
+current_page = query_params.get("page", "Home")
+
 if current_page not in pages:
     current_page = "Home"
     
