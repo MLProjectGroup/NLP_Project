@@ -41,7 +41,7 @@ def app():
         "secondary": "#FF9F1C",     # Orange
         "accent": "#e0e0e0",
         "background": "#dce3e4",
-        "text": "#333",          # Black
+        "text": "#222222",          # Black
     }
 
     # --- Google Fonts ---
@@ -377,7 +377,7 @@ def app():
                             x=0.5,           # Center the title horizontally (0.5 means 50% of the plot width)
                             xanchor='center',# Anchor the title text itself from its center point
                             font=dict(
-                                color="rgba(153, 0, 0, 1)", # <--- DEEPER RED IN RGBA
+                                color="black", # <--- DEEPER RED IN RGBA
                                 size=24 # <--- INCREASED FONT SIZE (adjust as needed, e.g., 28, 30)
                             )
 
