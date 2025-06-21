@@ -3,11 +3,11 @@ import streamlit as st
 def app():
     theme = {
         "primary": "#017691",
-        "secondary": "#FF9F1C",
+        "secondary": "#333",
         "accent": "#dce3e4",
         "background": "#dce3e4",
         "text": "#222222",
-        "highlight": "#AED581"
+        "highlight": "#abc2c7"
     }
     
     st.markdown(f"""
@@ -186,12 +186,7 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    # Contact info
-    st.markdown("""
-    <div class="contact">
-        For more informations: 
-        <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a>
-    </div>
+ 
     """, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
