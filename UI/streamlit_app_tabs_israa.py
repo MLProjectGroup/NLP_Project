@@ -29,6 +29,97 @@ from RAG.cv_summarizer import CVSummarizer
 from RAG.job_recommender import JobRecommender
 from RAG.hr_question_generator import HRQuestionGenerator
 
+
+
+# --- Theme Colors ---
+theme = {
+    "primary": "#017691",       # Blue
+    "secondary": "#FF9F1C",     # Orange
+    "accent": "#e0e0e0",
+    "background": "#dce3e4",
+    "text": "#222222",          # Black
+}
+
+# --- Google Fonts ---
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+
+# --- CSS Styles ---
+st.markdown(f"""
+<style>
+body, .stApp {{
+    background-color: {theme['background']};
+    font-family: 'Poppins', sans-serif;
+    color: {theme['text']};
+}}
+.header {{
+    background-color: {theme['primary']};
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}}
+
+
+
+h2, h3, .main-title {{
+    color: {theme['primary']};
+    font-weight: 700;
+}}
+
+p, label, .stText, .stMarkdown {{
+    color: {theme['text']};
+}}
+
+.stButton > button {{
+    background-color: {theme['primary']} !important;
+    color: white !important;
+    font-weight: 600;
+}}
+
+.stFileUploader > div > div {{
+    background-color: white !important;
+    border: 2px dashed #ccc !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+}}
+
+.centered-image {{
+    text-align: center;
+    margin: 30px 0;
+}}
+
+.centered-image img {{
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}}
+
+.centered-image img:hover {{
+    transform: scale(1.05);
+}}
+
+.quote {{
+    color: {theme['primary']};
+    font-style: italic;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0 40px 0;
+}}
+</style>
+""", unsafe_allow_html=True)
+
+
 def normalize_candidate_name(name: str) -> str:
     """Normalize candidate names to avoid duplicates and clean up."""
     if not name:
@@ -69,10 +160,15 @@ summarizer = CVSummarizer()
 job_recommender = JobRecommender()
 hr_question_generator = HRQuestionGenerator()
 
-st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
-st.title("Smart Recruiter Assistant")
-st.write("Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.")
-
+#st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
+st.markdown(
+    "<h1 style='text-align: center; color: #017691;'>Smart Recruiter Assistant</h1>",
+    unsafe_allow_html=True
+)
+st.markdown(
+    "<p style='text-align: center;'>Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.</p>",
+    unsafe_allow_html=True
+)
 # REMOVED DUPLICATE `if "uploaded_cvs" not in st.session_state:` BLOCK HERE
 
 st.subheader("Upload CVs")

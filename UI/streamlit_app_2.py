@@ -3,10 +3,7 @@ import os
 import streamlit as st
 from pathlib import Path
 import random
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from collections import defaultdict, Counter
 from Preprocessing.document_processor import CVProcessor
 from Preprocessing.vector_store import CVVectorStore
 from RAG.rag_engine import EnhancedRAGEngine
@@ -15,124 +12,213 @@ from RAG.cv_summarizer import CVSummarizer
 from RAG.job_recommender import JobRecommender
 from RAG.hr_question_generator import HRQuestionGenerator
 
-import matplotlib.pyplot as plt
-import pandas as pd
+# --- App Config ---
+st.set_page_config(
+    page_title="Smart Recruiter Assistant 🤖",
+    layout="wide",
+    page_icon="https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png"
+)
+    
 
-# Initialize modules
+# --- Theme Colors ---
+theme = {
+    "primary": "#017691",       # Blue
+    "secondary": "#FF9F1C",     # Orange
+    "accent": "#e0e0e0",
+    "background": "#dce3e4",
+    "text": "#222222",          # Black
+}
+
+# --- Google Fonts ---
+st.markdown("""
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
+# --- Daily Tips ---
+daily_tips = [
+    "Always personalize your hiring message!",
+    "Look beyond keywords, consider potential.",
+    "Soft skills matter as much as experience.",
+    "Diversity is a strength in hiring!",
+    "Hiring is like dating... look for culture fit!",
+]
+
+# --- CSS Styles ---
+st.markdown(f"""
+<style>
+body, .stApp {{
+    background-color: {theme['background']};
+    font-family: 'Poppins', sans-serif;
+    color: {theme['text']};
+}}
+.header {{
+    background-color: {theme['primary']};
+    padding: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 26px;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}}
+
+h1, h2, h3, .main-title {{
+    color: {theme['primary']};
+    font-weight: 700;
+}}
+
+p, label, .stText, .stMarkdown {{
+    color: {theme['text']};
+}}
+
+.stButton > button {{
+    background-color: {theme['primary']} !important;
+    color: white !important;
+    font-weight: 600;
+}}
+
+.stFileUploader > div > div {{
+    background-color: white !important;
+    border: 2px dashed #ccc !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+}}
+
+.centered-image {{
+    text-align: center;
+    margin: 30px 0;
+}}
+
+.centered-image img {{
+    width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}}
+
+.centered-image img:hover {{
+    transform: scale(1.05);
+}}
+
+.quote {{
+    color: {theme['primary']};
+    font-style: italic;
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    margin: 20px 0 40px 0;
+}}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Header ---
+st.markdown(f'<div class="header">🤖 Smart Recruiter Assistant</div>', unsafe_allow_html=True)
+
+# --- Home Section ---
+st.markdown('<div class="centered-image">', unsafe_allow_html=True)
+st.image("https://raw.githubusercontent.com/MLProjectGroup/NLP_Project/main/UI/assets/hr_man.png", width=400)
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown(f'<p class="quote">💡 Daily Tip: {random.choice(daily_tips)}</p>', unsafe_allow_html=True)
+
+
+# --- Main App Logic ---
+
 processor = CVProcessor(single_chunk=True)
-vector_store = CVVectorStore()
-rag_engine = EnhancedRAGEngine(vector_store, max_candidates_per_query=15)
+vector_store = CVVectorStore(reset_store=True)
+rag_engine = EnhancedRAGEngine(vector_store)
 job_matcher = EnhancedJobMatcher(vector_store, rag_engine)
 summarizer = CVSummarizer()
 job_recommender = JobRecommender()
 hr_question_generator = HRQuestionGenerator()
 
-st.set_page_config(page_title="Smart Recruiter Assistant", layout="wide")
-st.title("🤖 Smart Recruiter Assistant")
-st.write("Upload CVs, analyze them, ask queries, match jobs, and generate HR questions.")
+# Upload CVs
+uploaded_files = st.file_uploader(
+    "Upload Candidate CVs", type=["pdf", "docx", "doc", "txt"], accept_multiple_files=True)
 
-if "uploaded_cvs" not in st.session_state:
-    st.session_state.uploaded_cvs = {}
+candidate_cv_map = {}
+all_documents = []
+all_candidates = []
 
-st.header("📁 Upload CVs")
-uploaded_files = st.file_uploader("Upload CVs (PDF/DOCX)", type=["pdf", "docx"], accept_multiple_files=True)
+if uploaded_files:
+    os.makedirs("temp", exist_ok=True)
+    for uploaded_file in uploaded_files:
+        content_path = f"temp/{uploaded_file.name}"
+        with open(content_path, "wb") as f:
+            f.write(uploaded_file.read())
 
-if st.button("🔍 Process CVs"):
-    if uploaded_files:
-        for file in uploaded_files:
-            file_path = os.path.join("uploaded_files", file.name)
-            os.makedirs("uploaded_files", exist_ok=True)
-            with open(file_path, "wb") as f:
-                f.write(file.getbuffer())
-            chunks = processor.process_cv(file_path)
-            name = os.path.splitext(file.name)[0]
-            if chunks:
-                st.session_state.uploaded_cvs[name] = chunks[0].page_content
-                for chunk in chunks:
-                    chunk.metadata["candidate_name"] = name
-                    chunk.metadata["source_file"] = file.name
-                vector_store.add_cvs(chunks)
-        st.success(f"{len(st.session_state.uploaded_cvs)} CV(s) processed.")
-    else:
-        st.warning("Please upload CV files first.")
+        chunks = processor.process_cv(content_path)
+        candidate_name = Path(uploaded_file.name).stem
+        normalized_name = candidate_name.replace("_", " ").title()
 
-# TABS
-tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-    "Overview", "Ask", "Match", "Summarize", "Recommend", "HR Questions", "Debug"
-])
+        if chunks:
+            candidate_cv_map[normalized_name] = chunks[0].page_content
+            all_candidates.append(normalized_name)
+            for chunk in chunks:
+                chunk.metadata["candidate_name"] = normalized_name
+                chunk.metadata["source_file"] = uploaded_file.name
+            all_documents.extend(chunks)
 
-with tab0:
-    st.subheader("Overview of Job Matches")
-    job_counts = Counter()
-    if st.session_state.uploaded_cvs:
-        for name, content in st.session_state.uploaded_cvs.items():
-            ranked_jobs = job_recommender.recommend_jobs(content, top_k=1)
-            if ranked_jobs:
-                top_job = ranked_jobs[0][0]['title']
-                job_counts[top_job] += 1
+    vector_store.add_cvs(all_documents)
+    st.success(f"✅ Uploaded and processed {len(all_candidates)} CVs.")
 
-        if job_counts:
-            df = pd.DataFrame(job_counts.items(), columns=["Job Title", "Count"])
-            st.bar_chart(df.set_index("Job Title"))
-        else:
-            st.info("No job recommendations available yet. Process CVs first.")
-    else:
-        st.warning("Upload and process CVs to view overview.")
+# Query box
+st.markdown("---")
+query = st.text_input("🔎 Enter Custom Query (e.g., Who has React experience?)")
 
-with tab1:
-    st.subheader("Ask a question")
-    query = st.text_input("Enter your query")
-    if st.button("Ask"):
-        if st.session_state.uploaded_cvs:
-            top_text, all_relevant, top_names = rag_engine.find_top_candidates(query, top_k=5)
-            st.text_area("Top Candidates", top_text)
-            st.text_area("All Relevant", all_relevant)
-        else:
-            st.warning("Upload and process CVs first.")
+if st.button("Run Query") and query.strip():
+    try:
+        top_text = rag_engine.find_top_candidates(query, top_k=5)
+        all_relevant = rag_engine.get_all_candidates_for_skill(query)
+        st.subheader("🎯 Top Candidates")
+        st.code(top_text[0], language="markdown")
 
-with tab2:
-    st.subheader("Match job description")
-    job_desc = st.text_area("Paste job description")
-    if st.button("Match"):
-        if st.session_state.uploaded_cvs:
-            results = job_matcher.match_job_to_cvs(job_desc, top_k=5, explain=True)
-            for res in job_matcher.format_results(results).split("\n"):
-                st.markdown(res)
-        else:
-            st.warning("Upload and process CVs first.")
+        st.subheader("📌 All Relevant Candidates")
+        st.text(all_relevant)
+    except Exception as e:
+        st.error(f"❌ Failed to process query: {e}")
 
-with tab3:
-    st.subheader("Summarize CVs")
-    if st.button("Summarize"):
-        for name, content in st.session_state.uploaded_cvs.items():
-            summary = summarizer.summarize_cv(content, name)
+# Job matching
+st.markdown("---")
+st.subheader("📋 Match Job Description to Candidates")
+job_description = st.text_area("Paste Job Description")
+
+if st.button("Match Candidates to Job") and job_description.strip():
+    try:
+        results = job_matcher.match_job_to_cvs(job_description, top_k=5, explain=True)
+        formatted = job_matcher.format_results(results, show_snippets=True)
+        st.subheader("🧠 Matching Results")
+        st.code(formatted, language="markdown")
+    except Exception as e:
+        st.error(f"❌ Job matching failed: {e}")
+
+# Generate HR Questions
+st.markdown("---")
+st.subheader("💬 Generate HR Questions")
+if st.button("Generate HR Questions"):
+    try:
+        hr_qs = hr_question_generator.generate_questions_for_top_candidates(candidate_cv_map, all_candidates[:5])
+        for name, sections in hr_qs.items():
             st.markdown(f"**{name}**")
-            st.success(summary)
+            for sec, qs in sections.items():
+                st.markdown(f"*{sec}*:")
+                for q in qs:
+                    st.markdown(f"- {q}")
+    except Exception as e:
+        st.error(f"❌ HR question generation failed: {e}")
 
-with tab4:
-    st.subheader("Job Recommendations")
-    if st.button("Recommend Jobs"):
-        for name, content in st.session_state.uploaded_cvs.items():
-            st.markdown(f"### {name}")
-            ranked = job_recommender.recommend_jobs(content, top_k=3)
-            for job, score, reason in ranked:
-                st.markdown(f"**💼 {job['title']}** (Score: {score:.2f})")
-                st.markdown(f"**Reason:** {reason}")
-                st.markdown("---")
-
-with tab5:
-    st.subheader("HR Interview Questions")
-    if st.button("Generate Questions"):
-        if st.session_state.uploaded_cvs:
-            top_names = list(st.session_state.uploaded_cvs.keys())[:5]
-            questions = hr_question_generator.generate_questions_for_top_candidates(
-                st.session_state.uploaded_cvs, top_names
-            )
-            for name in top_names:
-                st.markdown(f"### {name}")
-                for sec, qs in questions[name].items():
-                    st.markdown(f"**{sec}**")
-                    for q in qs:
-                        st.markdown(f"- {q}")
-        else:
-            st.warning("Upload and process CVs first.")
+# Job Recommendation
+st.markdown("---")
+st.subheader("🚀 AI Job Recommendations")
+if st.button("Get Job Recommendations"):
+    try:
+        recommendations = job_recommender.get_top_candidates_for_jobs(candidate_cv_map, top_k=5)
+        for job, names in recommendations.items():
+            st.markdown(f"### {job}")
+            for i, name in enumerate(names, 1):
+                st.markdown(f"{i}. {name}")
+    except Exception as e:
+        st.error(f"❌ Job recommendation failed: {e}")
