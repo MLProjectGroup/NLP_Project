@@ -12,7 +12,7 @@ def app():
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #222222;
+            color: #017691;
             background-color: #dce3e4;
         }
         .container {
@@ -26,8 +26,6 @@ def app():
             color: white;
             padding: 100px 0;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
         .hero h1 {
             font-size: 3.5rem;
@@ -45,13 +43,14 @@ def app():
         .features {
             padding: 80px 0;
             background: white;
+            color: #017691;
         }
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 600;
-            color: #222222;
             margin-bottom: 3rem;
+            color: #017691;
         }
         .features-grid {
             display: grid;
@@ -80,7 +79,6 @@ def app():
             align-items: center;
             justify-content: center;
             margin-right: 1rem;
-            flex-shrink: 0;
         }
         .checkmark::after {
             content: '✓';
@@ -92,10 +90,8 @@ def app():
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            color: #222222;
         }
         .feature-content p {
-            color: #333;
             font-size: 0.95rem;
         }
         /* Why Choose */
@@ -114,8 +110,8 @@ def app():
         .why-content p {
             font-size: 1.1rem;
             line-height: 1.8;
-            color: #222222;
             margin-bottom: 1.5rem;
+            color: #000000; /* BLACK */
         }
         /* Contact */
         .contact {
@@ -135,6 +131,7 @@ def app():
             text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
+            word-wrap: break-word;
         }
         .contact-item:hover {
             transform: translateY(-5px);
@@ -168,7 +165,7 @@ def app():
 
     <section class="hero">
         <div class="container">
-            <h1>Recruit Smarter</h1>
+            <h1>Recruite Smarter</h1>
             <p>Innovative solutions designed to streamline your operations and accelerate growth with cutting-edge technology</p>
         </div>
     </section>
@@ -195,7 +192,7 @@ def app():
                     <div class="checkmark"></div>
                     <div class="feature-content">
                         <h3>Smart</h3>
-                        <p>A smart assistant guides you through hiring.</p>
+                        <p>A smart assistant guides you through hiring</p>
                     </div>
                 </div>
                 <div class="feature-item">
@@ -232,19 +229,19 @@ def app():
             <div class="contact-grid">
                 <div class="contact-item">
                     <h4>Mennatullah Tarek</h4>
-                    <a href="mailto:menatarek04@gmail.com" target="_blank" rel="noopener noreferrer">menatarek04@gmail.com</a>
+                    <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a>
                 </div>
                 <div class="contact-item">
                     <h4>Israa Abdelghany</h4>
-                    <a href="mailto:israaabdelghany9@gmail.com" target="_blank" rel="noopener noreferrer">israaabdelghany9@gmail.com</a>
+                    <a href="mailto:israaabdelghany9@gmail.com">israaabdelghany9@gmail.com</a>
                 </div>
                 <div class="contact-item">
                     <h4>Nagwa Mohamed</h4>
-                    <a href="mailto:nagwammatia919@gmail.com" target="_blank" rel="noopener noreferrer">nagwammatia919@gmail.com</a>
+                    <a href="mailto:nagwammatia919@gmail.com">nagwammatia919@gmail.com</a>
                 </div>
                 <div class="contact-item">
                     <h4>Mohamed Salama</h4>
-                    <a href="mailto:mohamedsalama152019@gmail.com" target="_blank" rel="noopener noreferrer">mohamedsalama152019@gmail.com</a>
+                    <a href="mailto:mohamedsalama152019@gmail.com">mohamedsalama152019@gmail.com</a>
                 </div>
             </div>
         </div>
