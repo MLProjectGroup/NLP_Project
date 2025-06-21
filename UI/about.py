@@ -1,127 +1,39 @@
-import streamlit as st
-
-def app():
-    # Hide Streamlit's default elements
-    st.set_page_config(
-        page_title="Smart Recruiter Assistant",
-        page_icon="🎯",
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
-
-    # Hide Streamlit menu and footer
-    hide_streamlit_style = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Landing Page</title>
     <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    .stApp > div:first-child {margin-top: -80px;}
-    </style>
-    """
-    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
-    
-    st.markdown("""
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-        
-        html, body, .main {
-            height: 100%;
-            background-color: #dce3e4;
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
         }
-        
-        .stApp {
-            background: #dce3e4 !important;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #222222;
+            background-color: #dce3e4;
         }
-        
-        .main .block-container {
-            padding: 0 !important;
-            max-width: none !important;
-        }
-        
-        .fade-in {
-            animation: fadeIn 1.2s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .slide-up {
-            animation: slideUp 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(50px);
-        }
-        
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 15px 0;
-        }
-        
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #017691;
-            text-decoration: none;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: #222222;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: #017691;
-        }
-        
+
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #017691 0%, #015a71 100%);
+            background: linear-gradient(135deg, #017691 0%, #015a70 100%);
             color: white;
-            padding: 140px 0 100px 0;
+            padding: 100px 0;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -129,516 +41,383 @@ def app():
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,0 1000,100 1000,0"/></svg>');
-            background-size: cover;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
         }
-        
+
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
         }
-        
-        .hero-title {
+
+        .hero h1 {
             font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 1rem;
             letter-spacing: -0.02em;
         }
-        
-        .hero-subtitle {
+
+        .hero p {
             font-size: 1.3rem;
-            margin-bottom: 40px;
+            margin-bottom: 2rem;
             opacity: 0.9;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 400;
         }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        
-        .btn-primary {
-            background: white;
-            color: #017691;
-            border: none;
-            border-radius: 50px;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-            border-radius: 50px;
-            padding: 14px 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: #017691;
-            transform: translateY(-2px);
-        }
-        
+
         /* Features Section */
-        .features-section {
-            padding: 100px 0;
+        .features {
+            padding: 80px 0;
             background: white;
         }
-        
+
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            font-weight: 800;
+            font-weight: 600;
             color: #222222;
-            margin-bottom: 20px;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
         }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        
-        .feature-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
-        }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 1.5rem;
+            border-radius: 12px;
             background: #abc2c7;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px auto;
-            font-size: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
-        
-        .feature-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #222222;
-            margin-bottom: 15px;
+
+        .feature-item:nth-child(1) { animation-delay: 0.3s; }
+        .feature-item:nth-child(2) { animation-delay: 0.4s; }
+        .feature-item:nth-child(3) { animation-delay: 0.5s; }
+        .feature-item:nth-child(4) { animation-delay: 0.6s; }
+        .feature-item:nth-child(5) { animation-delay: 0.7s; }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(1, 118, 145, 0.15);
         }
-        
-        .feature-description {
-            color: #333;
-            line-height: 1.6;
-            font-size: 1rem;
-        }
-        
-        /* Why Choose Section */
-        .why-choose-section {
-            padding: 100px 0;
-            background: #dce3e4;
-        }
-        
-        .why-choose-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-        
-        .why-choose-text h3 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #222222;
-            margin-bottom: 25px;
-            line-height: 1.2;
-        }
-        
-        .why-choose-text p {
-            font-size: 1.1rem;
-            color: #333;
-            line-height: 1.7;
-            margin-bottom: 30px;
-        }
-        
-        .stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: #017691;
-            display: block;
-        }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: #333;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 500;
-        }
-        
-        .benefits-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .benefits-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #222222;
-        }
-        
-        .benefits-list li::before {
-            content: "✓";
-            background: #017691;
-            color: white;
+
+        .checkmark {
             width: 24px;
             height: 24px;
+            background: #017691;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
+            margin-right: 1rem;
             flex-shrink: 0;
         }
-        
+
+        .checkmark::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #222222;
+        }
+
+        .feature-content p {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        /* Why Choose Us Section */
+        .why-choose-us {
+            padding: 80px 0;
+            background: #dce3e4;
+        }
+
+        .why-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .why-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
         /* CTA Section */
         .cta-section {
-            background: #017691;
-            color: white;
             padding: 80px 0;
+            background: white;
             text-align: center;
         }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
+
+        .cta-content {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
         }
-        
-        .cta-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 40px;
-        }
-        
-        /* Footer */
-        .footer {
-            background: #1e293b;
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #017691 0%, #015a70 100%);
             color: white;
-            padding: 60px 0 30px 0;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-        
-        .footer-description {
-            color: #94a3b8;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .footer-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a {
-            color: #94a3b8;
+            padding: 18px 40px;
             text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(1, 118, 145, 0.3);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(1, 118, 145, 0.4);
+            text-decoration: none;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: #abc2c7;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.5s; }
+        .contact-item:nth-child(2) { animation-delay: 0.6s; }
+        .contact-item:nth-child(3) { animation-delay: 0.7s; }
+        .contact-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-item h4 {
+            color: #017691;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95rem;
+            word-break: break-word;
             transition: color 0.3s ease;
         }
-        
-        .footer-links a:hover {
-            color: white;
+
+        .contact-item a:hover {
+            color: #017691;
         }
-        
-        .footer-bottom {
-            border-top: 1px solid #374151;
-            padding-top: 30px;
-            text-align: center;
-            color: #94a3b8;
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-title {
+            .hero h1 {
                 font-size: 2.5rem;
             }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+
+            .hero p {
+                font-size: 1.1rem;
             }
-            
+
+            .section-title {
+                font-size: 2rem;
+            }
+
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            
-            .why-choose-content {
+
+            .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 1rem;
             }
-            
-            .stats {
-                justify-content: center;
+
+            .container {
+                padding: 0 15px;
             }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
+
+            .hero, .features, .why-choose-us, .cta-section, .contact {
+                padding: 60px 0;
             }
-            
-            .nav-links {
-                display: none;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 16px 30px;
+                font-size: 1rem;
             }
         }
     </style>
-    """, unsafe_allow_html=True)
-
-    # Header
-    st.markdown("""
-    <div class="header">
-        <div class="nav">
-            <a href="#" class="logo">Smart Recruiter</a>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Hero Section
-    st.markdown("""
-    <div class="hero fade-in">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Revolutionize Your Hiring Process</h1>
-                <p class="hero-subtitle">AI-powered recruitment platform that helps you find, evaluate, and hire the best talent faster than ever before.</p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" onclick="window.location.href='mailto:menatarek04@gmail.com'">Start Free Trial</button>
-                    <button class="btn-secondary" onclick="window.location.href='#features'">Learn More</button>
-                </div>
+                <h1>Transform Your Business</h1>
+                <p>Innovative solutions designed to streamline your operations and accelerate growth with cutting-edge technology</p>
             </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+    </section>
 
-    # Features Section
-    st.markdown("""
-    <div class="features-section" id="features">
+    <!-- Features Section -->
+    <section class="features">
         <div class="container">
-            <h2 class="section-title">Powerful Features for Modern Recruiters</h2>
-            <p class="section-subtitle">Everything you need to streamline your recruitment process and make data-driven hiring decisions.</p>
-            
+            <h2 class="section-title">Key Features</h2>
             <div class="features-grid">
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">🎯</div>
-                    <h3 class="feature-title">AI-Powered Matching</h3>
-                    <p class="feature-description">Advanced algorithms analyze resumes and job requirements to find the perfect candidates automatically.</p>
-                </div>
-                
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">🤖</div>
-                    <h3 class="feature-title">Intelligent Assistant</h3>
-                    <p class="feature-description">Your personal AI recruiter guides you through every step of the hiring process with smart recommendations.</p>
-                </div>
-                
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">Analytics & Insights</h3>
-                    <p class="feature-description">Comprehensive reports and analytics help you optimize your recruitment strategy and track performance.</p>
-                </div>
-                
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Workflow Automation</h3>
-                    <p class="feature-description">Automate repetitive tasks like screening, scheduling, and follow-ups to focus on what matters most.</p>
-                </div>
-                
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">🔒</div>
-                    <h3 class="feature-title">Enterprise Security</h3>
-                    <p class="feature-description">Bank-level security ensures your sensitive recruitment data is always protected and compliant.</p>
-                </div>
-                
-                <div class="feature-card slide-up">
-                    <div class="feature-icon">🌐</div>
-                    <h3 class="feature-title">Global Integration</h3>
-                    <p class="feature-description">Seamlessly connects with popular job boards, ATS systems, and communication tools you already use.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Why Choose Section
-    st.markdown("""
-    <div class="why-choose-section" id="about">
-        <div class="container">
-            <div class="why-choose-content">
-                <div class="why-choose-text">
-                    <h3>Why Choose Smart Recruiter Assistant?</h3>
-                    <p>We're not just another recruitment tool. We're your strategic partner in building exceptional teams. Our AI-powered platform combines cutting-edge technology with human insight to deliver results that matter.</p>
-                    
-                    <ul class="benefits-list">
-                        <li>Reduce time-to-hire by up to 70%</li>
-                        <li>Improve candidate quality with AI screening</li>
-                        <li>Scale your recruitment without growing your team</li>
-                        <li>Make data-driven hiring decisions</li>
-                        <li>Eliminate unconscious bias in screening</li>
-                    </ul>
-                    
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="stat-number">10K+</span>
-                            <span class="stat-label">Candidates Screened</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Companies Trust Us</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">70%</span>
-                            <span class="stat-label">Faster Hiring</span>
-                        </div>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
+                        <h3>Advanced Analytics</h3>
+                        <p>Get deep insights into your data with powerful analytics tools and real-time reporting capabilities</p>
                     </div>
                 </div>
-                
-                <div class="why-choose-visual">
-                    <div class="feature-card">
-                        <div class="feature-icon">🚀</div>
-                        <h3 class="feature-title">Built for Scale</h3>
-                        <p class="feature-description">Whether you're hiring 10 or 10,000 people, our platform grows with your needs.</p>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
+                        <h3>Seamless Integration</h3>
+                        <p>Connect with your existing tools and workflows through our comprehensive API and integration platform</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
+                        <h3>Enterprise Security</h3>
+                        <p>Bank-level security with end-to-end encryption, compliance standards, and advanced threat protection</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
+                        <h3>24/7 Support</h3>
+                        <p>Round-the-clock customer support from our expert team to ensure your success at every step</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="checkmark"></div>
+                    <div class="feature-content">
+                        <h3>Scalable Architecture</h3>
+                        <p>Built to grow with your business, from startup to enterprise with flexible scaling options</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+    </section>
 
-    # CTA Section
-    st.markdown("""
-    <div class="cta-section">
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us">
         <div class="container">
-            <h2 class="cta-title">Ready to Transform Your Hiring?</h2>
-            <p class="cta-subtitle">Join hundreds of companies already using Smart Recruiter Assistant to build better teams.</p>
-            <button class="btn-primary" onclick="window.location.href='mailto:menatarek04@gmail.com'">Get Started Today</button>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    # Footer
-    st.markdown("""
-    <div class="footer" id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <div class="footer-brand">Smart Recruiter Assistant</div>
-                    <p class="footer-description">Empowering recruiters with AI-driven insights and automation to build exceptional teams faster and smarter.</p>
-                </div>
-                
-                <div>
-                    <h4 class="footer-title">Product</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Integrations</a></li>
-                        <li><a href="#">API</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="footer-title">Contact</h4>
-                    <ul class="footer-links">
-                        <li><a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a></li>
-                        <li><a href="mailto:israaabdelghany9@gmail.com">israaabdelghany9@gmail.com</a></li>
-                        <li><a href="mailto:nagwammatia919@gmail.com">nagwammatia919@gmail.com</a></li>
-                        <li><a href="mailto:mohamedsalama152019@gmail.com">mohamedsalama152019@gmail.com</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Smart Recruiter Assistant. All rights reserved.</p>
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="why-content">
+                <p>We've helped thousands of businesses transform their operations and achieve remarkable growth. Our platform combines cutting-edge technology with intuitive design, making complex processes simple and efficient.</p>
+                <p>With over 99.9% uptime, enterprise-grade security, and a team of dedicated experts, we're not just a service provider – we're your technology partner committed to your success.</p>
+                <p>Join industry leaders who trust us to power their most critical operations and drive innovation across their organizations.</p>
             </div>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="section-title">Ready to Get Started?</h2>
+                <p style="font-size: 1.1rem; color: #333; margin-bottom: 2rem;">Experience the power of our platform with a personalized demo tailored to your business needs</p>
+                <a href="#" class="cta-button">Request a Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h4>Mennatullah Tarek </h4>
+                    <a href="mailto:menatarek04@gmail.com">menatarek04@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Israa Abdelghany</h4>
+                    <a href="mailto:israaabdelghany9@gmail.com">israaabdelghany9@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Nagwa Mohamed </h4>
+                    <a href="mailto:nagwammatia919@gmail.com">nagwammatia919@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <h4>Mohamed Salama</h4>
+                    <a href="mailto:mohamedsalama152019@gmail.com">mohamedsalama152019@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
