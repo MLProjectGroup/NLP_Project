@@ -31,7 +31,7 @@ daily_tips = [
 # --- Pages Dictionary ---
 pages = {
     "Home": None,
-    "Start Recruiting": "Pages.recruiter",   
+    "Start": "Pages.recruiter",   
     "About Us": "Pages.about"
 }
 
