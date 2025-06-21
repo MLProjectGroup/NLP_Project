@@ -360,8 +360,39 @@ def app():
                                     color="Count", 
                                     labels={"Job Title": "Recommended Job Role", "Count": "Number of Candidates"},
                                     hover_data={"Job Title": True, "Count": True}) 
-                    fig.update_xaxes(tickangle=45) 
-                    fig.update_layout(showlegend=False) 
+
+                    # Update x and y axis tick label color
+                    fig.update_xaxes(tickfont=dict(color="black"))
+                    fig.update_yaxes(tickfont=dict(color="black"))
+
+                    fig.update_layout(
+                        showlegend=False,
+                        plot_bgcolor="rgba(220, 227, 228, 1)",
+                        paper_bgcolor="rgba(220, 227, 228, 1)",
+                        font=dict(color="black"),  
+                        
+                         # --- EDITED PLOT TITLE TO BE IN THE MIDDLE ---
+                        title=dict(
+                            text="Distribution of Candidates Across Top Job Roles", # Re-state the title text here
+                            x=0.5,           # Center the title horizontally (0.5 means 50% of the plot width)
+                            xanchor='center',# Anchor the title text itself from its center point
+                            font=dict(
+                                color="rgba(153, 0, 0, 1)", # <--- DEEPER RED IN RGBA
+                                size=24 # <--- INCREASED FONT SIZE (adjust as needed, e.g., 28, 30)
+                            )
+
+                        ),
+
+                        xaxis_title_font_color="black", 
+                        yaxis_title_font_color="black", 
+                        
+                        coloraxis_colorbar=dict(
+                            title=dict(
+                                text="Number of Candidates",
+                                font=dict(color="black")
+                            )
+                        )
+                    )
                     st.plotly_chart(fig, use_container_width=True) 
                     
                     st.subheader("🏆 Top Job Categories")
